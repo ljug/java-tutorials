@@ -19,14 +19,17 @@ public class Props {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       //Read system properties
+       //Read system properties 
         Properties sprop = System.getProperties();
         
         String propFile = sprop.getProperty("config.file");
         
         System.out.println("config.file="+propFile);
         
-        System.out.println(args[0]+"="+System.getenv(args[0]));
+        if(args.length > 0) {
+            //Args[0] correspondrais a une variable d'environement système
+             System.out.println(args[0]+"="+System.getenv(args[0]));
+        }
         //Read my own property file
         
         Properties myprop = new Properties();
@@ -34,6 +37,7 @@ public class Props {
             myprop.load(new FileInputStream(propFile));
             System.out.println("aprop="+myprop.getProperty("aprop"));
         } catch (IOException ex) {
+            //Probablement le fichie n'esxite pas ou la référence est incorrete
             Logger.getLogger(Props.class.getName()).log(Level.SEVERE, null, ex);
         }
         
