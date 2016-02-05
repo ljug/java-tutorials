@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 public class Props {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments 
      */
     public static void main(String[] args) {
-       //Read system properties 
+       //Read system properties (au sens de Java)
         Properties sprop = System.getProperties();
         
         String propFile = sprop.getProperty("config.file");
@@ -27,6 +27,7 @@ public class Props {
         System.out.println("config.file="+propFile);
         
         if(args.length > 0) {
+            //Get the envirement properties (au sens du Systeme d'exploitation)
             //Args[0] correspondrais a une variable d'environement système
              System.out.println(args[0]+"="+System.getenv(args[0]));
         }
@@ -37,7 +38,7 @@ public class Props {
             myprop.load(new FileInputStream(propFile));
             System.out.println("aprop="+myprop.getProperty("aprop"));
         } catch (IOException ex) {
-            //Probablement le fichie n'esxite pas ou la référence est incorrete
+            //Probablement le fichier n'esxite pas ou la référence est incorrete
             Logger.getLogger(Props.class.getName()).log(Level.SEVERE, "propFile="+propFile, ex);
         }
         
