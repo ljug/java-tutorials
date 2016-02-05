@@ -38,7 +38,7 @@ public class Props {
             System.out.println("aprop="+myprop.getProperty("aprop"));
         } catch (IOException ex) {
             //Probablement le fichie n'esxite pas ou la référence est incorrete
-            Logger.getLogger(Props.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Props.class.getName()).log(Level.SEVERE, "propFile="+propFile, ex);
         }
         
         
