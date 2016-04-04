@@ -5,6 +5,7 @@
  */
 package aproche3;
 
+import aproche3.CheckPerson;
 import net.cofares.ljug.Person;
 
 /**
@@ -18,8 +19,8 @@ public class CriteriaImpl implements CheckPerson {
      */
     public boolean test(Person p) {
         return p.getGender() == Person.Sex.MALE &&
-            p.getAge() >= 18 &&
-            p.getAge() <= 25;
+            p.getAge() >= 51 &&
+            p.getAge() <= 53;
     }
 
    
