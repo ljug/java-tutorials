@@ -18,17 +18,13 @@ import net.cofares.ljug.Person;
  */
 public class Aproche4 {
 
-    public static void processPersonsWithFunction(
-            List<Person> roster,
-            Predicate<Person> tester,
-            Function<Person, String> mapper,
-            Consumer<String> block) {
-        //test x -> boolean
-        for (Person p : roster) {
+    public static <X, Y> void processElements(Iterable<X> source, 
+            Predicate<X> tester,
+            Function<X, Y> mapper, 
+            Consumer<Y> block) {
+        for (X p : source) {
             if (tester.test(p)) {
-                //Application  x -> F x
-                String data = mapper.apply(p);
-                //Consomer x -> void
+                Y data = mapper.apply(p);
                 block.accept(data);
             }
         }
@@ -47,8 +43,8 @@ public class Aproche4 {
         lp.add(new Person("Pascal4 Fares", 1966, 9, 29, Person.Sex.MALE, "pfares@cofares.net"));
 
         /* CheckPerson une seule mehode abstraite alors une interface fonctionelle */
-        processPersonsWithFunction(lp,
-                (Person p) -> p.getGender() == Person.Sex.MALE
+        processElements(lp,
+                p -> p.getGender() == Person.Sex.MALE
                 && p.getAge() >= 51
                 && p.getAge() <= 53,
                 p -> p.getEmailAddress(),

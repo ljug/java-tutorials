@@ -18,21 +18,7 @@ import net.cofares.ljug.Person;
  */
 public class Aproche4 {
 
-    public static void processPersonsWithFunction(
-            List<Person> roster,
-            Predicate<Person> tester,
-            Function<Person, String> mapper,
-            Consumer<String> block) {
-        //test x -> boolean
-        for (Person p : roster) {
-            if (tester.test(p)) {
-                //Application  x -> F x
-                String data = mapper.apply(p);
-                //Consomer x -> void
-                block.accept(data);
-            }
-        }
-    }
+   
 
     /**
      * @param args the command line arguments
@@ -46,13 +32,15 @@ public class Aproche4 {
         lp.add(new Person("Pascal3 Fares", 1965, 9, 28, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal4 Fares", 1966, 9, 29, Person.Sex.MALE, "pfares@cofares.net"));
 
-        /* CheckPerson une seule mehode abstraite alors une interface fonctionelle */
-        processPersonsWithFunction(lp,
-                (Person p) -> p.getGender() == Person.Sex.MALE
-                && p.getAge() >= 51
-                && p.getAge() <= 53,
-                p -> p.getEmailAddress(),
-                email -> System.out.println(email));
+        
+        lp
+                .stream()
+                .filter(
+                        p -> p.getGender() == Person.Sex.MALE
+                        && p.getAge() >= 18
+                        && p.getAge() <= 25)
+                .map(p -> p.getEmailAddress())
+                .forEach(email -> System.out.println(email));
 
     }
 
