@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
  * @author pascalfares
  */
 public class Person {
+
     public enum Sex {
         MALE, FEMALE
     }
@@ -21,14 +22,14 @@ public class Person {
     LocalDate birthday;
     Sex gender;
     String emailAddress;
-    
-    public Person(String name, int year, int month, int dayOfMonth, Sex g, String email){
-        this.name=name;
+
+    public Person(String name, int year, int month, int dayOfMonth, Sex g, String email) {
+        this.name = name;
         birthday = LocalDate.of(year, month, dayOfMonth);
-        gender=g;
+        gender = g;
         emailAddress = email;
     }
-    
+
     public int getAge() {
         LocalDate now = LocalDate.now();
         long years = ChronoUnit.YEARS.between(birthday, now);
@@ -38,23 +39,23 @@ public class Person {
     public void printPerson() {
         System.out.println(this);
     }
-    
+
     public String toString() {
-        String sb = "{";
-        sb += "name : "+name;
-        sb += "Birthday : " + birthday;
-        sb += "Age : " + getAge();
-        sb+= "}";
-        
+        String sb = "{ ";
+        sb += "\"name\": \"" + name + "\",";
+        sb += "\"Birthday\": \"" + birthday+ "\",";
+        sb += "\"Age\": \"" + getAge()+ "\"";
+        sb += " }";
+
         return sb;
     }
-    
+
     /**
      * main pour test unitaire de la classe
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         Person p = new Person("Pascal Fares", 1962, 9, 25, Person.Sex.MALE, "pfares@cofares.net");
         p.printPerson();
     }
-    
+
 }
