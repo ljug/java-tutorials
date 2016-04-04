@@ -36,7 +36,7 @@ public class Aproche2 {
         lp.add(new Person("Pascal3 Fares", 1965, 9, 28, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal4 Fares", 1966, 9, 29, Person.Sex.MALE, "pfares@cofares.net"));
 
-       
+        printPersonsWithinAgeRange(lp, 51, 53);
         //printPersonsOlderThan(lp, 51);
 
     }
