@@ -58,6 +58,7 @@ public class Person {
 
     public enum Sex {
         MALE, FEMALE
+        
     }
 
     private String name;
@@ -82,10 +83,12 @@ public class Person {
         System.out.println(this);
     }
 
+    
     public String toString() {
         String sb = "{ ";
         sb += "\"name\": \"" + getName() + "\",";
         sb += "\"Birthday\": \"" + birthday+ "\",";
+        sb += "\"Sex\": \"" + getGender() + "\",";
         sb += "\"Age\": \"" + getAge()+ "\"";
         sb += " }";
 
@@ -98,6 +101,7 @@ public class Person {
     public static void main(String args[]) {
         Person p = new Person("Pascal Fares", 1962, 9, 25, Person.Sex.MALE, "pfares@cofares.net");
         p.printPerson();
+       
     }
 
 }

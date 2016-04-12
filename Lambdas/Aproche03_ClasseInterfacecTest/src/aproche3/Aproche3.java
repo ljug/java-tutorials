@@ -38,6 +38,7 @@ public class Aproche3 {
 
         
         printPersons(lp, new CriteriaImpl());
+        printPersons(lp, new CriteriaImpl_ex2());
 
     }
 
