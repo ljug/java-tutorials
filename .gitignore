@@ -51,3 +51,6 @@ hs_err_pid*
 /Lambdas/Aproche04_AnonInterfacece/build/
 /Lambdas/Aproche07_LambdaExp_Predicat_Consumer/build/
 /Lambdas/Aproche08_LambdaExp_Predicat_Cosumer_Functions/build/
+/PipeStream/pipeEtStream/build/
+/PipeStream/pipeEtStream/nbproject/private/
+/PipeStream/pipeEtStream/dist/
