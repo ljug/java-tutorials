@@ -29,7 +29,7 @@ public class PipeEtStream {
         lp.add(new Person("Pascal2 Fares", 1964, 9, 27, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal3 Fares", 1965, 9, 28, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal4 Fares", 1966, 9, 29, Person.Sex.MALE, "pfares@cofares.net"));
-
+long startTime = System.currentTimeMillis();
         lp.stream().forEach(p -> System.out.println("Qui?" + p));
         System.out.println("----------------------");
         lp.stream()
@@ -41,10 +41,10 @@ public class PipeEtStream {
                 //.map(e -> e.getName())
                 .forEach(e -> System.out.println(e));
         System.out.println("----------------------");
-        double average
-                = lp.stream()
+        double average;
+        average = lp.stream()
                 .filter(p -> p.getGender() == Person.Sex.MALE)
-                .mapToInt(e -> e.getAge())
+                .mapToInt(Person::getAge)
                 .average()
                 .getAsDouble();
 
@@ -53,7 +53,7 @@ public class PipeEtStream {
         int somme
                 = lp.stream()
                 .filter(p -> p.getGender() == Person.Sex.MALE)
-                .mapToInt(e -> e.getAge())
+                .mapToInt(Person::getAge)
                 .sum();
 
         System.out.print("Moyenne d'ages = " + somme);
@@ -67,6 +67,10 @@ public class PipeEtStream {
         
         System.out.println("MAGE H"+averageAgeByGender.get(Person.Sex.MALE));
         System.out.println("MAGE F"+averageAgeByGender.get(Person.Sex.FEMALE));
+        
+        long stopTime = System.currentTimeMillis();
+      long elapsedTime = stopTime - startTime;
+      System.out.println(elapsedTime);
 
     }
 

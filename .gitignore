@@ -55,3 +55,6 @@ hs_err_pid*
 /PipeStream/pipeEtStream/nbproject/private/
 /PipeStream/pipeEtStream/dist/
 /Persons/nbproject/private/
+/Persons/build/
+/PipeStream/Parallel/nbproject/private/
+/PipeStream/Parallel/build/
