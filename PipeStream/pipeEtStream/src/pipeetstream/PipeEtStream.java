@@ -56,7 +56,7 @@ long startTime = System.currentTimeMillis();
                 .mapToInt(Person::getAge)
                 .sum();
 
-        System.out.print("Moyenne d'ages = " + somme);
+        System.out.println("Somme des ages = " + somme);
 
         Map<Person.Sex, Double> averageAgeByGender = lp
                 .stream()

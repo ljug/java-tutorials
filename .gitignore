@@ -58,3 +58,13 @@ hs_err_pid*
 /Persons/build/
 /PipeStream/Parallel/nbproject/private/
 /PipeStream/Parallel/build/
+/testWS/nbproject/private/
+/testWS/build/
+/testWS/dist/
+/clientWS/nbproject/private/
+/JavaApplication5/nbproject/private/
+/JavaApplication5/build/
+/testREST/nbproject/private/
+/testREST/build/
+/ACCOV/ExempleEtFormat/nbproject/private/
+/ACCOV/ExempleEtFormat/build/
