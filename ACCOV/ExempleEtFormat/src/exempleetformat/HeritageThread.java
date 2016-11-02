@@ -30,8 +30,9 @@ class HeritageThread extends Thread {
         t.start();
         for (int i = 0; i < 5; i++) {
             System.out.println("Initial main, en " + i);
-            Thread.sleep(300);
+            Thread.sleep(3);
         }
+        //t.join();
         System.out.println("Initial main se termine");
     }
 }

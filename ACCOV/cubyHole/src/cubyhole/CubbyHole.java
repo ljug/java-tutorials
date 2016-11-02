@@ -50,15 +50,16 @@ public class CubbyHole {
 
     /**
      * Pour le test
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
-      CubbyHole c = new CubbyHole();
-      Producteur p1 = new Producteur(c, 1);
-      Consomateur c1 = new Consomateur(c, 1);
-      Consomateur c2 = new Consomateur(c, 2);
-      p1.start(); 
-      c1.start();
-      c2.start();
-   }
+        CubbyHole c = new CubbyHole();
+        Producteur p1 = new Producteur(c, 1);
+        Consomateur c1 = new Consomateur(c, 1);
+        Consomateur c2 = new Consomateur(c, 2);
+        p1.start();
+        c1.start();
+        c2.start();
+    }
 }

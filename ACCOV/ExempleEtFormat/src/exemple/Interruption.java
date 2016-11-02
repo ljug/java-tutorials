@@ -35,6 +35,9 @@ public class Interruption implements Runnable {
                 case 2:
                     t2.interrupt();
                     break;
+                case 3:
+                    System.exit(0);
+                    break;
             }
         }
     }

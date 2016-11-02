@@ -12,13 +12,11 @@ public class ParRunnable implements Runnable {
         for (int i = 0; i < 500; i++) {
 
             System.out.println("ParRunnable, en " + i);
-/*
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
-*/
         }
 
         System.out.println("ParRunnable se termine");

@@ -38,7 +38,9 @@ public class Aproche4 {
         lp.stream().filter(
                         p -> p.getGender() == Person.Sex.MALE
                         && p.getAge() >= 51
-                        && p.getAge() <= 53).map(p -> p.getEmailAddress()).forEach(email -> System.out.println(email));
+                        && p.getAge() <= 53)
+                .map(p -> p.getEmailAddress())
+                .forEach(email -> System.out.println(email));
         
         lp
                 .stream()
