@@ -15,11 +15,11 @@ class HeritageThread extends Thread {
     public void run() {
         for (int i = 0; i < 5; i++) {
             System.out.println("HeritageThread , en " + i);
-            try {
+            /* try {
                 Thread.sleep(500);
             } catch (InterruptedException ie) {
                 System.out.println(ie);
-            }
+            } */
         }
         System.out.println("HeritageThread se termine");
     }
@@ -30,7 +30,8 @@ class HeritageThread extends Thread {
         t.start();
         for (int i = 0; i < 5; i++) {
             System.out.println("Initial main, en " + i);
-            Thread.sleep(3);
+            /* Thread.sleep(3);
+            */
         }
         //t.join();
         System.out.println("Initial main se termine");

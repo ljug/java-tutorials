@@ -9,10 +9,13 @@ import java.util.logging.Logger;
  * @author pascalfares
  */
 public class InterruptionTempo implements Runnable {
+
     private int id;
+
     public InterruptionTempo(int id) {
         this.id = id;
     }
+
     public void tempo() {
         try {
             Thread.sleep(1000);
@@ -22,6 +25,7 @@ public class InterruptionTempo implements Runnable {
             Thread.currentThread().interrupt();
         }
     }
+
     @Override
     public void run() {
         int i = 0;
@@ -33,6 +37,7 @@ public class InterruptionTempo implements Runnable {
         // L'appel à interrupted() a réinitialisé le statut d'interruption 
         System.out.println(Thread.currentThread().isInterrupted()); // Affiche: false 
     }
+
     public static void main(String[] args) throws IOException {
         Thread t1 = new Thread(new InterruptionTempo(1));
         Thread t2 = new Thread(new InterruptionTempo(2));
@@ -47,6 +52,9 @@ public class InterruptionTempo implements Runnable {
                     break;
                 case 2:
                     t2.interrupt();
+                    break;
+                case 3:
+                    System.exit(0);
                     break;
             }
         }

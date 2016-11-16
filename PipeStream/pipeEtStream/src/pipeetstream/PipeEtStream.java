@@ -24,7 +24,7 @@ public class PipeEtStream {
         lp.add(new Person("Pascal2 Fares", 1964, 9, 27, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal3 Fares", 1965, 9, 28, Person.Sex.MALE, "pfares@cofares.net"));
         lp.add(new Person("Pascal4 Fares", 1966, 9, 29, Person.Sex.MALE, "pfares@cofares.net"));
-long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         lp.stream().forEach(p -> System.out.println("Qui?" + p));
         System.out.println("----------------------");
         lp.stream()
@@ -33,7 +33,7 @@ long startTime = System.currentTimeMillis();
         System.out.println("----------------------");
         lp.stream()
                 .filter(e -> e.getGender() == Person.Sex.MALE)
-                //.map(e -> e.getName())
+                .map(e -> e.getName())
                 .forEach(e -> System.out.println(e));
         System.out.println("----------------------");
         double average;
@@ -59,13 +59,13 @@ long startTime = System.currentTimeMillis();
                         Collectors.groupingBy(
                                 Person::getGender,
                                 Collectors.averagingInt(Person::getAge)));
-        
-        System.out.println("MAGE H"+averageAgeByGender.get(Person.Sex.MALE));
-        System.out.println("MAGE F"+averageAgeByGender.get(Person.Sex.FEMALE));
-        
+
+        System.out.println("MAGE H" + averageAgeByGender.get(Person.Sex.MALE));
+        System.out.println("MAGE F" + averageAgeByGender.get(Person.Sex.FEMALE));
+
         long stopTime = System.currentTimeMillis();
-      long elapsedTime = stopTime - startTime;
-      System.out.println(elapsedTime);
+        long elapsedTime = stopTime - startTime;
+        System.out.println(elapsedTime);
 
     }
 
