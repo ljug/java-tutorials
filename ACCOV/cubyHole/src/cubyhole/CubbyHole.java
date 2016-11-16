@@ -25,6 +25,7 @@ public class CubbyHole {
     private boolean available = false;
 
     public synchronized int get() {
+        //  guarded block. (un if ne suffit pas ... )
         while (available == false) {
             try {
                 wait();
@@ -37,6 +38,7 @@ public class CubbyHole {
     }
 
     public synchronized void put(int value) {
+        //  guarded block. (un if ne suffit pas ... )
         while (available == true) {
             try {
                 wait();

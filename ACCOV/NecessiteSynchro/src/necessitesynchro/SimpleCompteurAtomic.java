@@ -10,19 +10,21 @@
  */
 package necessitesynchro;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  *
  * @author pascalfares
  */
 public class SimpleCompteurAtomic {
 
-    private static int compte;
+   private  static AtomicInteger compte =  new AtomicInteger(0) ;
+   
+    public  void compte() {
+      compte.incrementAndGet() ;
+   }
 
-    public void compte() {
-        compte++;
-    }
-
-    public static int getCompte() {
-        return compte;
-    }
+    public  static  int getCompte() {
+       return compte.intValue() ;
+   }
 }
