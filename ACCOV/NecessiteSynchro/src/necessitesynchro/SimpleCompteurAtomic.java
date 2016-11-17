@@ -16,15 +16,23 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author pascalfares
  */
-public class SimpleCompteurAtomic {
+public class SimpleCompteurAtomic extends SimpleC{
 
-   private  static AtomicInteger compte =  new AtomicInteger(0) ;
+   private static final AtomicInteger compte =  new AtomicInteger(0) ;
    
+   @Override
     public  void compte() {
       compte.incrementAndGet() ;
    }
 
-    public  static  int getCompte() {
+    /**
+     *
+     * @return
+     */
+   @Override
+    public  int getCompte() {
        return compte.intValue() ;
    }
+
+    
 }

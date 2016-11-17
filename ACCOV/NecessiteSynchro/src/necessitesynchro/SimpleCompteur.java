@@ -14,7 +14,7 @@ package necessitesynchro;
  *
  * @author pascalfares
  */
-public class SimpleCompteur {
+public class SimpleCompteur extends SimpleC {
 
     private static int compte;
 
@@ -22,7 +22,12 @@ public class SimpleCompteur {
         compte++;
     }
 
-    public static int getCompte() {
+    @Override
+    public int getCompte() {
         return compte;
     }
+
+    
+
+    
 }

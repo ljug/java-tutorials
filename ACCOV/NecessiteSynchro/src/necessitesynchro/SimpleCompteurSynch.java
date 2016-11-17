@@ -14,20 +14,23 @@ package necessitesynchro;
  *
  * @author pascalfares
  */
-public class SimpleCompteurSynch {
+public class SimpleCompteurSynch extends SimpleC {
 
     private static int compte;
 
     // objet de synchronization
-    private static Object key = new Object();
+    private static final Object key = new Object();
 
+    @Override
     public void compte() {
         synchronized (key) {
+            //System.out.println(compte);
             compte++;
         }
     }
 
-    public static int getCompte() {
+    public int getCompte() {
         return compte;
     }
+
 }

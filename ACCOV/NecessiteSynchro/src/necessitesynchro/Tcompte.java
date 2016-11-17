@@ -14,42 +14,18 @@ package necessitesynchro;
  *
  * @author pascalfares
  */
-public class NecessiteSynchro {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws InterruptedException {
-
-        SimpleC compte=null;
-        if (args[0].equals("simple")) {
-            compte = new SimpleCompteur();
-        } else if (args[0].equals("sync")) {
-            compte = new SimpleCompteurSynch();
-        } else if (args[0].equals("atomic")) {
-            compte = new SimpleCompteurAtomic();
-        }
-
-        // on lance 5 threads, qui comptent chacun jusqu'à 100
-        Thread[] compteurs = new Thread[100];
-
-        // initialisation des threads
-        for (int i = 0; i < compteurs.length; i++) {
-            compteurs[i] = new Thread(compte);
-        }
-
-        // lancement des threads
-        for (int i = 0; i < compteurs.length; i++) {
-            compteurs[i].start();
-        }
-
-        for (int i = 0; i < compteurs.length; i++) {
-            // jette une InterruptedException
-            compteurs[i].join();
-        }
-
-        // vérification de la valeur de compte
-        System.out.println("Compteur = " + compte.getCompte());
+public class Tcompte implements Runnable {
+    SimpleC compteur;
+    public Tcompte (SimpleC sc) {
+        compteur=sc;
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+                    compteur.compte();
+                }
     }
 
+    
+    
 }
