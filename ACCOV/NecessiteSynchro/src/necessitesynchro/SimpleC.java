@@ -15,8 +15,19 @@ package necessitesynchro;
  * @author pascalfares
  */
 abstract class SimpleC implements Runnable {
+    /**
+     * incrément du compteur
+     */
     abstract public void compte();
+    /**
+     * 
+     * @return récupère la valeure du compteur 
+     */
     abstract public int getCompte();
+    
+    /**
+     * Compter 100 fois
+     */
     @Override
     public void run() {
         for (int i=0; i<100; i++) {

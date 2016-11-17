@@ -27,7 +27,7 @@ public class SimpleCompteurAtomic extends SimpleC{
 
     /**
      *
-     * @return
+     * @return la valeur du compteur
      */
    @Override
     public  int getCompte() {
