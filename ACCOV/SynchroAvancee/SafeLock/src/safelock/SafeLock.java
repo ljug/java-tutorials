@@ -14,7 +14,6 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-
 /**
  *
  * @author pascalfares
@@ -82,14 +81,15 @@ public class SafeLock {
 
     static class BoucleLance implements Runnable {
 
-        private Friend lanceur;
-        private Friend recepteur;
+        private final Friend lanceur;
+        private final Friend recepteur;
 
         public BoucleLance(Friend lanceur, Friend recepteur) {
             this.lanceur = lanceur;
             this.recepteur = recepteur;
         }
 
+        @Override
         public void run() {
             Random random = new Random();
             for (;;) {
