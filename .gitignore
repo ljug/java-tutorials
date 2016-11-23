@@ -8,6 +8,8 @@
 *.war
 *.ear
 
+private/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /Props/props/nbproject/private/
@@ -84,3 +86,6 @@ hs_err_pid*
 /ACCOV/runls/dist/
 /ACCOV/ExempleEtFormat/dist/
 /Lambdas/Aproche05_LambdaExp/build/
+/ACCOV/SynchroAvancee/DeadLock/nbproject/private/
+/ACCOV/SynchroAvancee/DeadLock/build/
+/ACCOV/SynchroAvancee/DeadLock/dist/
