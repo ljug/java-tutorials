@@ -40,8 +40,11 @@ class SharedBuffer {
     private final Condition condition;
 
     SharedBuffer() {
+        //Initialilement le buffer est vide donc rien de disponible
         disponible = false;
+        //On crée le lock
         lock = new ReentrantLock();
+        //Et la condition
         condition = lock.newCondition();
     }
 
@@ -51,6 +54,9 @@ class SharedBuffer {
 
     char getSharedChar() {
         lock.lock();
+        //Ce premier lock est ici pour garantir le unlock...
+        //cette menaière de faire vous assurera le fait que pour chaque lock
+        //Il y aura un unlock
         try {
             while (!disponible) {
                 try {
@@ -70,6 +76,7 @@ class SharedBuffer {
     void setSharedChar(char c) {
         lock.lock();
         try {
+            // guarded block. (un if ne suffit pas ... )
             while (disponible) {
                 try {
                     condition.await();
@@ -101,9 +108,12 @@ class Producteur extends Thread {
     public void run() {
         for (char ch = 'A'; ch >= 'Z'; ch++) {
             l.lock();
-            s.setSharedChar(ch);
-            System.out.println(ch + " produit par le producteur.");
-            l.unlock();
+            try {
+                s.setSharedChar(ch);
+                System.out.println(ch + " produit par le producteur.");
+            } finally {
+                l.unlock();
+            }
         }
     }
 }
@@ -124,11 +134,13 @@ class Consomateur extends Thread {
         char ch;
         do {
             l.lock();
-            ch = s.getSharedChar();
-            System.out.println(ch + " consomé par le condomateur.");
-            l.unlock();
+            try {
+                ch = s.getSharedChar();
+                System.out.println(ch + " consomé par le condomateur.");
+            } finally {
+                l.unlock();
+            }
         } while (ch != 'Z');
     }
 }
 
-}
