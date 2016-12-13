@@ -20,15 +20,18 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ProdConsParLock {
 
+    public static boolean DEBUG = false;
+
     public static void main(String[] args) {
         SharedBuffer s = new SharedBuffer();
+        
         new Producteur(s).start();
         new Consomateur(s).start();
     }
 }
 
 class SharedBuffer {
-    
+
     //Un buffer d'une seule place (1 charactère)
     private char c;
 
@@ -53,10 +56,17 @@ class SharedBuffer {
     }
 
     char getSharedChar() {
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("enter getSharedChar brefore lock");
+        }
         lock.lock();
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("enter getSharedChar after lock");
+        }
         //Ce premier lock est ici pour garantir le unlock...
         //cette menaière de faire vous assurera le fait que pour chaque lock
         //Il y aura un unlock
+
         try {
             while (!disponible) {
                 try {
@@ -66,15 +76,24 @@ class SharedBuffer {
                 }
             }
             disponible = false;
-            condition.signal();
+            condition.signalAll();
         } finally {
             lock.unlock();
+            if (ProdConsParLock.DEBUG) {
+                System.out.println("enter getSharedChar" + c);
+            }
             return c;
         }
     }
 
     void setSharedChar(char c) {
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("enter setSharedChar brefore lock" + c);
+        }
         lock.lock();
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("enter setSharedChar after lock" + c);
+        }
         try {
             // guarded block. (un if ne suffit pas ... )
             while (disponible) {
@@ -86,9 +105,12 @@ class SharedBuffer {
             }
             this.c = c;
             disponible = true;
-            condition.signal();
+            condition.signalAll();
         } finally {
             lock.unlock();
+            if (ProdConsParLock.DEBUG) {
+                System.out.println("out setSharedChar ");
+            }
         }
     }
 }
@@ -106,14 +128,18 @@ class Producteur extends Thread {
 
     @Override
     public void run() {
-        for (char ch = 'A'; ch >= 'Z'; ch++) {
-            l.lock();
-            try {
-                s.setSharedChar(ch);
-                System.out.println(ch + " produit par le producteur.");
-            } finally {
-                l.unlock();
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("Run de Producteur");
+        }
+        for (char ch = 'A'; ch <= 'Z'; ch++) {
+
+            if (ProdConsParLock.DEBUG) {
+                System.out.println("Run de Producteur before set");
             }
+
+            s.setSharedChar(ch);
+            System.out.println(ch + " produit par le producteur.");
+
         }
     }
 }
@@ -131,16 +157,19 @@ class Consomateur extends Thread {
 
     @Override
     public void run() {
+        if (ProdConsParLock.DEBUG) {
+            System.out.println("Run de consomateur");
+        }
         char ch;
         do {
-            l.lock();
-            try {
-                ch = s.getSharedChar();
-                System.out.println(ch + " consomé par le condomateur.");
-            } finally {
-                l.unlock();
+
+            if (ProdConsParLock.DEBUG) {
+                System.out.println("Run de consomateur before get");
             }
+
+            ch = s.getSharedChar();
+            System.out.println(ch + " consomé par le condomateur.");
+
         } while (ch != 'Z');
     }
 }
-
