@@ -15,7 +15,7 @@ package deadlock;
  * @author pascalfares
  */
 public class DeadLock {
-
+    public static boolean DEBUG=true;
     static class Friend {
 
         private final String name;
@@ -28,17 +28,31 @@ public class DeadLock {
             return this.name;
         }
 
-        public synchronized void fleche(Friend lanceur) {
-            System.out.format("%s: %s"
-                    + "  me lance une flèche!%n",
-                    this.name, lanceur.getName());
-            lanceur.flecheRetour(this);
+        public void fleche(Friend lanceur) {
+            if (DeadLock.DEBUG) System.out.printf("%nEF %s : <- %s ?.. ",this.name, lanceur.name);
+            synchronized (this) {
+                if (DeadLock.DEBUG) System.out.printf("%nF %s : <- %s oui.. ",this.name, lanceur.name);
+            
+                if (!DeadLock.DEBUG) System.out.format("F %s: %s"
+                        + "  me lance une flèche!%n",
+                        this.name, lanceur.getName());
+                lanceur.flecheRetour(this);
+                if (DeadLock.DEBUG) System.out.printf("%nF V %s : <- %s .. ",this.name, lanceur.name);
+            
+                
+            }
         }
 
-        public synchronized void flecheRetour(Friend lanceur) {
-            System.out.format("%s: %s"
-                    + " m'a relencé une flèche!%n",
-                    this.name, lanceur.getName());
+        public void flecheRetour(Friend lanceur) {
+            if (DeadLock.DEBUG) System.out.printf("%nEFR %s : <- %s ?.. ",this.name, lanceur.name);
+            
+            synchronized (this) {
+                if (DeadLock.DEBUG) System.out.printf("%nFR %s : <- %s oui.. ",this.name, lanceur.name);
+            
+                if (!DeadLock.DEBUG) System.out.format("FR V %s: %s"
+                        + " m'a relencé une flèche!%n",
+                        this.name, lanceur.getName());
+            }
         }
     }
 
@@ -47,19 +61,25 @@ public class DeadLock {
      */
     public static void main(String[] args) {
         final Friend alphonse
-                = new Friend("Alphonse");
+                = new Friend("A");
         final Friend gaston
-                = new Friend("Gaston");
+                = new Friend("B");
         new Thread(new Runnable() {
             public void run() {
-                alphonse.fleche(gaston);
+                while (true) {
+                    alphonse.fleche(gaston);
+                }
             }
         }).start();
+        
         new Thread(new Runnable() {
             public void run() {
-                gaston.fleche(alphonse);
+                while (true) {
+                    gaston.fleche(alphonse);
+                }
             }
         }).start();
+        /**/
     }
 
 }
