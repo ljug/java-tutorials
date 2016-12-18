@@ -40,6 +40,7 @@ public class SafeLock {
                 myLock = lock.tryLock();
                 yourLock = lanceur.lock.tryLock();
             } finally {
+               
                 if (!(myLock && yourLock)) {
                     if (myLock) {
                         lock.unlock();
@@ -48,6 +49,7 @@ public class SafeLock {
                         lanceur.lock.unlock();
                     }
                 }
+                
             }
             return myLock && yourLock;
         }

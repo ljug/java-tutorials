@@ -33,7 +33,7 @@ public class Philosophe extends Thread {
     }
 
     public void run() {
-        while (loopCount-- > 0) {
+        while (true) {
             penser();
             prendre(fourchetteGauche);
             prendre(fourchetteDroite);

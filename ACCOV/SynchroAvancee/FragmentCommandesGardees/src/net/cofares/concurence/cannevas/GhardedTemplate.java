@@ -8,44 +8,39 @@
  * fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, 
  * whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the Software. »
  */
-package philosophe;
+package net.cofares.concurence.cannevas;
 
 /**
  *
  * @author pascalfares
  */
-class Fourchette {
-
+public abstract class GhardedTemplate {
+    Condition condition;
+    
     /**
-     * une fourchette est libre (prise==false)
-     * ou prise (prise==true)
+     * Faire une action quelconque
      */
-    private boolean prise = false;
-
-    /**
-     * <h1>Commande gardée</h1>
-     * Condition -> action
-     * <h2>en Java<h2>
-     * while (not Condition) wait();
-     * doAction()
-     */
-    public synchronized void prendre() {
-        // fouchetteLibre -> prendreFourchette
-        // fourchetteLibre == not prise
-        // prendreFourchette == prese=true
-        
-        while (prise) {
+    abstract void doAction();
+    
+    public synchronized void guardedCond() {
+        // This guard only loops once for each special event, which may not
+        // be the event we're waiting for.
+        while (!condition.getCond()) {
             try {
-                this.wait();
+                wait();
             } catch (InterruptedException e) {
-            };
+            }
         }
-        prise = true;
+        doAction();
+        
     }
 
-    //Condition change notifié les gardes
-    public synchronized void poser() {
-        prise = false;
-        this.notify();
+    /**
+     * Suite a un changement dans condition on notifie toutes les guardes
+     * quand condirion modifiés alors notifié
+     * TRIGER WHEN isCondModified() notifyCond() 
+     */
+    public synchronized void notifyCond() {       
+        notifyAll();
     }
 }
