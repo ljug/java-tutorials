@@ -13,7 +13,10 @@ package max;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 import net.cofares.libListesRes.FonctionsSurListes;
+import net.cofares.libListesRes.LMax;
+import net.cofares.libListesRes.LMaxFork;
 
 /**
  *
@@ -26,10 +29,33 @@ public class Max {
      */
     public static void main(String[] args) throws Exception {
         List<Integer> numbers = new ArrayList<Integer>(
-                Arrays.asList(5, 3, 1, 2, 9, 5, 0, 7)
+                Arrays.asList(5, 3, 1, 2, 9, 5, 0, 7,25,30)
         );
-        System.out.printf("max(5, 3, 1, 2, 9, 5, 0, 7)=%d%n", FonctionsSurListes.lMax(numbers));
-
+        for (int i=0; i< 10000000; i++) {
+            numbers.add((int) (100 * Math.random()));
+        }
+        //
+        long debut = System.currentTimeMillis();
+        System.out.printf("lmax()=%d", FonctionsSurListes.lMax(numbers));
+        System.out.println(" Elapsed "+ (System.currentTimeMillis()-debut));
+        //
+        debut = System.currentTimeMillis();
+        System.out.printf("lmax2()=%d ", FonctionsSurListes.lMax2(numbers,0,numbers.size()-1));
+        System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
+        //
+        debut = System.currentTimeMillis();
+        LMax<Integer> li = new LMax<>(numbers);
+        System.out.printf("LMax()=%d ", li.lMax());
+        System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
+        //
+        debut = System.currentTimeMillis();
+        LMaxFork<Integer> lif = new LMaxFork<>(numbers,10000000/10);
+        ForkJoinPool pool = new ForkJoinPool();
+        System.out.printf("LMaxFork()=%d ", pool.invoke(lif));    
+        System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
+        
+        //==== Autres tests
+        debut = System.currentTimeMillis();
         numbers = new ArrayList<Integer>(
                 Arrays.asList(5)
         );
@@ -37,6 +63,7 @@ public class Max {
         numbers = new ArrayList<Integer>(
                 Arrays.asList(5, 3)
         );
+        /*
         System.out.printf("max(5, 3)=%d%n", FonctionsSurListes.lMax(numbers));
 
         numbers = new ArrayList<Integer>(
@@ -46,7 +73,7 @@ public class Max {
 
         numbers = null;
         System.out.printf("max(null)=%d%n", FonctionsSurListes.lMax(numbers));
-
+        /**/
         /**
          * Résultat: 
          * max(5, 3, 1, 2, 9, 5, 0, 7)=9 

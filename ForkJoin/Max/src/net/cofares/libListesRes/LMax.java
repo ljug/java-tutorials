@@ -10,47 +10,34 @@
  */
 package net.cofares.libListesRes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author pascalfares
  */
-public class FonctionsSurListes {
-    public static Integer lMax(List<Integer> l) throws Exception {
+public class LMax<T extends Comparable> {
+    List<T> l;
+    public LMax(List<T> l) {
+        this.l=l;
+    }
+    
+    public T lMax() throws Exception {
         if ((l==null) || (l.size()==0)) {
             //Pas de max de liste vide faire uhe exception
             throw new Exception("Pas de max de liste vide...");
         }
         //Si ici liste non vide et non null
         if (l.size() == 1) return l.get(0);
-        if (l.size()==2) return ((l.get(0) > l.get(1)) ? l.get(0) : l.get(1));
+        
+        if (l.size()==2) return (l.get(0).compareTo(l.get(1)) > 0 ? l.get(0) : l.get(1));
         //Split the lists
         int half = l.size()/2;
-        List<Integer> l1 = l.subList(0, half);
-        List<Integer> l2 = l.subList(half, l.size());
-        Integer m1,m2;
-        m1=lMax(l1);
-        m2=lMax(l2);
-        return ((m1>m2) ? m1 : m2);
+        LMax<T> l1 = new LMax(l.subList(0, half));
+        LMax<T> l2 = new LMax(l.subList(half, l.size()));
+        T m1,m2;
+        m1=l1.lMax();
+        m2=l2.lMax();
+        return (m1.compareTo(m2) > 0 ? m1 : m2);
     }
-    
-    public static Integer lMax2(List<Integer> l,int debut, int fin) throws Exception {
-        if ((fin -debut)<=0) {
-            //Pas de max de liste vide faire uhe exception
-            throw new Exception("Pas de max de liste vide...");
-        }
-        //Si ici liste non vide et non null
-        if ((fin -debut)==1) return l.get(debut);
-        if ((fin-debut)==2) return ((l.get(debut) > l.get(fin)) ? l.get(debut) : l.get(fin));
-        //Split the lists
-        int half = (fin-debut)/2;
-        //List<Integer> l1 = l.subList(0, half);
-        //List<Integer> l2 = l.subList(half, l.size());
-        Integer m1,m2;
-        m1=lMax2(l,debut,debut+half);
-        m2=lMax2(l,debut+half,fin);
-        return ((m1>m2) ? m1 : m2);
-    }
-}
+} 
