@@ -72,11 +72,12 @@ public class SHAStringHashTest {
 
     /**
      * Test of convertToHexString method, of class SHAStringHash.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConvertToHexString_String_String() throws Exception {
         System.out.println("convertToHexString");
-        String str = "pasca";
+        String str = "pascal";
         String algo = "sha1";
         String expResult = "de9b8d32d21ac4abee992cab0591365746b5103f";
         String result = SHAStringHash.convertToHexString(str, algo);
@@ -87,6 +88,7 @@ public class SHAStringHashTest {
 
     /**
      * Test of convertToHexStringV2 method, of class SHAStringHash.
+     * @throws java.lang.Exception
      */
     @Test
     public void testConvertToHexStringV2() throws Exception {
