@@ -49,8 +49,8 @@ public class Max {
         System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
         //
         debut = System.currentTimeMillis();
-        LMaxFork<Integer> lif = new LMaxFork<>(numbers,10000000/10);
-        ForkJoinPool pool = new ForkJoinPool();
+        LMaxFork<Integer> lif = new LMaxFork<Integer>(numbers,numbers.size()/16);
+        ForkJoinPool pool = new ForkJoinPool(16);
         System.out.printf("LMaxFork()=%d ", pool.invoke(lif));    
         System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
         

@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class LMax<T extends Comparable> {
     List<T> l;
+    int debut;
+    int fin;
     public LMax(List<T> l) {
         this.l=l;
     }
