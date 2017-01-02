@@ -8,39 +8,43 @@
  * fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, 
  * whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the Software. »
  */
-package net.cofares.libListesRes;
+package net.cofares.forkSort;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author pascalfares
- * @param <T>
+ * @param <T> : Un eclasse de comparable pour trier une liste
  */
-public class LMax<T extends Comparable> {
+public class MyLists<T extends Comparable> {
     List<T> l;
     int debut;
     int fin;
-    public LMax(List<T> l) {
+    
+    public MyLists(List<T> l) {
         this.l=l;
+        debut=0;
+        fin=l.size()-1;
+    }
+    public MyLists(MyLists<T> ml) {
+        l=new ArrayList<T>(ml.l);        
+        debut=ml.debut;
+        fin=ml.fin;
     }
     
-    public T lMax() throws Exception {
-        if ((l==null) || (l.size()==0)) {
-            //Pas de max de liste vide faire uhe exception
-            throw new Exception("Pas de max de liste vide...");
-        }
-        //Si ici liste non vide et non null
-        if (l.size() == 1) return l.get(0);
-        
-        if (l.size()==2) return (l.get(0).compareTo(l.get(1)) > 0 ? l.get(0) : l.get(1));
-        //Split the lists
-        int half = l.size()/2;
-        LMax<T> l1 = new LMax(l.subList(0, half));
-        LMax<T> l2 = new LMax(l.subList(half, l.size()));
-        T m1,m2;
-        m1=l1.lMax();
-        m2=l2.lMax();
-        return (m1.compareTo(m2) > 0 ? m1 : m2);
+    public boolean isVide(){
+        return (fin < debut);
     }
-} 
+    
+    public String toString() {
+        if (isVide()) return "()";
+        StringBuilder res=new StringBuilder("(");
+        for (int i=debut;i<fin;i++) {
+            res.append(l.get(i)).append(" ");
+        }
+        res.append(l.get(fin)).append(")");
+        return res.toString();
+    }
+}

@@ -26,9 +26,10 @@ public class Max {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        List<Integer> numbers = new ArrayList<Integer>(
+        List<Integer> numbers = new ArrayList<>(
                 Arrays.asList(5, 3, 1, 2, 9, 5, 0, 7,25,30)
         );
         for (int i=0; i< 10000000; i++) {
