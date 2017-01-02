@@ -106,3 +106,5 @@ hs_err_pid*
 /ACCOV/SynchroAvancee/04.1_ProdConsParLock/dist/
 /ACCOV/SynchroAvancee/04.1_ProdConsParLock/build/
 /Executor/E01/dist/
+/ForkJoin/Max/build/
+/ForkJoin/Max/dist/

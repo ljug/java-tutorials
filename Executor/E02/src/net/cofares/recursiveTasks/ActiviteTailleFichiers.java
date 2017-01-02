@@ -32,7 +32,7 @@ public class ActiviteTailleFichiers extends RecursiveTask<Long> {
 
     @Override
     protected Long compute() {
-      if (TailleDir.DEBUG) System.out.printf("Computing size of: %s%n", file.getName());
+      if (TailleDir.DEBUG) System.out.printf("Calcul taille de : %s%n", file.getName());
 
       if (file.isFile()) {
         return file.length();

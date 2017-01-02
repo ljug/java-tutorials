@@ -49,12 +49,13 @@ public class Max {
         System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
         //
         debut = System.currentTimeMillis();
-        LMaxFork<Integer> lif = new LMaxFork<Integer>(numbers,numbers.size()/16);
+        LMaxFork<Integer> lif = new LMaxFork<>(numbers,numbers.size()/16);
         ForkJoinPool pool = new ForkJoinPool(16);
         System.out.printf("LMaxFork()=%d ", pool.invoke(lif));    
         System.out.println("Elapsed "+ (System.currentTimeMillis()-debut));
         
         //==== Autres tests
+        /*
         debut = System.currentTimeMillis();
         numbers = new ArrayList<Integer>(
                 Arrays.asList(5)
@@ -63,7 +64,7 @@ public class Max {
         numbers = new ArrayList<Integer>(
                 Arrays.asList(5, 3)
         );
-        /*
+        
         System.out.printf("max(5, 3)=%d%n", FonctionsSurListes.lMax(numbers));
 
         numbers = new ArrayList<Integer>(
