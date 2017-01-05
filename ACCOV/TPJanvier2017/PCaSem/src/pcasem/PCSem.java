@@ -14,25 +14,18 @@ package pcasem;
  *
  * @author pascalfares
  */
-public class Consommateur extends Thread {
-    private TampCirc Tampon;
-    private Integer Valeur_Lue;
-    
-    public Consommateur(TampCirc Tampon) {
-        this.Tampon = Tampon;
-    }
-    //////////////////////////////////////////////////////////
-    public void run() {
-        while (true) {
-	    Valeur_Lue = ((Integer)Tampon.Consommer());
-	    // System.out.println(" --- Consommateur "  + Thread.currentThread().getName() + " lit " +((Integer)Tampon.Consommer()).toString() );
-	    System.out.println(" --- Consommateur "  + Thread.currentThread().getName() + " lit " + Valeur_Lue);
-	    // verifier le timeout
-	    //if (Valeur_Lue == null) break;
-            try {
-                Thread.sleep((int)(Math.random()*200));    // sleep : en ms
-            } catch (InterruptedException e) {}
-        }
+public class PCSem {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        TampCirc tc=new TampCirc(10);
+        Consommateur c = new Consommateur(tc);
+        Producteur p = new Producteur(tc);
+        //
+        //p.start();
+        c.start();
     }
     
 }

@@ -25,7 +25,7 @@ public class TampCirc {
     private final Object Tampon[];
     private final int NbCases;
     private int IndProd, IndCons;
-    Semaphore plein, vide;
+    Semaphore plein, vide, mutexp, mutexc;
 
     //////////////////////////////////////////////////////////	
     public TampCirc(int NbCases) {
@@ -33,6 +33,8 @@ public class TampCirc {
         this.NbCases = NbCases;
         plein = new Semaphore(NbCases);
         vide = new Semaphore(0);
+        mutexp = new Semaphore(1);
+        mutexc = new Semaphore(1);
         IndProd = 0;
         IndCons = 0;
     }
@@ -50,12 +52,13 @@ public class TampCirc {
 
         System.out.println("Plein= " + plein.availablePermits());
         plein.acquireUninterruptibly();
-        synchronized (this) {
-            Tampon[IndProd] = obj;
-
-            IndProd = (IndProd + 1) % NbCases;
-            System.out.println("      Produire : IndProd = " + IndProd);
-        }
+        mutexp.acquireUninterruptibly();
+        //SECTION CRITIQUE
+        Tampon[IndProd] = obj;
+        IndProd = (IndProd + 1) % NbCases;
+        System.out.println("      Produire : IndProd = " + IndProd);
+        //FIN DE SECTION CRITIQUE
+        mutexp.release();
         vide.release();
 
     }
@@ -73,14 +76,16 @@ public class TampCirc {
     public Object Consommer() {
         System.out.println("vide= " + vide.availablePermits());
         vide.acquireUninterruptibly();
-        synchronized (this) {
-            Object obj = Tampon[IndCons];
-            //Tampon[IndCons] = null;    // supprimer la reference sur l'objet
-            IndCons = (IndCons + 1) % NbCases;
-            System.out.println("      Consommer (" + Thread.currentThread().getName() + ") : IndCons =" + IndCons);
-            plein.release();                // signaler que le tampon est non-plein
-            return obj;
-        }
+        mutexc.acquireUninterruptibly();
+        //DEBUT SECTION CRITIQUE
+        Object obj = Tampon[IndCons];
+        IndCons = (IndCons + 1) % NbCases;
+        System.out.println("      Consommer (" + Thread.currentThread().getName() + ") : IndCons =" + IndCons);
+        //FIN SECTION CRITIQUE
+        mutexc.release();
+        plein.release();                // signaler que le tampon est non-plein
+        return obj;
+
     }
 
 }

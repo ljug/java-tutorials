@@ -10,6 +10,7 @@
  */
 package pm;
 
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,40 +19,37 @@ import java.util.logging.Logger;
  * @author pascalfares
  */
 public class A_faire {
-     int Valeur;
-        public A_faire(){
-                Valeur = 0;
-                //  System.out.println("Afaire.Valeur  : " + Valeur);
-        }
 
-        // Init : initialisation du nombre de travaux a effectue
-        public void Init(int Nouvelle_Valeur){
-                // Initialisation de la valeur a valeur +1
-                // Ainsi, si valeur vaut 0 on fait tout de suite notify  
-                Valeur = Nouvelle_Valeur +1 ;
-                // System.out.println("Afaire.Valeur init. a : " + Valeur);
-        }
+    int Valeur;
+    Semaphore ntraveaux;
 
-        // Decrementer : cette methode decremente
-        // le nombre de travaux a faire et reveille celui qui attend
-        //  quand le dernier travail est pris
-        public synchronized int Decrementer( ){
-                Valeur = Valeur - 1;
-                System.out.println("Reste A faire. Valeur Decr. -> : " + Valeur);
-                if(Valeur == 0){
-                        this.notifyAll();
-                        return(0);
-                }
-                return(Valeur);
-        }
+    public A_faire() {
+        Valeur = 0;
+        //  System.out.println("Afaire.Valeur  : " + Valeur);
+    }
 
-        // Methode Attendre : cette methode est appelee par celui 
-        // qui attend la fin des travaux
-        public synchronized void Attendre( ) {
-         try {
-             this.wait();
-         } catch (InterruptedException ex) {
-             Logger.getLogger(A_faire.class.getName()).log(Level.SEVERE, null, ex);
-         }
-	}
+    // Init : initialisation du nombre de travaux a effectue
+    public void Init(int Nouvelle_Valeur) {
+        // Initialisation de la valeur a valeur +1
+        // Ainsi, si valeur vaut 0 on fait tout de suite notify  
+        Valeur = Nouvelle_Valeur+1;
+        ntraveaux = new Semaphore(0 - Nouvelle_Valeur);
+        // System.out.println("Afaire.Valeur init. a : " + Valeur);
+    }
+
+    // Decrementer : cette methode decremente
+    // le nombre de travaux a faire et reveille celui qui attend
+    //  quand le dernier travail est pris
+    public synchronized int Decrementer() {
+        Valeur = Valeur - 1;
+        ntraveaux.release();
+        System.out.println("Reste A faire. Valeur Decr. -> : " + Valeur + "dans sem "+ntraveaux.availablePermits());       
+        return (Valeur);
+    }
+
+    // Methode Attendre : cette methode est appelee par celui 
+    // qui attend la fin des travaux
+    public void Attendre() {
+        ntraveaux.acquireUninterruptibly();
+    }
 }

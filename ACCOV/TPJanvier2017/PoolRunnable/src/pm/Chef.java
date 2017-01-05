@@ -17,7 +17,7 @@ import java.util.concurrent.Semaphore;
  * @author pascalfares
  */
 public class Chef extends Thread {
-
+    int nbdefois=1;
     Semaphore b;
     A_faire Travail;
     int nbTravaux;
@@ -30,15 +30,15 @@ public class Chef extends Thread {
 
     @Override
     public void run() {
-        while (true) {
-
+        while (nbdefois-->0) {
+            
             // Initialiser le nombre de travaux a faire
             Travail.Init(nbTravaux);
             System.out.println(" *** Init du travail par chef : " + nbTravaux + " travaux a faire *** ");
 
             // Lever la barriere pour 
             // indiquer aux travailleurs qu'ils peuvent commencer
-            b.release();
+            b.release(Travail.Valeur-1);
 
             // Ici on pourrait afficher l'etat des donnees
             // avant travaux.
