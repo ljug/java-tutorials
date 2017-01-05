@@ -11,7 +11,9 @@
 package pm;
 
 /**
- *
+ * Travailleur est un thread qui a pour rôle d'executer un Travail (tâche)
+ * Barr la barrière donnant l'autorisation de lancer un travail
+ * A_faire les traveaux qui restent a faire
  * @author pascalfares
  */
 public class Travailleur extends Thread {
@@ -30,8 +32,10 @@ public class Travailleur extends Thread {
 	
 	  System.out.println(getName() + " attend du travail");
 	  
-	  // Attendre devant la barriere qu'il y ait un travail a faire
-	  b.Attendre();
+          
+              // Attendre devant la barriere qu'il y ait un travail a faire
+              b.Attendre();
+          
 	  
 	  while (true)  {
 	// Indiquer qu'on a va prendre un travail :
