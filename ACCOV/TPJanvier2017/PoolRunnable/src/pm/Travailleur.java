@@ -46,7 +46,7 @@ public class Travailleur extends Thread {
                 // donc, le thread retournera attendre.
 
                 j = Travail.Decrementer();
-                if (j == 0) {
+                if (j <= 0) {
                     break;
                 }
 
@@ -58,9 +58,7 @@ public class Travailleur extends Thread {
                 }
                 // Le travail est termine
                 System.out.println("\t\t" + getName() + " TERMINE un travail");
-                if (Travail.Valeur == 0) {
-                    break;
-                }
+                
             }
 
         }

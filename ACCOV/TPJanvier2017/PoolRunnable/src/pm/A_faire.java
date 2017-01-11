@@ -41,6 +41,7 @@ public class A_faire {
     // le nombre de travaux a faire et reveille celui qui attend
     //  quand le dernier travail est pris
     public synchronized int Decrementer() {
+        if (Valeur==0) return 0;
         Valeur = Valeur - 1;
         ntraveaux.release();
         System.out.println("Reste A faire. Valeur Decr. -> : " + Valeur + "dans sem "+ntraveaux.availablePermits());       

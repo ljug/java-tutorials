@@ -46,7 +46,7 @@ public class PR {
         Semaphore b = new Semaphore(0);
         //b2 est un A_Faire
         A_faire b2 = new A_faire();
-        b2.Init(nbTravaux);
+        //b2.Init(nbTravaux);
 
         // Creation des threads  qui vont effectuer le travail
         //
@@ -56,7 +56,7 @@ public class PR {
 
         // ... et enfin, le chef
         //
-        new Chef(b, b2, nbTravaux).start();
+        new Chef(b, b2, nbThreads, nbTravaux).start();
     }
 
 ////////////////////////////////////////////////////////////////

@@ -20,12 +20,12 @@ public class PCSem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TampCirc tc=new TampCirc(10);
+        TampCirc tc = new TampCirc(10);
         Consommateur c = new Consommateur(tc);
         Producteur p = new Producteur(tc);
         //
-        //p.start();
+        p.start();
         c.start();
     }
-    
+
 }

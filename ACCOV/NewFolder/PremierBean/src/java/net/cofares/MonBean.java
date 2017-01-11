@@ -8,47 +8,49 @@
  * fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, 
  * whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the Software. »
  */
-package pm;
-
-import java.util.concurrent.Semaphore;
+package net.cofares;
 
 /**
  *
  * @author pascalfares
  */
-public class Chef extends Thread {
-    int nbdefois=1;
-    Semaphore b;
-    A_faire Travail;
-    int nbThread;
-    int nbTravaux;
+public class MonBean {
+    private int x;
+    private String name;
 
-    Chef(Semaphore b, A_faire Travail, int nbThread, int nbTravaux) {
-        this.b = b;
-        this.Travail = Travail;
-        this.nbThread = nbThread;
-        this.nbTravaux = nbTravaux;
+    /**
+     * Get the value of name
+     *
+     * @return the value of name
+     */
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public void run() {
-        while (nbdefois-->0) {
-            
-            // Initialiser le nombre de travaux a faire
-            Travail.Init(nbTravaux);
-            System.out.println(" *** Init du travail par chef : " + nbTravaux + " travaux a faire *** ");
+    /**
+     * Set the value of name
+     *
+     * @param name new value of name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-            // Lever la barriere pour 
-            // indiquer aux travailleurs qu'ils peuvent commencer
-            b.release(nbThread);
+    public MonBean(){
+        
+    }
 
-            // Ici on pourrait afficher l'etat des donnees
-            // avant travaux.
-            // attendre la fin des travaux
-            Travail.Attendre();
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
 
-            // Ici on pourrait afficher l'etat des donnees
-            // apres travaux.
-        }
+    /**
+     * @param x the x to set
+     */
+    public void setX(int x) {
+        this.x = x;
     }
 }
