@@ -22,7 +22,8 @@ public class PCSem {
     public static void main(String[] args) {
         TampCirc tc = new TampCirc(10);
         Consommateur c = new Consommateur(tc);
-        Producteur p = new Producteur(tc);
+        Producteur p;
+        p = new Producteur(tc);
         //
         p.start();
         c.start();
