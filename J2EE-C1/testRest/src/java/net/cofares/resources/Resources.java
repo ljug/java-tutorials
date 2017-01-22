@@ -42,6 +42,10 @@ public class Resources {
         return "Ca marche!";
     }
 
+    /**
+     * 
+     * @return a new testC object 
+     */
     @GET
     @Path("/new")
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
@@ -59,6 +63,11 @@ public class Resources {
         return "\n<\n"+content+"\n>\n";
     }
     
+    /**
+     * POST methode for creating or initailising an instance of Resource (generally)
+     * @param content
+     * @return 
+     */
     @POST
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
