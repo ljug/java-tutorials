@@ -46,3 +46,33 @@ Vous êtes libre de représenter vos données en XML, en JSON, ou tout autre for
 
 Il n’est pas rare que les services REST permettent au client d’indiquer le format dans lequel ils souhaitent dialoguer,
  sous la forme par exemple d’un paramètre supplémentaire dans l’URL, ou plus simplement grâce aux en tête HTTP en spécifiant le content-type.
+
+## Ajouter sécurisation des service web par http BASIC
+
+### dans web.xml
+
+```xml
+<security-constraint>
+        <display-name>wr</display-name>
+        <web-resource-collection>
+            <web-resource-name>webresources</web-resource-name>
+            <description/>
+            <url-pattern>/wr/r/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>For admin user and testing</description>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>ForWS</realm-name>
+    </login-config>
+    <security-role>
+        <description>For admin only!</description>
+        <role-name>admin</role-name>
+    </security-role>
+```
+
+#TODO
+

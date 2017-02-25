@@ -126,3 +126,5 @@ hs_err_pid*
 /J2EE-C1/jsfhello/dist/
 /J2EE-C1/jsfPrem/dist/
 /J2EE-C1/jsfPrem/build/
+/J2EE-C1/testRest/build/
+/J2EE-C1/testRest/dist/
