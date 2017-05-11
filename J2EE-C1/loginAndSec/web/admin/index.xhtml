@@ -1,0 +1,15 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <p>Hello, <strong><h:outputText value="#{user}" /></strong>.</p>
+        <p>This is the ADMIN page. You can only view this if you have logged in with a user having the <code>admin</code> role.</p>
+
+    </ui:define>
+
+</ui:composition>

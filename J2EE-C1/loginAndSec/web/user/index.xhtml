@@ -1,0 +1,27 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <p:panel header="JSF Example">
+
+            <h3>This is the USER page.</h3>
+
+            <p:fragment autoUpdate="true">
+                <p>Below you'll find a property and a (Ajax) button example.</p>
+
+                <p style="color: green">exampleManagedBean.exampleProperty: #{exampleManagedBean.exampleProperty}</p>
+                <h:form>
+                    <p:commandButton value="Example Ajax Action!" actionListener="#{exampleManagedBean.exampleAction}" />
+                </h:form>
+            </p:fragment>
+        </p:panel>
+
+
+    </ui:define>
+
+</ui:composition>

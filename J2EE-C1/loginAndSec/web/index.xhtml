@@ -1,0 +1,29 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        HOME JSF Example Page - Overriding the default title
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:panel header="Home Page">
+                <h1>Welcome, this is the HOME page.</h1>
+            </p:panel>
+
+            <p:panel rendered="#{!loginManager.userLoggedIn}">
+                You are not logged in. To login, use the button on the top-right corner of this page.
+            </p:panel>
+
+            <p:panel rendered="#{loginManager.userLoggedIn}">
+                Hello, <strong>#{loginManager.user}</strong>.
+                <h:outputText rendered="#{loginManager.isUserInRole('admin')}" value="I see you have administrator powers." />
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

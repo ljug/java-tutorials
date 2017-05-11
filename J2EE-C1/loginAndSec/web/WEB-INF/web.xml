@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>JSF - PrimeFaces with JAAS Authentication in Tomcat Example Project</display-name>
+    <servlet-mapping>
+        <servlet-name>GcallBack</servlet-name>
+        <url-pattern>/GcallBack</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    <!-- The JSF FacesServlet - The JSF Front Controller, manages the the request processing lifecycle for JSF-->
+    <servlet>
+        <servlet-name>facesServlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- Maps the file extensions to the JSF FacesServlet -->
+    <servlet>
+        <servlet-name>GcallBack</servlet-name>
+        <servlet-class>net.cofares.servlet.GcallBack</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facesServlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <!-- ***************************************************************************************************************
+        BELOW: SECURITY, JAAS RELATED, SETTINGS
+     -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Views only available when logged in as ADMIN</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Views only available when logged in as USER</web-resource-name>
+            <url-pattern>/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>tomcat</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/authentication/login.xhtml</form-login-page>
+            <!-- We don't actually need an error page (since the form does not use j_security_check), but as it is
+            required here, we just repeat the login page -->
+            <form-error-page>/authentication/login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/error-pages/forbidden.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error-pages/notFound.xhtml</location>
+    </error-page>
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>tomcat</role-name>
+    </security-role>
+</web-app>

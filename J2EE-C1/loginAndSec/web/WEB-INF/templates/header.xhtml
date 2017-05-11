@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+        <p:menubar>
+            <p:submenu label="Example Pages" icon="ui-icon-folder-open">
+                <p:menuitem value="Home page" icon="ui-icon-document" outcome="/index"/>
+                <p:separator/>
+                <p:menuitem value="Sample page" icon="ui-icon-document" outcome="/samplePage"/>
+                <p:menuitem value="User-only page" icon="ui-icon-document" outcome="/user/index"/>
+                <p:menuitem value="Admin-only page" icon="ui-icon-document" outcome="/admin/index"/>
+                <p:separator/>
+                <p:menuitem value="Login page" icon="ui-icon-check" outcome="/authentication/login"/>
+            </p:submenu>
+
+            <p:submenu label="What is this?" icon="ui-icon-help">
+                <p:menuitem value="JSF 2.2 Prime Example" url="http://acdcjunior.github.io" icon="ui-icon-extlink"/>
+                <p:menuitem value="PrimeFaces MenuBar" url="http://www.primefaces.org/showcase/ui/menu/menubar.xhtml" icon="ui-icon-extlink"/>
+            </p:submenu>
+
+            <f:facet name="options">
+                <p:outputPanel rendered="#{!loginManager.userLoggedIn}">
+                    <p:button  value="Log In" icon="ui-icon-gear" outcome="/authentication/login"/>
+                </p:outputPanel>
+                <p:outputPanel rendered="#{loginManager.userLoggedIn}">
+                    <h:outputText style="margin-right:15px" value="Hello, #{loginManager.user}."/>
+                    <p:commandButton value="Log Out" icon="ui-icon-gear" actionListener="#{loginManager.logout}" ajax="false"/>
+                </p:outputPanel>
+            </f:facet>
+        </p:menubar>
+    </h:form>
+
+</ui:composition>

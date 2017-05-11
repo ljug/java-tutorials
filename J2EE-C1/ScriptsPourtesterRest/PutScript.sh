@@ -1,4 +1,4 @@
-Usr=pascalfares:pascal00
+Usr=pascal:pascal
 
 echo -e "GET http://localhost:8080/testRest/wr/r"
 curl -X GET -u $Usr -d "help me" http://localhost:8080/testRest/wr/r

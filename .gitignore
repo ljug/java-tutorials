@@ -128,3 +128,5 @@ hs_err_pid*
 /J2EE-C1/jsfPrem/build/
 /J2EE-C1/testRest/build/
 /J2EE-C1/testRest/dist/
+/J2EE-C1/loginAndSec/build/
+/J2EE-C1/loginAndSec/dist/

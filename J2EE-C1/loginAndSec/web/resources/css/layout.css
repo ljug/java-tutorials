@@ -1,0 +1,19 @@
+/*
+    The two CSS rules below are a fix for the MENUBAR with the FULL LAYOUT.
+    If you take it out, the floating menu from the menubar (in the top part) will be behind the middle part of the
+  layout (experiment removing this CSS and using the menubar). Ref: http://forum.primefaces.org/viewtopic.php?f=3&t=14013
+    It is taken from the "complex layout" example from the showcase:
+    https://code.google.com/p/primefaces/source/browse/examples/trunk/showcase/src/main/webapp/ui/layoutComplex.xhtml
+*/
+.ui-layout-north { z-index:20 !important; overflow:visible !important; }
+.ui-layout-north .ui-layout-unit-content { overflow:visible !important; }
+
+
+/*
+General Utilities rules
+*/
+
+/* Used to remove the border of panelGrids: <p:panelGrid styleClass="panelGridNoBorder"> */
+.panelGridNoBorder .ui-panelgrid-even, .panelGridNoBorder .ui-panelgrid-odd, .panelGridNoBorder .ui-panelgrid-cell {
+    border-style: none;
+}
