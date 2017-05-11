@@ -41,7 +41,7 @@
             <url-pattern>/user/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>tomcat</role-name>
+            <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
@@ -66,6 +66,6 @@
     </security-role>
     <security-role>
         <description/>
-        <role-name>tomcat</role-name>
+        <role-name>user</role-name>
     </security-role>
 </web-app>

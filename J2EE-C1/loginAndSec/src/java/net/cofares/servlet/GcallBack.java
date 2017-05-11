@@ -18,21 +18,17 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import net.cofares.domain.User;
-import net.cofares.jsf.web.authentication.LoginManager;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
 
@@ -52,29 +48,20 @@ public class GcallBack extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, InterruptedException, ExecutionException, JSONException, SQLException, NamingException, ClassNotFoundException {
+            throws IOException, InterruptedException, ExecutionException, JSONException, SQLException, NamingException, ClassNotFoundException {
 
-        /*
-         match the google callback successful to Tomcat credential: get username and password 
-        from Gmail:
-        
-        1- fetch code 
-        2- connect to Google and fecth current user Gmail
-        3- fetch user/pssd from DB given his Gmail
-        4- authenticate to tomcat programmatically - see Login Servlet to Tomcat
-         */
         String glgCode = request.getParameter("code");
         //System.out.println(FacesContext.getCurrentInstance().getExternalContext());
         if (glgCode != null) {
             //System.out.println("GoogleCallback glgCode=" + glgCode);
-            HttpSession sess = request.getSession();
-            OAuth20Service service = (OAuth20Service) sess.getAttribute("oauth2Service");
+            HttpSession session = request.getSession(true);
+            OAuth20Service service = (OAuth20Service) session.getAttribute("oauth2Service");
             if (service != null) {
                 //Construct the access token
                 OAuth2AccessToken accessToken = service.getAccessToken(glgCode);
                 //System.out.println("Got the Access Token!");
                 //Save the token for the duration of the session
-                sess.setAttribute("token", accessToken);
+                session.setAttribute("token", accessToken);
                 //System.out.println("GoogleCallback accessToken=" + accessToken);
                 String requestUrl = "https://www.googleapis.com/oauth2/v1/userinfo";
                 final OAuthRequest oAuthrequest = new OAuthRequest(Verb.GET, requestUrl);
@@ -82,36 +69,40 @@ public class GcallBack extends HttpServlet {
                 final Response OAuthResponse = service.execute(oAuthrequest);
                 //fetch the gmail from google response
                 JSONObject bodyJsonObject = new JSONObject(OAuthResponse.getBody());
+
                 //System.out.println(bodyJsonObject.get("email").toString());
                 String gmail = bodyJsonObject.get("email").toString();
 
-                request.login("admin", "admin");
-                
-                request.getSession(true).setAttribute("user", new User("admin"));
+                //A partir de l' email reconnu par google retrouver les informations locale
+                //li'e a cet email et faire le login
+                try {
+                    /* pour le test ceci dans tomcat-users.xml
+                    <user username="pfares@cofares.net" password="unsecretDansLeCodeSeulement" roles="user"/>
+                    <user username="pascal.fares@isae.edu.lb" password="unsecretDansLeCodeSeulement" roles="admin,user"/>
+                    <user username="admin@isae.edu.lb" password="unsecretDansLeCodeSeulement" roles="admin"/>
+                    <user username="nehmat@isae.edu.lb" password="unsecretDansLeCodeSeulement" roles="user"/>
+                    <user username="roulajawhar@isae.edu.lb" password="unsecretDansLeCodeSeulement" roles="user"/>
+                     */
+                    request.login(gmail, "unsecretDansLeCodeSeulement");
+                    User aUser = new User(gmail);
+                    aUser.setData(String.format("<pre>%s</pre>", bodyJsonObject.toString(4)));
+                    session.setAttribute("user", aUser);
+                    response.sendRedirect(request.getContextPath());
 
-                try (PrintWriter out = response.getWriter()) {
-                    /* TODO output your page here. You may use following sample code. */
-                    out.println("<!DOCTYPE html>");
-                    out.println("<html>");
-                    out.println("<head>");
-                    out.println("<title>Sucess login</title>");
-                    out.println("</head>");
-                    out.println("<body>");
-                    out.println("<h1>Servlet GoogleCallback: " + request.getContextPath() + ".<br> S.R.</h1>");
-                    out.println("<h1>" + gmail + "</h1>");
-                    out.println("</body>");
-                    out.println("</html>");
+                } catch (ServletException ex) {
+                    Logger.getLogger(GcallBack.class.getName()).log(Level.SEVERE, null, ex);
+                    printToOutput(request, response, "Echec du login!");
                 }
 
             } else {
-                printToOutput(request, response);
+                printToOutput(request, response, "Pas de session servoice!");
             }
         } else {
-            printToOutput(request, response);
+            printToOutput(request, response, "googleCode null");
         }
     }
 
-    public static void printToOutput(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public static void printToOutput(HttpServletRequest request, HttpServletResponse response, String message) throws IOException {
         System.out.println(request.getContextPath() + "GoogleCallback : Code is null!");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -119,10 +110,10 @@ public class GcallBack extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GoogleCallback : Code is null!</title>");
+            out.println("<title>Servlet GoogleCallback : message...</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GoogleCallback: code is invalid at " + request.getContextPath() + ".<br> S.R.</h1>");
+            out.printf("<h1>%s</h1> ", message);
             out.println("</body>");
             out.println("</html>");
         }

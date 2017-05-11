@@ -9,7 +9,7 @@
 
         <p>Hello, <strong><h:outputText value="#{user}" /></strong>.</p>
         <p>This is the ADMIN page. You can only view this if you have logged in with a user having the <code>admin</code> role.</p>
-
+        <h:outputText value="#{loginManager.user.data}" escape="false"/>
     </ui:define>
 
 </ui:composition>
