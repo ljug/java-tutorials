@@ -24,8 +24,8 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <!-- ***************************************************************************************************************
-        BELOW: SECURITY, JAAS RELATED, SETTINGS
-     -->
+       BELOW: SECURITY, JAAS RELATED, SETTINGS
+    -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Views only available when logged in as ADMIN</web-resource-name>
@@ -68,4 +68,8 @@
         <description/>
         <role-name>user</role-name>
     </security-role>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>redmond</param-value>
+    </context-param>
 </web-app>
