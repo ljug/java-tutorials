@@ -1,4 +1,4 @@
-#Un test simple d'un service web restfull avec Tomcat ou TomEE
+# Un test simple d'un service web restfull avec Tomcat ou TomEE
 
 Utilisation de NETBEANS, TOMEE
 
@@ -20,7 +20,7 @@ C'est à dire:
 
 Recupérer [TOMEE](http://tomee.apache.org/apache-tomee.html)
 
-##Qu’est-ce que REST ?
+## Qu’est-ce que REST ?
 
 
 REST (Representational State Transfer) est un style d’architecture qui repose sur le protocole HTTP 
@@ -29,7 +29,7 @@ REST (Representational State Transfer) est un style d’architecture qui repose 
 
 En quelques sorte un PUT serait utiliser pour un "update" dans une BD, et POST pour un "insert".
 
-##Les principes
+## Les principes
 
 L’adresse de notre service représente le « point terminal » (endpoint) : http://localhost:8080/.
  (si notre service n’était pas uniquement un serveur REST, notre point terminal pourrait être http://localhost:8080/testRest dans l'environnment tomcat ou tomee testRest represente le contexte d'application, 
@@ -39,7 +39,7 @@ Le point terminal n’est ni plus ni moins l’adresse de notre webservice.
 
 Notre service contient des ressources, en particulier des TestC, qui pourront être manipulés à une URI formée par convention de la sorte : http://point_terminal/nom_de_ressource/, soit dans notre exemple http://localhost:8080/testRest/wr.
 
-##Les formats d’échange
+## Les formats d’échange
 REST n’impose ni ne revendique un format d’échange entre client et serveur.
 
 Vous êtes libre de représenter vos données en XML, en JSON, ou tout autre format sérialisé ou dans tout autre dialecte de votre propre cru (sans oublier que le but est souvent d’exposer des services vers l’extérieur).
@@ -72,6 +72,7 @@ Il n’est pas rare que les services REST permettent au client d’indiquer le f
         <description>For admin only!</description>
         <role-name>admin</role-name>
     </security-role>
+</ecurity-constraint>
 ```
 
 #TODO
