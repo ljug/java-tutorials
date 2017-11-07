@@ -3,8 +3,11 @@
 * Des traveaux pratiques
 * ACCOV, Cycle C et autre cours du [Cnam Liban](http://depinfo.isae.edu.lb)
 
+## Lambda
+* [Lambda java 8](Lambdas)
+
 ## Liens externes et utiles
 
 * [Portail de l'animateur](http://www.cofares.net)
 * [Lebanese Java User Group](http://ljug.cofares.net)
-* [Portail vers d'autres compléments](http;//cours.cofares.net)
+* [Portail vers d'autres compléments](http://cours.cofares.net)
