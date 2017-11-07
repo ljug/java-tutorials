@@ -2,6 +2,12 @@
 
 Exemple d'une application de réseaux social. Permettant à l'administrateur d'effectuer des traitements sur une sélection de candidats selon certains critères.
 
+Vous trouverez aussi d'autres exemples et des TP ici
+
+* [Un stocks et requêtes en Java8](Exemple2)
+* [Camp de codes : des traveaux pratique](CampDeCode)
+
+
 # L'UC : Action sur une sélection de membres
 
 **Name :** Perform action on selected members
