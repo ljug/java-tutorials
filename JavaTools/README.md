@@ -1,5 +1,7 @@
 # Outils pour projets Java
 
+ [Vers la présentation du cours](https://docs.google.com/presentation/d/11EZh-Xo4qAX_JgPmYslyLWuTeY1pt2y9yma9AraYDIM/edit?usp=sharing)
+
 ## maven
 
 * [Projet Maven simple](MavenSimple)
@@ -14,3 +16,5 @@
 * Qu'est-ce que le groupId/artifactId ?
 * Qu'est-ce qu'un SNAPSHOT ?
 * Qu'est-ce que le repository local, distant ?
+
+
