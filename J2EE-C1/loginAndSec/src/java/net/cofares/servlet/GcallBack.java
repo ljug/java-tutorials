@@ -18,7 +18,6 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
