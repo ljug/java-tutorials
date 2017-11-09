@@ -6,6 +6,11 @@
 ## Lambda
 * [Lambda java 8](Lambdas)
 
+## Java Tools 
+
+* [Maven](JavaTools)
+* [Autre](Autre)
+
 ## Liens externes et utiles
 
 * [Portail de l'animateur](http://www.cofares.net)
