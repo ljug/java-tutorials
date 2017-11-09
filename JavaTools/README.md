@@ -5,6 +5,7 @@
 ## maven
 
 * [Projet Maven simple](MavenSimple)
+* [Modifier le pom](pluginsConfig)
 
 # Lien externe pour répondre a ces questions https://java.developpez.com/faq/maven/?page=Terminologie-et-documentation
 
