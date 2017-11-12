@@ -8,23 +8,15 @@
   gtag('config', 'UA-24954673-1');
 </script>
 
-# java-tutorials
-* Tutorials, howto and how it works 
-* Des traveaux pratiques
-* ACCOV, Cycle C et autre cours du [Cnam Liban](http://depinfo.isae.edu.lb)
-* Publications de la [LJUG](http://ljug.cofares.net) ( [Lebanese Java Users group](http://ljug.cofares.net) )
+# J2EE tutoriels et "Trucs et Astuces"
 
-## Lambda
-* [Lambda java 8](Lambdas)
+En complmeent de j2ee.isae.edu.lb
 
 ## Java Tools 
 
-* [Maven](JavaTools)
-* [Autre](Autre)
+* [Maven](../JavaTools)
+* [Autre](../Autre)
 
-## J2EE
-
-* [J2EE 8](J2EE8) en complmeent de j2ee.isae.edu.lb
 
 ## Liens externes et utiles
 
