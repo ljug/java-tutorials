@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Guess Number Facelets Application</title>
+    </h:head>
+    <h:body>
+        <h:form>
+                <p:graphicImage library="images" name="wave.med.gif" />
+                Bonjour (ou bonsoir),                              
+                <p:panel header="Mon nom est Duke. Je pense a un nombre entre \n
+                    #{userNumberBean.minimum} (Inclusif) et #{userNumberBean.maximum}.">
+                    <h2>Pouvez vous le deviner ?</h2>
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid id="grid" columns="3" cellpadding="5">
+                        <p:inputText
+                            id="userNo"
+                            value="#{userNumberBean.userNumber}">
+                            <f:validateLongRange
+                                minimum="#{userNumberBean.minimum}"
+                                maximum="#{userNumberBean.maximum}"/>
+                        </p:inputText>
+                        <p:commandButton id="submit" value="Valider" update="result"/>
+
+                        <p:message 
+                            for="userNo"/>
+
+                    </h:panelGrid>
+                     <p:outputLabel id="result" value="#{userNumberBean.response}" />
+                </p:panel>
+        </h:form>
+    </h:body>
+</html>
