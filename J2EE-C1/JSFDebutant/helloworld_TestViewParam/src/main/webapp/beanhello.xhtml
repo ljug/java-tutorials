@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewParam name="world" value="#{my_hello.world}" />
+    </f:metadata>
+    <h:head>
+        <title>Facelet Hello World</title>
+    </h:head>
+    <h:body>
+        Sans la balise h:outputText  (possible avec JSF 2.0):  #{my_hello.world}
+        <br/>
+        Avec la balise h:outputText: <h:outputText value="#{my_hello.world}"/>
+    </h:body>
+</html>
+
+
