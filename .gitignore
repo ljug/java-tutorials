@@ -142,3 +142,5 @@ hs_err_pid*
 /J2EE-C1/JSPetServlets/net.cofares_guessnumber/target/
 /J2EE-C1/JSFDebutant/helloworld_TestViewParam/target/
 /J2EE-C1/JSFDebutant/Ajax/net.cofares_jsf2.0_ajax-tag-SecondEcho/target/
+/Autre/testRest/target/
+/J2EE-C1/Rest/jaxrs_clients_crud/target/

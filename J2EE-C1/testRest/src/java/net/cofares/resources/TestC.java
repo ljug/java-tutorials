@@ -5,10 +5,6 @@
  */
 package net.cofares.resources;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
