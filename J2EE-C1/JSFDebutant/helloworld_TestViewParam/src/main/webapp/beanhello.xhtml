@@ -10,9 +10,15 @@
         <title>Facelet Hello World</title>
     </h:head>
     <h:body>
-        Sans la balise h:outputText  (possible avec JSF 2.0):  #{my_hello.world}
-        <br/>
-        Avec la balise h:outputText: <h:outputText value="#{my_hello.world}"/>
+        <h:form>
+            Saisir un text pour world : <h:inputText value="#{my_hello.world}" />
+            <h:commandButton value="Send" />
+            <br/>Sans la balise h:outputText  (possible avec JSF 2.0): 
+            #{my_hello.world}
+            <br/>
+            Avec la balise h:outputText: 
+            <h:outputText value="#{my_hello.world}"/>
+        </h:form>
     </h:body>
 </html>
 
