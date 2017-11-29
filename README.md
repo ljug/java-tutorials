@@ -1,13 +1,3 @@
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-24954673-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-24954673-1');
-</script>
-
 # java-tutorials
 * Tutorials, howto and how it works 
 * Des traveaux pratiques
@@ -24,7 +14,10 @@
 
 ## J2EE
 
+
 * [J2EE 8](J2EE8) en complmeent de j2ee.isae.edu.lb
+* [J2EE pour Cycle C Cnam Liban](J2EE-C1) en complmeent de j2ee.isae.edu.lb
+* [Un tomee 7.0.4 préconfiguré et complements](https://github.com/ljug/tomee704)
 
 ## Liens externes et utiles
 
