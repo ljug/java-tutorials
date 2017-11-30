@@ -6,50 +6,57 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * Tester en afichant le contenue des tables d'une base de donnée Mysql
+ *
+ * @author pfares
+ */
 public class JPAUtil {
 
-    // Database configuration
-    public static final String URL = "jdbc:mysql://localhost/testdb?useSSL=false";
+    private static final Logger logger
+            = Logger.getLogger(JPAUtil.class.getName());
+
+    // Configuration  de la base de donnée par defaut pour tester (a l'origine par le developpeur)
+    // A adapté pour votre besoin en fonction de votre environemnent
+    // Lire ceci dans un fichier de propriété
+    public static final String URL = "jdbc:mysql://localhost/?useSSL=false";
     public static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String USERNAME = "tomcat";
     public static final String PASSWORD = "pourtomcat";
     static Statement st;
     static Connection conn;
-/*
-    static {
-        try {
-            Class.forName(DBDRIVER);
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            st = conn.createStatement();
-        } catch (ClassNotFoundException|SQLException ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        } 
-    }
-*/
+
+    /**
+     * Requete update
+     *
+     * @param sql la requete sql
+     */
     public static void setup(String sql) {
         try {
             createStatement();
             st.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.println("Got an exception! ");
-            e.printStackTrace();
+            logger.log(Level.INFO, "Une exeption pour :" + sql, e);
+            System.exit(0);
+        }
+    }
+
+    public static void createStatement(String driver, String url, String username, String password) {
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, username, password);
+            st = conn.createStatement();
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.log(Level.INFO, "Une exeption pour createStatement", e);
             System.exit(0);
         }
     }
 
     public static void createStatement() {
-        try {
-            Class.forName(DBDRIVER);
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            st = conn.createStatement();
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Got an exception! ");
-            e.printStackTrace();
-            System.exit(0);
-        }
+        createStatement(DBDRIVER, URL, USERNAME, PASSWORD);
     }
 
     // Drop table if exists
@@ -57,14 +64,25 @@ public class JPAUtil {
         try {
             createStatement();
             st.executeUpdate(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
 
+    /**
+     * Executer une commande sql
+     *
+     * @param sql
+     * @throws Exception erreur dans la requete
+     */
     public void executeSQLCommand(String sql) throws Exception {
         st.executeUpdate(sql);
     }
 
+    /**
+     * afficher les donnée d'une requête
+     *
+     * @param sql la requete sql
+     */
     public static void checkData(String sql) {
         String[] starray = sql.split(" ");
         System.out.println("\n******** Table: " + starray[starray.length - 4] + " *******");
@@ -78,6 +96,12 @@ public class JPAUtil {
         }
     }
 
+    /**
+     * Affichage des resultat d'une requete générique (un prettyprint)
+     *
+     * @param rs
+     * @throws Exception
+     */
     public static void outputResultSet(ResultSet rs) throws Exception {
         ResultSetMetaData metadata = rs.getMetaData();
 
@@ -138,8 +162,8 @@ public class JPAUtil {
                 Object value = rs.getObject(i + 1);
                 if (value != null) {
                     overwrite(line, colpos[i] + 1, value.toString().trim());
-                    overwrite(line, colpos[i] + colwidths[i], " |");
                 }
+                overwrite(line, colpos[i] + colwidths[i], " |");
             }
             System.out.println(line);
         }
