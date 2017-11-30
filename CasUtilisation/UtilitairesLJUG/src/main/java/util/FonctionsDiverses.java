@@ -8,6 +8,7 @@ package util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  *
@@ -43,5 +44,11 @@ public class FonctionsDiverses {
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    
+    public static void addIfNot(List l, Object o) {
+        long n = l.stream().filter(e -> e.equals(o)).count();
+        System.out.println(o + " " + n);
+        if (n==0) l.add(o);
     }
 }

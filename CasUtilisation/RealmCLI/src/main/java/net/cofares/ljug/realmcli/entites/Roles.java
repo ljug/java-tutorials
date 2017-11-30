@@ -1,10 +1,13 @@
 package net.cofares.ljug.realmcli.entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -32,10 +35,11 @@ public class Roles implements Serializable {
     @Basic(optional = false)
     @Column(name = "role_name", nullable = false, length = 15)
     private String roleName;
+    //Role est le propriétaire de la relation
     @JoinTable(name = "user_roles", joinColumns = {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "user_name", referencedColumnName = "user_name", nullable = false)})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Users> usersList;
 
     public Roles() {
@@ -55,6 +59,7 @@ public class Roles implements Serializable {
 
     @XmlTransient
     public List<Users> getUsersList() {
+        if (usersList == null) setUsersList(new ArrayList<>());
         return usersList;
     }
 

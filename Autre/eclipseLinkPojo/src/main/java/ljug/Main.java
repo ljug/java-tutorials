@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // Perform JPA operations
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("lb.edu.isae_mavenproject1_jar_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf
+                = Persistence.createEntityManagerFactory("lb.edu.isae_mavenproject1_jar_1.0-SNAPSHOTPU");
         
         UsersJpaController uc = new UsersJpaController(emf);
         uc.createorUpdate(new Users("pascalfares3210", "chef", 0, true));

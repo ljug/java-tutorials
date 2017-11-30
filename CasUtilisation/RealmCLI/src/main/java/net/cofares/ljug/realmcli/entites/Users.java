@@ -6,10 +6,13 @@
 package net.cofares.ljug.realmcli.entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -46,7 +49,7 @@ public class Users implements Serializable {
     @Lob
     @Column(name = "description", length = 65535)
     private String description;
-    @ManyToMany(mappedBy = "usersList")
+    @ManyToMany(mappedBy = "usersList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Roles> rolesList;
 
     public Users() {
@@ -95,6 +98,7 @@ public class Users implements Serializable {
 
     @XmlTransient
     public List<Roles> getRolesList() {
+        if (rolesList ==  null) setRolesList(new ArrayList<>());
         return rolesList;
     }
 
@@ -121,7 +125,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "net.cofares.ljug.realmcli.entites.Users[ userName=" + userName + " ]";
+        return String.format("net.cofares.ljug.realmcli.entites.Users[ userName=%s]",userName);
     }
     
 }
