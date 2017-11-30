@@ -30,6 +30,6 @@ public class Main {
         emf.close();
 
         // Display the table for verification
-        JPAUtil.checkData("select * from EMPLOYEE ORDER BY ID");
+        JPAUtil.checkData("select * from testdb.EMPLOYEE ORDER BY ID");
     }
 }

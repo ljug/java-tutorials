@@ -4,10 +4,10 @@
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <class>entities.Employee</class>
     <properties>
-      <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
-      <property name="toplink.jdbc.user" value="root"/>
-      <property name="toplink.jdbc.password" value="pascal00"/>
+      <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/testdb?useSSL=false"/>
+      <property name="toplink.jdbc.user" value="tomcat"/>
+      <property name="toplink.jdbc.password" value="pourtomcat"/>
       <!-- enable this property to see SQL and other logging -->
       <!-- property name="toplink.logging.level" value="FINE"/ -->
       <property name="toplink.ddl-generation" value="drop-and-create-tables"/>
