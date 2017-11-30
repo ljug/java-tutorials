@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>net.cofares.ljug</groupId>
-  <artifactId>JPAUtil</artifactId>
+  <artifactId>jpa_basics_pojo_datatypes_mysql</artifactId>
   <versioning>
     <versions>
       <version>1.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20171130093250</lastUpdated>
+    <lastUpdated>20171130085416</lastUpdated>
   </versioning>
 </metadata>
