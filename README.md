@@ -31,5 +31,7 @@
 
 # Le dépot maven dans le repoertoire mvn-repo
 
-faire ceci puis copier cp -r .m2/repositry/<racinedevotreartifact> .
-`mvn install -DperformRelease=true -DcreateChecksum=true`
+Lien vers le depot maven de ljug https://github.com/ljug/java-tutorials/tree/master/mvn-repo
+
+faire ceci `mvn install -DperformRelease=true -DcreateChecksum=true` puis copier cp -r .m2/repositry/<racinedevotreartifact> <artifactidpath>
+
