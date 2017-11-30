@@ -29,7 +29,7 @@
 
 * [Compléments et supports](https://drive.google.com/open?id=0B2NK97qOKj2jOWwwZnRFdmc4em8)
 
-# Le dépot maven dans la branche mvn-repo
+# Le dépot maven dans le repoertoire mvn-repo
 
 faire ceci puis copier cp -r .m2/repositry/<racinedevotreartifact> .
 `mvn install -DperformRelease=true -DcreateChecksum=true`
