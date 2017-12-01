@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.cofares.ljug.realmcli.entites;
+package ljug.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author pfares
  */
 @Entity
-@Table(name = "users", catalog = "Realm", schema = "")
+@Table(name = "users")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
@@ -39,18 +37,18 @@ public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "user_name", nullable = false, length = 15)
+    @Column(name = "user_name")
     private String userName;
-    @Column(name = "user_gsuite", length = 256)
+    @Lob
+    @Column(name = "description")
+    private String description;
+    @Column(name = "user_gsuite")
     private String userGsuite;
     @Basic(optional = false)
-    @Column(name = "user_pass", nullable = false, length = 64)
+    @Column(name = "user_pass")
     private String userPass;
-    @Lob
-    @Column(name = "description", length = 65535)
-    private String description;
-    @ManyToMany(mappedBy = "usersList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Roles> rolesList;
+    @ManyToMany(mappedBy = "usersSet", fetch = FetchType.EAGER)
+    private Set<Roles> rolesSet;
 
     public Users() {
     }
@@ -72,6 +70,14 @@ public class Users implements Serializable {
         this.userName = userName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getUserGsuite() {
         return userGsuite;
     }
@@ -88,22 +94,13 @@ public class Users implements Serializable {
         this.userPass = userPass;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @XmlTransient
-    public List<Roles> getRolesList() {
-        if (rolesList ==  null) setRolesList(new ArrayList<>());
-        return rolesList;
+    public Set<Roles> getRolesSet() {
+        return rolesSet;
     }
 
-    public void setRolesList(List<Roles> rolesList) {
-        this.rolesList = rolesList;
+    public void setRolesSet(Set<Roles> rolesSet) {
+        this.rolesSet = rolesSet;
     }
 
     @Override
@@ -120,12 +117,15 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        return !((this.userName == null && other.userName != null) || (this.userName != null && !this.userName.equals(other.userName)));
+        if ((this.userName == null && other.userName != null) || (this.userName != null && !this.userName.equals(other.userName))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return String.format("net.cofares.ljug.realmcli.entites.Users[ userName=%s]",userName);
+        return "ljug.entities.Users[ userName=" + userName + " ]";
     }
     
 }

@@ -4,8 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>net.cofares.ljug.realmcli.entites.Users</class>
     <class>net.cofares.ljug.realmcli.entites.Roles</class>
+    <class>ljug.entities.Users</class>
+    <class>ljug.entities.Roles</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Realm?useSSL=false"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/NewRealm?useSSL=false"/>
       <property name="javax.persistence.jdbc.user" value="tomcat"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="pourtomcat"/>

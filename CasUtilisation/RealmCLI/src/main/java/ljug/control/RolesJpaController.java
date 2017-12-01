@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.cofares.ljug.realmcli.control;
+package ljug.control;
 
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import net.cofares.ljug.realmcli.entites.Users;
-import java.util.ArrayList;
+import ljug.entities.Users;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import net.cofares.ljug.realmcli.control.exceptions.NonexistentEntityException;
-import net.cofares.ljug.realmcli.control.exceptions.PreexistingEntityException;
-import net.cofares.ljug.realmcli.entites.Roles;
+import ljug.control.exceptions.NonexistentEntityException;
+import ljug.control.exceptions.PreexistingEntityException;
+import ljug.entities.Roles;
 
 /**
  *
@@ -34,35 +35,30 @@ public class RolesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void createorUpdate (Roles role) throws PreexistingEntityException, Exception {
-        if (findRoles(role.getRoleName()) == null) {
-            create(role);
-        } else {
-            edit(role);
-        }
-    }
     public void create(Roles roles) throws PreexistingEntityException, Exception {
-        if (roles.getUsersList() == null) {
-            roles.setUsersList(new ArrayList<Users>());
+        if (findRoles(roles.getRoleName()) != null) return;
+        if (roles.getUsersSet() == null) {
+            roles.setUsersSet(new HashSet<Users>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Users> attachedUsersList = new ArrayList<Users>();
-            for (Users usersListUsersToAttach : roles.getUsersList()) {
-                usersListUsersToAttach = em.getReference(usersListUsersToAttach.getClass(), usersListUsersToAttach.getUserName());
-                attachedUsersList.add(usersListUsersToAttach);
+            Set<Users> attachedUsersSet = new HashSet<Users>();
+            for (Users usersSetUsersToAttach : roles.getUsersSet()) {
+                usersSetUsersToAttach = em.getReference(usersSetUsersToAttach.getClass(), usersSetUsersToAttach.getUserName());
+                attachedUsersSet.add(usersSetUsersToAttach);
             }
-            roles.setUsersList(attachedUsersList);
+            roles.setUsersSet(attachedUsersSet);
             em.persist(roles);
-            for (Users usersListUsers : roles.getUsersList()) {
-                usersListUsers.getRolesList().add(roles);
-                usersListUsers = em.merge(usersListUsers);
+            for (Users usersSetUsers : roles.getUsersSet()) {
+                usersSetUsers.getRolesSet().add(roles);
+                usersSetUsers = em.merge(usersSetUsers);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findRoles(roles.getRoleName()) != null) {
+                System.out.println("\n\nRoles " + roles + " already exists.\n\n");
                 throw new PreexistingEntityException("Roles " + roles + " already exists.", ex);
             }
             throw ex;
@@ -74,34 +70,31 @@ public class RolesJpaController implements Serializable {
     }
 
     public void edit(Roles roles) throws NonexistentEntityException, Exception {
-        if (roles.getUsersList() == null) {
-            roles.setUsersList(new ArrayList<Users>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Roles persistentRoles = em.find(Roles.class, roles.getRoleName());
-            List<Users> usersListOld = persistentRoles.getUsersList();
-            List<Users> usersListNew = roles.getUsersList();
-            List<Users> attachedUsersListNew = new ArrayList<Users>();
-            for (Users usersListNewUsersToAttach : usersListNew) {
-                usersListNewUsersToAttach = em.getReference(usersListNewUsersToAttach.getClass(), usersListNewUsersToAttach.getUserName());
-                attachedUsersListNew.add(usersListNewUsersToAttach);
+            Set<Users> usersSetOld = persistentRoles.getUsersSet();
+            Set<Users> usersSetNew = roles.getUsersSet();
+            Set<Users> attachedUsersSetNew = new HashSet<Users>();
+            for (Users usersSetNewUsersToAttach : usersSetNew) {
+                usersSetNewUsersToAttach = em.getReference(usersSetNewUsersToAttach.getClass(), usersSetNewUsersToAttach.getUserName());
+                attachedUsersSetNew.add(usersSetNewUsersToAttach);
             }
-            usersListNew = attachedUsersListNew;
-            roles.setUsersList(usersListNew);
+            usersSetNew = attachedUsersSetNew;
+            roles.setUsersSet(usersSetNew);
             roles = em.merge(roles);
-            for (Users usersListOldUsers : usersListOld) {
-                if (!usersListNew.contains(usersListOldUsers)) {
-                    usersListOldUsers.getRolesList().remove(roles);
-                    usersListOldUsers = em.merge(usersListOldUsers);
+            for (Users usersSetOldUsers : usersSetOld) {
+                if (!usersSetNew.contains(usersSetOldUsers)) {
+                    usersSetOldUsers.getRolesSet().remove(roles);
+                    usersSetOldUsers = em.merge(usersSetOldUsers);
                 }
             }
-            for (Users usersListNewUsers : usersListNew) {
-                if (!usersListOld.contains(usersListNewUsers)) {
-                    usersListNewUsers.getRolesList().add(roles);
-                    usersListNewUsers = em.merge(usersListNewUsers);
+            for (Users usersSetNewUsers : usersSetNew) {
+                if (!usersSetOld.contains(usersSetNewUsers)) {
+                    usersSetNewUsers.getRolesSet().add(roles);
+                    usersSetNewUsers = em.merge(usersSetNewUsers);
                 }
             }
             em.getTransaction().commit();
@@ -133,10 +126,10 @@ public class RolesJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The roles with id " + id + " no longer exists.", enfe);
             }
-            List<Users> usersList = roles.getUsersList();
-            for (Users usersListUsers : usersList) {
-                usersListUsers.getRolesList().remove(roles);
-                usersListUsers = em.merge(usersListUsers);
+            Set<Users> usersSet = roles.getUsersSet();
+            for (Users usersSetUsers : usersSet) {
+                usersSetUsers.getRolesSet().remove(roles);
+                usersSetUsers = em.merge(usersSetUsers);
             }
             em.remove(roles);
             em.getTransaction().commit();

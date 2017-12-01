@@ -1,10 +1,13 @@
-package net.cofares.ljug.realmcli.entites;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ljug.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author pfares
  */
 @Entity
-@Table(name = "roles", catalog = "Realm", schema = "")
+@Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
@@ -33,14 +36,13 @@ public class Roles implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "role_name", nullable = false, length = 15)
+    @Column(name = "role_name")
     private String roleName;
-    //Role est le propriétaire de la relation
-    @JoinTable(name = "user_roles", joinColumns = {
-        @JoinColumn(name = "role_name", referencedColumnName = "role_name", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "user_name", referencedColumnName = "user_name", nullable = false)})
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Users> usersList;
+    @JoinTable(name = "users_roles", joinColumns = {
+        @JoinColumn(name = "rolesList_role_name", referencedColumnName = "role_name")}, inverseJoinColumns = {
+        @JoinColumn(name = "usersList_user_name", referencedColumnName = "user_name")})
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Users> usersSet;
 
     public Roles() {
     }
@@ -58,13 +60,12 @@ public class Roles implements Serializable {
     }
 
     @XmlTransient
-    public List<Users> getUsersList() {
-        if (usersList == null) setUsersList(new ArrayList<>());
-        return usersList;
+    public Set<Users> getUsersSet() {
+        return usersSet;
     }
 
-    public void setUsersList(List<Users> usersList) {
-        this.usersList = usersList;
+    public void setUsersSet(Set<Users> usersSet) {
+        this.usersSet = usersSet;
     }
 
     @Override
@@ -81,12 +82,15 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        return !((this.roleName == null && other.roleName != null) || (this.roleName != null && !this.roleName.equals(other.roleName)));
+        if ((this.roleName == null && other.roleName != null) || (this.roleName != null && !this.roleName.equals(other.roleName))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "net.cofares.ljug.realmcli.entites.Roles[ roleName=" + roleName + " ]";
+        return "ljug.entities.Roles[ roleName=" + roleName + " ]";
     }
     
 }

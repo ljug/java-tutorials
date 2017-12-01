@@ -5,12 +5,15 @@
  */
 package ljug;
 
+import java.util.List;
+import java.util.Set;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import net.cofares.ljug.realmcli.control.RolesJpaController;
-import net.cofares.ljug.realmcli.control.UsersJpaController;
-import net.cofares.ljug.realmcli.entites.Roles;
-import net.cofares.ljug.realmcli.entites.Users;
+import ljug.control.RolesJpaController;
+import ljug.control.UsersJpaController;
+import ljug.entities.Roles;
+import ljug.entities.Users;
 import util.FonctionsDiverses;
 
 /**
@@ -24,29 +27,49 @@ public class Main {
         EntityManagerFactory emf
                 = Persistence.createEntityManagerFactory("RealmCLI_PU");
         
+        EntityManager em = emf.createEntityManager();
+        
         RolesJpaController tc = new RolesJpaController(emf);
         UsersJpaController uc = new UsersJpaController(emf);
         
-        uc.createorUpdate(new Users("pascal1","pascal1"));
-        tc.createorUpdate(new Roles("prof"));
+        uc.create(new Users("pascal","pascal"));
+        tc.create(new Roles("chef"));
         
         uc.findUsersEntities().stream().forEach(System.out::println);
         tc.findRolesEntities().stream().forEach(System.out::println);
         
-        Users pascal = uc.findUsers("Pascal");
+        Users pascal = uc.findUsers("pascal");
         Roles chef = tc.findRoles("chef");
-        System.out.printf("%s %d\n",pascal,pascal.getRolesList().size());
-        pascal.getRolesList().stream().forEach(System.out::println);
-        System.out.printf("%s %d\n",chef,chef.getUsersList().size());
-        chef.getUsersList().stream().forEach(System.out::println);
+        System.out.println("-----------\n\n");
+        System.out.printf("%s %d\n",pascal,pascal.getRolesSet().size());
+        pascal.getRolesSet().stream().forEach(System.out::println);
+        System.out.println("-----------\n\n");
+        Set<Users> lr = chef.getUsersSet();
+        System.out.printf("LR %s %d\n",chef,lr.size());
+        lr.stream().forEach(u -> System.out.println("Heho"+u));
         System.out.println("----------------------------------------------------\n\n");
-        FonctionsDiverses.addIfNot(pascal.getRolesList(), chef);
+        pascal.getRolesSet().add(chef);
+        //FonctionsDiverses.addIfNot(pascal.getRolesList(), chef);
         //pascal.getRolesList().add(chef);
         //chef.getUsersList().add(pascal);
-        FonctionsDiverses.addIfNot(chef.getUsersList(),pascal);
+        chef.getUsersSet().add(pascal);
+        //FonctionsDiverses.addIfNot(chef.getUsersList(),pascal);
         //edit du propriétaire de la relation
         //uc.edit(pascal);
         System.out.println("----------------------------------------------------\n\n");
         tc.edit(chef);
+        
+        uc.create(new Users("pascal1","pascal1"));
+        tc.create(new Roles("prof"));
+        
+        Users pascal1 = uc.findUsers("pascal1");
+        Roles prof = tc.findRoles("prof");
+        
+        pascal.getRolesSet().add(prof);
+        prof.getUsersSet().add(pascal);
+        
+        uc.edit(pascal);
+        
+        
     }
 }
