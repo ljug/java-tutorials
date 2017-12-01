@@ -1,9 +1,12 @@
 package Hello;
 
-import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
+import javax.inject.Named;
 
-@ManagedBean(name="my_hello")
-public class Hello {
+
+
+@Named("my_hello")
+public class Hello implements Serializable{
     private String world = "Hello World!";
 
     public String getworld() {

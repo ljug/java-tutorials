@@ -10,6 +10,9 @@
 private/
 build/
 dist/
+target/
+
+!mvn-repo/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -145,3 +148,8 @@ hs_err_pid*
 /Autre/testRest/target/
 /J2EE-C1/Rest/jaxrs_clients_crud/target/
 /CampCode/JerseyRest/target/
+/J2EE-C1/JPA/jpa_basics_pojo_datatypes_mysql/target/
+/J2EE-C1/TP/restTest/target/
+/J2EE-C1/JPA/01_OneToOne_UniDirectional_NoAnnotation_NoCascade_jar_1.0-SNAPSHOT/target/
+/J2EE-C1/TP/JPAUtil/target/
+

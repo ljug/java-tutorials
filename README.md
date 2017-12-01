@@ -28,3 +28,10 @@
 ## Pour les auditeurs du Cnam Liban possédant un compte @isae.edu.lb
 
 * [Compléments et supports](https://drive.google.com/open?id=0B2NK97qOKj2jOWwwZnRFdmc4em8)
+
+# Le dépot maven dans le repoertoire mvn-repo
+
+Lien vers le depot maven de ljug https://github.com/ljug/java-tutorials/tree/master/mvn-repo
+
+faire ceci `mvn install -DperformRelease=true -DcreateChecksum=true` puis copier cp -r .m2/repositry/<racinedevotreartifact> <artifactidpath>
+

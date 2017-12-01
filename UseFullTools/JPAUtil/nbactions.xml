@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-mypublish</actionName>
+            <displayName>mypublish</displayName>
+            <goals>
+                <goal>install:install</goal>
+            </goals>
+            <properties>
+                <performRelease>true -DcreateChecksum=true</performRelease>
+            </properties>
+        </action>
+    </actions>
