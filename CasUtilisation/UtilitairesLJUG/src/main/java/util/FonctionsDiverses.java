@@ -47,6 +47,8 @@ public class FonctionsDiverses {
     }
     
     public static void addIfNot(List l, Object o) {
+        System.out.printf("\naddIf %s\n", o);
+        l.stream().forEach(System.out::println);
         long n = l.stream().filter(e -> e.equals(o)).count();
         System.out.println(o + " " + n);
         if (n==0) l.add(o);

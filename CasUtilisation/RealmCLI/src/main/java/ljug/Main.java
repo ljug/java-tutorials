@@ -67,8 +67,10 @@ public class Main {
         
         pascal.getRolesSet().add(prof);
         prof.getUsersSet().add(pascal);
-        
         uc.edit(pascal);
+        pascal1.getRolesSet().add(prof);
+        prof.getUsersSet().add(pascal1);
+        uc.edit(pascal1);
         
         
     }
