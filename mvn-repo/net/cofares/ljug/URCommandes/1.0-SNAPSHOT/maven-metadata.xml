@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
   <groupId>net.cofares.ljug</groupId>
-  <artifactId>URCommades</artifactId>
+  <artifactId>URCommandes</artifactId>
   <version>1.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20171202.083538</timestamp>
+      <timestamp>20171202.120523</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20171202083538</lastUpdated>
+    <lastUpdated>20171202120523</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.0-20171202.083538-1</value>
-        <updated>20171202083538</updated>
+        <value>1.0-20171202.120523-1</value>
+        <updated>20171202120523</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0-20171202.083538-1</value>
-        <updated>20171202083538</updated>
+        <value>1.0-20171202.120523-1</value>
+        <updated>20171202120523</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

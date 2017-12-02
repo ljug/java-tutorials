@@ -2,7 +2,7 @@ package net.cofares.ljug.urcommades;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import net.cofares.ljug.event.CommandCallback;
+import net.cofares.ljug.event.CommandesCallback;
 
 /**
  * CommandUR ::= AddUser | AddRole | Assoc | ListU | ListR
@@ -13,7 +13,7 @@ public class CommandeUR {
     Consumer callback = (c) -> System.out.println(c);
     Supplier produce = () -> this;
     
-    public static CommandeUR parse(CommandCallback lesSemantiques, URCTokenizer scan){  
+    public static CommandeUR parse(CommandesCallback lesSemantiques, URCTokenizer scan){  
         //System.out.println("UR");
         switch (scan.getTok()) {
             case ADDUSER:

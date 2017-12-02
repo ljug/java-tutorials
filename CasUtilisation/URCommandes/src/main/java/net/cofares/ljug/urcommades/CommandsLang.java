@@ -5,7 +5,7 @@
  */
 package net.cofares.ljug.urcommades;
 
-import net.cofares.ljug.event.CommandCallback;
+import net.cofares.ljug.event.CommandesCallback;
 
 /**
  *
@@ -13,7 +13,7 @@ import net.cofares.ljug.event.CommandCallback;
  */
 public class CommandsLang {
     //CommandCallback lesSemantiques;
-    public static void parse(CommandCallback lesSemantiques, URCTokenizer scan) {
+    public static void parse(CommandesCallback lesSemantiques, URCTokenizer scan) {
         CommandeUR cur;
         System.out.flush();
         System.out.printf("\n$> ");
