@@ -6,7 +6,11 @@
 package ljug;
 
 import java.io.IOException;
-import net.cofares.ljug.urcommades.CommandeUR;
+import net.cofares.ljug.event.CommandCallback;
+import net.cofares.ljug.urcommades.AddRole;
+import net.cofares.ljug.urcommades.AddUser;
+import net.cofares.ljug.urcommades.Assoc;
+import net.cofares.ljug.urcommades.CommandsLang;
 import net.cofares.ljug.urcommades.URCTokenizer;
 
 /**
@@ -16,23 +20,18 @@ import net.cofares.ljug.urcommades.URCTokenizer;
  */
 public class Main {
 
-    public static void main(String a[]) throws IOException {
+    public static void initCommandCallbacks(CommandCallback cc) {
+        cc.registerCommandAction("adduser", (AddUser u) -> System.out.printf("\nAdduser %s %s %s \n", u.username, u.password, u.gmail));
+        cc.registerCommandAction("addrole", (AddRole r) -> System.out.printf("\nAddRole %s \n", r.role));
+        cc.registerCommandAction("assoc", (Assoc r) -> System.out.printf("\nAssoc %s %s \n", r.user, r.role));
+    }
+    public static void main(String a[])  {
         URCTokenizer scan = new URCTokenizer(System.in);
-        CommandeUR cur;
-        System.out.print("\n$> ");
-            scan.nToken();
-        while (true) {            
-            cur = CommandeUR.parse(scan);
-            if (cur == null) {
-                //skip pour essayer de reprendre
-                System.out.print("Pas une commande correcte " + scan.getTok());
-                System.out.print("\n$> ");
-                scan.nToken();
-                continue;
-            }
-            cur.eval();
-            System.out.print("\n$> ");
-        }
+        CommandCallback cc=new CommandCallback();
+        initCommandCallbacks(cc);
+        System.out.printf("START");
+        CommandsLang.parse(cc, scan);
+        System.out.println("END");
     }
 
 }

@@ -6,15 +6,16 @@
 package net.cofares.ljug.urcommades;
 
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  *
  * @author cnamliban
  */
-class Assoc extends CommandeUR {
-    String user;
-    String role;
-    public static Assoc parse(URCTokenizer scan){
+public class Assoc extends CommandeUR {
+    public String user;
+    public String role;
+    public static Assoc parse(Consumer<Assoc> assocCallback, URCTokenizer scan){
         //System.out.println("AU");
         if (scan.getTok() != URCTokenizer.Token.ASSOC) {
             System.out.println("Pas de debut assoc");
@@ -23,6 +24,7 @@ class Assoc extends CommandeUR {
         
         scan.nToken(); 
         Assoc au = new Assoc();
+        au.callback=assocCallback;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de username");
             return null;
@@ -39,7 +41,10 @@ class Assoc extends CommandeUR {
 
         return au;
     }
-    public void eval () {
-        System.out.printf("Assoc %s %s\n",user,role);
+
+    @Override
+    public void eval() {
+        //System.out.println("Eval ASSOC");
+        callback.accept(produce.get());
     }
 }

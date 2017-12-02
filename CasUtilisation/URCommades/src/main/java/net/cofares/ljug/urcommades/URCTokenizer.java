@@ -102,6 +102,7 @@ public class URCTokenizer extends StreamTokenizer implements Serializable {
     public URCTokenizer(InputStream is) {
         super(new BufferedReader(new InputStreamReader(is)));
         this.slashStarComments(true);
+        this.eolIsSignificant(true);
         this.ordinaryChar('"');
     }
     
@@ -124,6 +125,7 @@ public class URCTokenizer extends StreamTokenizer implements Serializable {
                 else if(sval.equals("addrole")) return (tok=Token.ADDROLE); 
                 else return (tok=Token.SYMBOL);
                 case TT_NUMBER : return (tok=Token.CONST) ;
+                case TT_EOL: return (tok=Token.FININST);
                 default :
                     if (ttype == '+') return (tok=Token.PLUS);
                     else if (ttype=='-') return (tok=Token.MOINS);

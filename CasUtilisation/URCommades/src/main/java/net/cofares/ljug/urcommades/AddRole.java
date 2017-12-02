@@ -5,13 +5,15 @@
  */
 package net.cofares.ljug.urcommades;
 
+import java.util.function.Consumer;
+
 /**
  *
  * @author cnamliban
  */
-class AddRole extends CommandeUR {
-    String role;
-    public static AddRole parse(URCTokenizer scan){
+public class AddRole extends CommandeUR {
+    public String role;
+    public static AddRole parse(Consumer<AddRole> addRoleCallback, URCTokenizer scan){
         
         //System.out.println("AU");
         if (scan.getTok() != URCTokenizer.Token.ADDROLE) {
@@ -21,6 +23,7 @@ class AddRole extends CommandeUR {
         //Current token est ADDUSER
         scan.nToken(); //skip ADDUSER
         AddRole au = new AddRole();
+        au.callback=addRoleCallback;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de role");
             return null;
@@ -29,7 +32,10 @@ class AddRole extends CommandeUR {
         scan.nToken();   
         return au;
     }
-    public void eval () {
-        System.out.printf("Addrole %s\n",role);
+    @Override
+    public void eval() {
+        //System.out.println("Eval AddRole");
+        callback.accept(produce.get());
     }
+    
 }

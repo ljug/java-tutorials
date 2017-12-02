@@ -6,6 +6,7 @@
 package net.cofares.ljug.urcommades;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * le ? dans la règele est pour indiquer une option parser et semantique de
@@ -16,18 +17,22 @@ import java.util.function.Consumer;
  */
 public class AddUser extends CommandeUR {
 
-    Consumer<AddUser> adduserCallback;
-    String username;
-    String password;
-    String gmail;
+    static CommandeUR parse(Function commadAction, URCTokenizer scan) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //Consumer<AddUser> adduserCallback;
+    public String username;
+    public String password;
+    public String gmail;
 
     public AddUser() {
-        adduserCallback = u -> System.out.printf("Adduser %s %s %s \n", u.username, u.password, u.gmail);
+        //adduserCallback = u -> System.out.printf("Adduser %s %s %s \n", u.username, u.password, u.gmail);
             
         
     }
-    public static AddUser parse(URCTokenizer scan) {
-        //System.out.println("AU");
+    public static AddUser parse(Consumer<AddUser> adduserCallback, URCTokenizer scan) {
+        
         if (scan.getTok() != URCTokenizer.Token.ADDUSER) {
             System.out.println("Pas de debut adduser");
             return null;
@@ -35,6 +40,8 @@ public class AddUser extends CommandeUR {
         //Current token est ADDUSER
         scan.nToken(); //skip ADDUSER
         AddUser au = new AddUser();
+        //au.adduserCallback=adduserCallback;
+        au.callback=adduserCallback;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de username");
             return null;
@@ -56,12 +63,14 @@ public class AddUser extends CommandeUR {
             System.out.println("-gmail?"+au.gmail);
             scan.nToken();
         }
-        System.out.println("fin adduser"+scan.getTok());
+        //System.out.println("fin adduser"+scan.getTok());
         return au;
     }
 
     @Override
     public void eval() {
-        adduserCallback.accept(this);
+        //System.out.println("Eval AddUser"+callback+produce);
+        callback.accept(this);
     }
+    
 }

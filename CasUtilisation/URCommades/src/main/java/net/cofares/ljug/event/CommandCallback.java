@@ -5,19 +5,20 @@
  */
 package net.cofares.ljug.event;
 
+import java.util.HashMap;
 import java.util.function.Consumer;
-import net.cofares.ljug.urcommades.AddUser;
+import net.cofares.ljug.urcommades.CommandeUR;
 
 /**
  *
  * @author cnamliban
  */
-public class CommandCallback<T>  {
-    Consumer<T> callback;
-    public void registerCommandAction(Consumer<T> c){
-        callback=c;
+public class CommandCallback {
+    HashMap<String,Consumer<? extends CommandeUR>> callbacks = new HashMap<>();
+    public <T> void registerCommandAction(String command, Consumer<? extends CommandeUR> f){
+        callbacks.put(command, f);
     }
-    public Consumer<T> getCommadAction(){
-        return callback;
+    public Consumer getCommadAction(String command){
+        return callbacks.get(command);
     }
 }
