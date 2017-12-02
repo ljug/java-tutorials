@@ -2,6 +2,12 @@
 
 ## gestion de profils et de Realm (utilisateur et roles)
 
+### Les sous-module
+
+* [Interpreteur de commade REPL](URCommandes.md)
+* [Gestion réalm version JPA directe](RealmCLI.md)
+* [Gestion réalm version JPA Restfull sans Serveur d'application](RealmAuto.md)
+
 L'objectif est de préparer un depots pour la securisation des applications J2EE grace à un domaine de sécurité "Realm" , Utilsateurs et Roles 
 
 Un "Realm" = royaume d’autentification = lieu de stockage des infos logi/pwd/role

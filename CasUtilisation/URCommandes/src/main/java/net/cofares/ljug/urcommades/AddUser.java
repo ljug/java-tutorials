@@ -7,6 +7,7 @@ package net.cofares.ljug.urcommades;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
+import net.cofares.ljug.event.CommandeCallbackAction;
 
 /**
  * le ? dans la règele est pour indiquer une option parser et semantique de
@@ -31,7 +32,7 @@ public class AddUser extends CommandeUR {
             
         
     }
-    public static AddUser parse(Consumer<AddUser> adduserCallback, URCTokenizer scan) {
+    public static AddUser parse(CommandeCallbackAction roleCallback, URCTokenizer scan) {
         
         if (scan.getTok() != URCTokenizer.Token.ADDUSER) {
             System.out.println("Pas de debut adduser");
@@ -41,7 +42,7 @@ public class AddUser extends CommandeUR {
         scan.nToken(); //skip ADDUSER
         AddUser au = new AddUser();
         //au.adduserCallback=adduserCallback;
-        au.callback=adduserCallback;
+        au.actionCallbackChain=roleCallback;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de username");
             return null;
@@ -70,7 +71,8 @@ public class AddUser extends CommandeUR {
     @Override
     public void eval() {
         //System.out.println("Eval AddUser"+callback+produce);
-        callback.accept(this);
+        //callback.accept(this);
+        actionCallbackChain.eval(this);
     }
     
 }
