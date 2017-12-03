@@ -50,7 +50,9 @@ Aleer dans votre "browser" favory et essayer http://localhost:8080/myapp/applica
 
 ## Maintenant Enrichissons le service
 
-Ajouter ces 2 fichier a votre projet
+Ajouter ces 3 fichiers à votre projet (is definissent le serviceWeb l'entité et le dépot d'entité (ici c'est une liste)
 
-[Customer.java](Customer.java.md) et 
+[CustomerService.java](CustomerService.java.md), [Customer.java](Customer.java.md) et
 [CustomerList.java](CustomerList.java.md)
+
+
