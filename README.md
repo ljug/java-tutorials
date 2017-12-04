@@ -72,3 +72,4 @@ Inserrer ce code | Puis
 * [ ] Préparer les présentations
 * [ ] Finaliser Rest Jersey Grizzly JPA
 * [ ] Securiser Griszly
+* [ ] Utiliser Asciidoctor http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
