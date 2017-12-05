@@ -8,6 +8,7 @@ package ljug.entities;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +48,7 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_pass")
     private String userPass;
-    @ManyToMany(mappedBy = "usersSet", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE}, mappedBy = "usersSet", fetch = FetchType.EAGER)
     private Set<Roles> rolesSet;
 
     public Users() {

@@ -5,16 +5,11 @@
  */
 package ljug;
 
-import java.util.List;
-import java.util.Set;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import ljug.control.RolesJpaController;
-import ljug.control.UsersJpaController;
-import ljug.entities.Roles;
-import ljug.entities.Users;
-import util.FonctionsDiverses;
+import ljug.provide.BuildService;
+import ljug.provide.Services;
+import util.JPAUtil;
 
 /**
  *
@@ -23,10 +18,30 @@ import util.FonctionsDiverses;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        // Perform JPA operations
         EntityManagerFactory emf
                 = Persistence.createEntityManagerFactory("RealmCLI_PU");
         
+        Services service = BuildService.ServicesBuilder(emf);
+        
+        service.addUser("pascal", "pascal", null);
+        service.addUser("pascal1", "pascal1", "pfares@cofares.net");
+        service.addRole("admin");
+        service.addRole("prof");
+        service.associate("pascal", "admin");
+        service.associate("pascal", "prof");
+        service.associate("pascal1", "prof");
+        JPAUtil.checkData("select * from NewRealm.users");
+        JPAUtil.checkData("select * from NewRealm.roles");
+        JPAUtil.checkData("select * from NewRealm.users_roles");
+        service.dessociate("pascal1", "prof");
+        JPAUtil.checkData("select * from NewRealm.users");
+        JPAUtil.checkData("select * from NewRealm.roles");
+        JPAUtil.checkData("select * from NewRealm.users_roles");
+        service.rmUser("pascal");
+        JPAUtil.checkData("select * from NewRealm.users");
+        JPAUtil.checkData("select * from NewRealm.roles");
+        JPAUtil.checkData("select * from NewRealm.users_roles");
+        /*
         EntityManager em = emf.createEntityManager();
         
         RolesJpaController tc = new RolesJpaController(emf);
@@ -71,7 +86,7 @@ public class Main {
         pascal1.getRolesSet().add(prof);
         prof.getUsersSet().add(pascal1);
         uc.edit(pascal1);
-        
+        */
         
     }
 }
