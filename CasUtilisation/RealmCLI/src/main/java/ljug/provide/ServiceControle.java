@@ -6,8 +6,12 @@
 package ljug.provide;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import ljug.entities.Roles;
 import ljug.entities.Users;
 
@@ -110,7 +114,7 @@ class ServiceControle implements Services {
             roles = em.find(Roles.class, role);
             users.getRolesSet().remove(roles);
             roles.getUsersSet().remove(users);
-            em.merge(users);
+            em.merge(roles);
 
             em.getTransaction().commit();
         } finally {
@@ -156,5 +160,43 @@ class ServiceControle implements Services {
                 em.close();
             }
         }
+    }
+
+    @Override
+    public List<Users> getUsers() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Users.class));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<Roles> getRoles() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Roles.class));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Set<Users> getUsers(String role) {
+        Roles r = getRole(role);
+        return r.getUsersSet();
+    }
+
+    @Override
+    public Set<Roles> getRoles(String username) {
+        Users u = getUser(username);
+        return u.getRolesSet();
     }
 }
