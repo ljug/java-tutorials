@@ -22,10 +22,7 @@ import java.util.List;
 public class GestionAvancee {
     
     public static void main(String args[]) throws GeneralSecurityException, IOException {
-        //List<String> l=listeMembresGroupes("favoris-nehmat@isae.edu.lb");
-        //for (String l0:l) {
-        //    System.out.println("nom groupe favori: "+l0);
-        //}
+        
     }
     
     
@@ -85,7 +82,7 @@ public class GestionAvancee {
             Directory d = GestionDomaine.initDirectory();
             
             //la variable nomd contient le nom du domaine sans le @
-            //c'est-à-dire nomd='isae.edu.lb'  car la variable nomdomaine='@isae.edu.lb'
+            //c'est-à-dire nomd='isae.edu.lb'  car la variable nomdomaine='@cnamliban.org'
             String nomd=nomdomaine.substring(1, nomdomaine.length());
             
             Groups r = d.groups().list().setDomain(nomd).execute();
@@ -145,7 +142,7 @@ public class GestionAvancee {
             //------------------------------------------------------------
             String emailTrouve="";
             //la variable nomd contient le nom du domaine sans le @
-            //c'est-à-dire nomd='isae.edu.lb'  car la variable nomdomaine='@isae.edu.lb'
+            //c'est-à-dire nomd='isae.edu.lb'  car la variable nomdomaine='@cnamliban.org'
             String nomd=nomdomaine.substring(1, nomdomaine.length());
             
             Groups r = d.groups().list().setDomain(nomd).execute();

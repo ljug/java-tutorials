@@ -75,15 +75,15 @@ public class OperationBase {
         
         
         
-        File f=new java.io.File("/home/nehmat/resources/ProjetMars2017-957cf1c4fbcb.p12");
+        File f=new java.io.File("~/resources/uneCleProjet.p12");
         
         GoogleCredential credential=new GoogleCredential.Builder()
             .setTransport(httpTransport)
             .setJsonFactory(JSON_FACTORY)
-            .setServiceAccountId("ent-857@projetmars2017-160810.iam.gserviceaccount.com")
+            .setServiceAccountId("GENEREPARGOOGLE-160810.iam.gserviceaccount.com")
             .setServiceAccountScopes(l)
             .setServiceAccountPrivateKeyFromP12File(f)
-            .setServiceAccountUser("env.numerique@isae.edu.lb")
+            .setServiceAccountUser("email@dman")
             .build();
         
         //fin credential
@@ -101,12 +101,12 @@ public class OperationBase {
         User user = new User();
        
         UserName name = new UserName();
-        name.setGivenName("si");
-        name.setFamilyName("demo9");
+        name.setGivenName("aa");
+        name.setFamilyName("bb");
         user.setName(name);
         
-        user.setPrimaryEmail("sidemo9@isae.edu.lb");
-        user.setPassword("newn9999"); 
+        user.setPrimaryEmail("aa.bb@cnamliban.org");
+        user.setPassword("premuierPassachanger"); 
         user.setOrgUnitPath("/Etudiants");
 
         // requires DirectoryScopes.ADMIN_DIRECTORY_USER scope  
@@ -115,10 +115,10 @@ public class OperationBase {
     }
     
     public static void modifyPassword(Directory d) throws IOException {
-        String emailVoulu="sidemo8@isae.edu.lb";   //L’email qu’on veut modifier son password
+        String emailVoulu="aa.bb@cnamliban.org";   //L’email qu’on veut modifier son password
         
         User user=d.users().get(emailVoulu).execute();
-        user.setPassword("newf8888"); //minimum 8 caractères pour un mot de passe dans gmail
+        user.setPassword("newPassword"); //minimum 8 caractères pour un mot de passe dans gmail
         d.users().update(emailVoulu, user).execute();
     }
     
@@ -126,17 +126,17 @@ public class OperationBase {
         Group group=new Group();
         
         group.setName("testdeleg2");
-        group.setEmail("testdeleg2@isae.edu.lb");
+        group.setEmail("testdeleg2@cnamliban.org");
         group.setDescription("pour test delegation");
         
         d.groups().insert(group).execute();    
     }
     
     public static void addMember(Directory d) throws IOException {
-        String groupEmail="testdeleg2@isae.edu.lb";
+        String groupEmail="testdeleg2@cnamliban.org";
         
         Member member=new Member();
-        member.setEmail("sidemo8@isae.edu.lb");
+        member.setEmail("sidemo8@cnamliban.org");
         member.setRole("OWNER");
         
         d.members().insert(groupEmail, member).execute();
@@ -144,16 +144,15 @@ public class OperationBase {
     
     public static void addMembersList(Directory d) throws IOException {
 
-        String groupEmail="testdeleg2@isae.edu.lb";
+        String groupEmail="testdeleg2@cnamliban.org";
         
         List<String> l=new LinkedList<>();
-        l.add("roulajawhar@isae.edu.lb");
-        l.add("sidemo2@isae.edu.lb");
-        l.add("sidemo3@isae.edu.lb");
-        l.add("sidemo4@isae.edu.lb");
-        l.add("sidemo5@isae.edu.lb");
-        l.add("sidemo6@isae.edu.lb");
-        l.add("sidemo7@isae.edu.lb");
+        l.add("sidemo2@cnamliban.org");
+        l.add("sidemo3@cnamliban.org");
+        l.add("sidemo4@cnamliban.org");
+        l.add("sidemo5@cnamliban.org");
+        l.add("sidemo6@cnamliban.org");
+        l.add("sidemo7@cnamliban.org");
         
         for (String l0:l) {
             Member member=new Member();
@@ -167,7 +166,7 @@ public class OperationBase {
     
     public static void deleteGroup(Directory d) throws IOException {
         
-        String groupEmail="testdeleg2@isae.edu.lb";
+        String groupEmail="testdeleg2@cnamliban.org";
         d.groups().delete(groupEmail).execute();
         
     }

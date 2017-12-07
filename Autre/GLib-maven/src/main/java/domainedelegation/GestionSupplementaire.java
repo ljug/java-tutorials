@@ -16,18 +16,9 @@ public class GestionSupplementaire {
     //}
 
     public static void main(String args[]) throws GeneralSecurityException, IOException {
-        //System.out.println(ajoutMembreAGroupe("test@isae.edu.lb", "sidemo17@isae.edu.lb", "OWNER"));
-        //System.out.println(listeGroupes());
-        //System.out.println(testerExistenceMembreGroupe("test@isae.edu.lb", "sidemo17@isae.edu.lb"));
-        //System.out.println(testerExistenceMembreGroupe("2017-SMB215-2@isae.edu.lb", "pascal.fares@isae.edu.lb"));
-        //System.out.println(testerExistenceMembreGroupe("test@isae.edu.lb", "pascal.fares@isae.edu.lb"));
-        //listeGroupesParPersonne("pascal.fares@isae.edu.lb");
-        //System.out.println(listeGroupesSansOwner());
         
-        //List<String> l=listeGroupesParPersonne("nehmat@isae.edu.lb");
-        //for (String l0:l) {
-            //System.out.println(l0);
-        //}
+        
+        
         
     }
 

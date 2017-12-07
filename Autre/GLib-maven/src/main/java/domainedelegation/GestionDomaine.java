@@ -23,12 +23,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 public class GestionDomaine {
 
@@ -81,11 +78,7 @@ public class GestionDomaine {
     }
 
     public static void main(String args[]) throws GeneralSecurityException, IOException {
-        //System.out.println(creerUtilisateur("sidemo-ente@isae.edu.lb", "si", "demo16", "demo1616", "/Etudiants"));
-        //System.out.println(changerMotDePasse("sidemo17@isae.edu.lb", "demo1717"));
-        //System.out.println(creerGroupe("test", "test@isae.edu.lb", "test"));
-        //System.out.println(supprimerGroupe("test@isae.edu.lb"));
-        //System.out.println(testerExistenceEmail("sidemo17@isae.edu.lb"));
+        
     }
 
     public static String miseAJourGroupe(String groupEmail, List<String> l) throws IOException, GeneralSecurityException {
