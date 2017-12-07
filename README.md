@@ -12,6 +12,7 @@ Vous trouverez ici:
 * [Lambda Java8](#lambda)
 * [J2EE](#j2ee)
 * [Concurence et Synchronisation](#accov)
+* [Transverse, Non classifié](Autre)
 
 ## [Code Camp](CampCode) 
 
@@ -35,6 +36,8 @@ Vous trouverez ici:
 * [J2EE pour Cycle C Cnam Liban](J2EE-C1) en complmeent de j2ee.isae.edu.lb
 * [Camp code](CampCode) Exemple générique dans plusieurs domaines (Rest, Grizzly, JPA, Securiser des service web avec reverse proxu apache2, etc...)
 * [Un tomee 7.0.4 préconfiguré et complements](https://github.com/ljug/tomee704)
+
+## [Transverse, Non classifié](Autre)
 
 ## ACCOV
 
