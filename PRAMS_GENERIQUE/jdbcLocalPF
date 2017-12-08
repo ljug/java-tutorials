@@ -1,0 +1,5 @@
+    public static String url = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
+    public static String dbdriver = "com.mysql.jdbc.Driver";
+    public static String username = "app";
+    public static String password = "app";
+

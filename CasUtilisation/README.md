@@ -16,7 +16,7 @@ Un "Realm" = royaume d’autentification = lieu de stockage des infos logi/pwd/r
   1. En ligne de commande : JPA, Mysql et POJO JAVA
   2. En integrant un serveur ambarqueé grizlly et l'utilisation de service Restfull jersey (une version augmenté de 1)
 
-## La base de donnée Mysql et le catalogue Realm et les trois table users, roles, users_roles : _pour demarrer_
+## _La vue_ base de donnée Mysql et le catalogue Realm et les trois table users, roles, users_roles : _pour demarrer_
 
 ```SQL
 CREATE DATABASE  IF NOT EXISTS `Realm` 
@@ -47,7 +47,13 @@ CREATE TABLE `users` (
   `description` text,
   PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-```MysqlDB.scripts
+```
+
+
+## _La vue_ Entité 
+
+## Liens 
+MysqlDB.scripts
 README.md
 RealmCLI
 UtilitairesLJUG
