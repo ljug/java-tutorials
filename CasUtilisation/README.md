@@ -2,13 +2,32 @@
 
 ## gestion de profils et de Realm (utilisateur et roles)
 
-### Les sous-module
+L'objectif de l'apllication est de préparer un depots pour la securisation des applications J2EE grace à un domaine de sécurité "Realm" , Utilsateurs et Roles 
+
+* **Un realm**: (Classification des utilisateurs par roles) : Un utilisateurs possède plusieurs roles, chaque roles permet un certain nombre d'actions. Un role regroupe plusieurs utilisateurs.
+
+### Les Opérations prévues
+
+* ajouter/suprimer utiliseur
+* ajouter/suprimer role
+* associer/dissosier utilisateur role
+* Lister roles pour un utilisateur OU tous
+* Lister utilisateur pour un role OU tous
+
+### Une décomposition statique: Les sous-modules (comme microservice)
 
 * [Interpreteur de commade REPL](URCommandes.md)
 * [Gestion réalm version JPA directe](RealmCLI.md)
 * [Gestion réalm version JPA Restfull sans Serveur d'application](RealmAuto.md)
 
-L'objectif est de préparer un depots pour la securisation des applications J2EE grace à un domaine de sécurité "Realm" , Utilsateurs et Roles 
+pour en savoir plus concernant les [microservice](/MicroService)? et pourquoi un  [microservice](/MicroService) visiter cette présentation simple [ici](/MicroService)
+
+L'application que ous allons créer sera basé sur la composition de micrioservices, nous produiront notre application en 
+
+1. Découpant notre appli en microservices
+2. Developperons chaque microservice avec les design pattern qui vont bien et les technologies adaptés pour chacun d'eux
+3. Nou recomposeront les microservices pour obtenir notre application finale 
+
 
 Un "Realm" = royaume d’autentification = lieu de stockage des infos logi/pwd/role
 
@@ -16,10 +35,11 @@ Un "Realm" = royaume d’autentification = lieu de stockage des infos logi/pwd/r
   1. En ligne de commande : JPA, Mysql et POJO JAVA
   2. En integrant un serveur ambarqueé grizlly et l'utilisation de service Restfull jersey (une version augmenté de 1)
 
+## _La vue_ Entité
 ## _La vue_ base de donnée Mysql et le catalogue Realm et les trois table users, roles, users_roles : _pour demarrer_
 
 ```SQL
-CREATE DATABASE  IF NOT EXISTS `Realm` 
+CREATE DATABASE  IF NOT EXISTS `InitRealm` 
 USE `Realm`;
 
 DROP TABLE IF EXISTS `roles`;
@@ -29,7 +49,7 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`role_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `user_roles`;
+DROP TABLE IF EXISTS `users_roles`;
 CREATE TABLE `user_roles` (
   `user_name` varchar(15) NOT NULL,
   `role_name` varchar(15) NOT NULL,
@@ -50,7 +70,6 @@ CREATE TABLE `users` (
 ```
 
 
-## _La vue_ Entité 
 
 ## Liens 
 MysqlDB.scripts
