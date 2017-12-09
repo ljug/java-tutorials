@@ -2,7 +2,7 @@ package ljug.control;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import ljug.provide.BuildService;
+import ljug.provide.ServiceFactory;
 import ljug.provide.Services;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,9 +47,9 @@ public class ServiceControleTest {
     @org.junit.Test
     public void testAny() {
         EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("RealmCLI_PU");
+                = Persistence.createEntityManagerFactory("REALMPU");
         
-        Services service = BuildService.ServicesBuilder(emf);
+        Services service = ServiceFactory.ServicesBuilder(emf);
         
         service.addUser("pascal", "pascal", null);
         assertNotNull(service.getUser("pascal"));

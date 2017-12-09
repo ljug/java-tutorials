@@ -11,7 +11,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author pfares
  */
-public class BuildService {
+public class ServiceFactory {
     Services s;
     
     public static Services ServicesBuilder(EntityManagerFactory emf) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ljug;
 
 import javax.persistence.EntityManagerFactory;
@@ -20,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         EntityManagerFactory emf
-                = Persistence.createEntityManagerFactory("REALMPU");
+                = Persistence.createEntityManagerFactory("RPS_PU");
         
         Services service = ServiceFactory.ServicesBuilder(emf);
         JDBCUtil jdbcUtil= JDBCUtilFactory.create();
@@ -32,9 +27,9 @@ public class Main {
         service.associate("pascal", "admin");
         service.associate("pascal", "prof");
         service.associate("pascal1", "prof");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.USERS");
+        jdbcUtil.checkData("select * from realm.ROLES");
+        jdbcUtil.checkData("select * from realm.ROLES_USERS");
         System.out.println("----------");
         service.getRoles("pascal").stream().map(r -> r.getRoleName() + " of pascal " ).forEach(System.out::print);
         System.out.println("-");
@@ -45,13 +40,13 @@ public class Main {
         service.getUsers("prof").stream().map(u -> u.getUserName() + " of admin " ).forEach(System.out::print);
         System.out.println("-----------");
         service.dessociate("pascal1", "prof");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.USERS");
+        jdbcUtil.checkData("select * from realm.ROLES");
+        jdbcUtil.checkData("select * from realm.ROLES_USERS");
         service.rmUser("pascal");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.USERS");
+        jdbcUtil.checkData("select * from realm.ROLES");
+        jdbcUtil.checkData("select * from realm.ROLES_USERS");
         jdbcUtil.endStatement();
         /*
         EntityManager em = emf.createEntityManager();
