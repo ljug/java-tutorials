@@ -1,18 +1,18 @@
 # Quelques exemple plus consistants
 
-## gestion de profils et de Realm (utilisateur et roles)
+## gestion de profils et de Realm (utilisateur et rôles)
 
-L'objectif de l'apllication est de préparer un depots pour la securisation des applications J2EE grace à un domaine de sécurité "Realm" , Utilsateurs et Roles 
+L'objectif de l'application est de préparer un dépôts pour la sécurisation des applications J2EE grace à un domaine de sécurité "Realm" , Utilisateurs et Rôles 
 
-* **Un realm**: (Classification des utilisateurs par roles) : Un utilisateurs possède plusieurs roles, chaque roles permet un certain nombre d'actions. Un role regroupe plusieurs utilisateurs.
+* **Un realm**: (Classification des utilisateurs par rôles) : Un utilisateurs possède plusieurs rôles, chaque rôles permet un certain nombre d'actions. Un rôle regroupe plusieurs utilisateurs.
 
 ### Les Opérations prévues
 
-* ajouter/suprimer utiliseur
-* ajouter/suprimer role
-* associer/dissosier utilisateur role
-* Lister roles pour un utilisateur OU tous
-* Lister utilisateur pour un role OU tous
+* ajouter/supprimer utiliseur
+* ajouter/supprimer rôle
+* associer/dissosier utilisateur rôle
+* Lister rôles pour un utilisateur OU tous
+* Lister utilisateur pour un rôle OU tous
 
 ### Une décomposition statique: Les sous-modules (comme microservice)
 
@@ -29,33 +29,33 @@ L'application que ous allons créer sera basé sur la composition de micrioservi
 3. Nou recomposeront les microservices pour obtenir notre application finale 
 
 
-Un "Realm" = royaume d’autentification = lieu de stockage des infos logi/pwd/role
+Un "Realm" = royaume d’autentification = lieu de stockage des infos login/pwd/rôle
 
-* Nous crérons 2 applications en pure Java sans conteneurs d'application web
+* Nous créerons 2 applications en pure Java sans conteneurs d'application web
   1. En ligne de commande : JPA, Mysql et POJO JAVA
-  2. En integrant un serveur ambarqueé grizlly et l'utilisation de service Restfull jersey (une version augmenté de 1)
+  2. En intégrant un serveur embarqué grizlly et l'utilisation de service RESTfull jersey (une version augmenté de 1)
 
 ## _La vue_ Entité
-## _La vue_ base de donnée Mysql et le catalogue Realm et les trois table users, roles, users_roles : _pour demarrer_
+## _La vue_ base de donnée Mysql et le catalogue Realm et les trois table users, rôles, users_rôles : _pour démarrer_
 
 ```SQL
 CREATE DATABASE  IF NOT EXISTS `InitRealm` 
 USE `Realm`;
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `rôles`;
 
-CREATE TABLE `roles` (
-  `role_name` varchar(15) NOT NULL,
-  PRIMARY KEY (`role_name`)
+CREATE TABLE `rôles` (
+  `rôle_name` varchar(15) NOT NULL,
+  PRIMARY KEY (`rôle_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `users_roles`;
-CREATE TABLE `user_roles` (
+DROP TABLE IF EXISTS `users_rôles`;
+CREATE TABLE `user_rôles` (
   `user_name` varchar(15) NOT NULL,
-  `role_name` varchar(15) NOT NULL,
-  PRIMARY KEY (`user_name`,`role_name`),
-  KEY `fk_user_roles_2_idx` (`role_name`),
-  CONSTRAINT `fk_role_name` FOREIGN KEY (`role_name`) REFERENCES `roles` (`role_name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  `rôle_name` varchar(15) NOT NULL,
+  PRIMARY KEY (`user_name`,`rôle_name`),
+  KEY `fk_user_rôles_2_idx` (`rôle_name`),
+  CONSTRAINT `fk_rôle_name` FOREIGN KEY (`rôle_name`) REFERENCES `rôles` (`rôle_name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_name` FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
