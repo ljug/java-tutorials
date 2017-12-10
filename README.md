@@ -6,6 +6,12 @@ Vous trouverez ici:
 * Le dépots des exercices ou traveaux d'auditeurs dans le cadre des UEs : ACCOV, Cycle C informatique et autre cours du [Cnam Liban](http://depinfo.isae.edu.lb)
 * Les publications de la [LJUG](http://ljug.cofares.net) ( [Lebanese Java Users group](http://ljug.cofares.net) )
 
+# Activités du moment
+
+* [ ] Application complètes a la mode "microservice" (afin de donner une idée des concepts derrière ce pattern d'implémentation), utilisation JPA, RESTFull, Serveur ambarqué Grizzly, Lambda Java8, pattern conception: Fabrique, Callback, Interpreteur, Observer.
+* [ ] Documentation du cours cycle C
+* [ ] FAQ
+
 # Thèmes
 
 * [Code Camp](#code-camp)
