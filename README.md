@@ -8,9 +8,9 @@ Vous trouverez ici:
 
 # Activités du moment
 
-* [ ] Application complètes a la mode "microservice" (afin de donner une idée des concepts derrière ce pattern d'implémentation), utilisation JPA, RESTFull, Serveur ambarqué Grizzly, Lambda Java8, pattern conception: Fabrique, Callback, Interpreteur, Observer.
-* [ ] Documentation du cours cycle C
-* [ ] FAQ
+- [x] Application complètes a la mode "microservice" (afin de donner une idée des concepts derrière ce pattern d'implémentation), utilisation JPA, RESTFull, Serveur ambarqué Grizzly, Lambda Java8, pattern conception: Fabrique, Callback, Interpreteur, Observer.
+- [x] Documentation du cours cycle C
+- [x] FAQ
 
 # Thèmes
 
