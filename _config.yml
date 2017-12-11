@@ -10,3 +10,6 @@ title:  Autour de Java
 
 google_analytics: UA-24954673-1
 
+
+plugins: 
+  - jekyll-sitemap
