@@ -6,7 +6,6 @@
 package ljugCallback;
 
 import java.util.HashMap;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import ljug.langage.CommandeUR;
 
@@ -15,7 +14,9 @@ import ljug.langage.CommandeUR;
  * @author cnamliban
  */
 public interface CallBackFunction {
-    HashMap<String,Function<? extends CommandeUR,? extends CommandeUR>> callbacks = new HashMap<>();
+    HashMap<String,Function<CommandeUR,CommandeUR>> callbacks = new HashMap<>();
     
-    public void registerFunction(String command, Function<? extends CommandeUR,? extends CommandeUR> f);
+    public void registerFunction(String command, Function<CommandeUR,CommandeUR> f);
+    public  Function<CommandeUR,CommandeUR> getFunction(String commande);
+    public CommandeUR apply(String commandename, CommandeUR commande);
 }

@@ -5,32 +5,42 @@
  */
 package ljug.urcommades.provide;
 
-import ljug.langage.Assoc;
-import ljug.langage.AddUser;
-import ljug.langage.AddRole;
-import ljugCallback.CommandeCallbackAction;
-import ljugCallback.CommandesCallback;
+import java.util.function.Function;
+import ljug.langage.CommandeUR;
+import ljugCallback.CallBackFunction;
+import ljugCallback.CallBackFunctionImpl;
 
 /**
  *
  * @author cnamliban
  */
 public interface CommandLangServices {
-    CommandesCallback cc=new CommandesCallback();
-    
-    public <I> void setActionAddUsers(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionAddRoles(CommandeCallbackAction<I, AddRole> ca);
-    public <I> void setActionAssoc(CommandeCallbackAction<I, Assoc> ca);
-    public <I> void setActionRmUsers(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionRmAddRoles(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionDeAssoc(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionGetUsers(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionGetRoles(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionGetUser(CommandeCallbackAction<I, AddUser> ca);
-    public <I> void setActionGetRole(CommandeCallbackAction<I, AddUser> ca);
-    
+
+    CallBackFunction cc = new CallBackFunctionImpl();
+
+    public void setActionAddUsers(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionAddRoles(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionAssoc(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionRmUsers(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionRmRoles(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionDeAssoc(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionGetUsers(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionGetRoles(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionGetUser(Function<CommandeUR, CommandeUR> f);
+
+    public void setActionGetRole(Function<CommandeUR, CommandeUR> f);
+
     /**
      * Read Eval Print Loop
+     *
      * @param lesSemantiques : semantiques des commandes
      */
     public void repl();

@@ -11,22 +11,22 @@ import ljugCallback.CallBackFunction;
  *
  * @author cnamliban
  */
-public class AddRole extends CommandeUR {
+public class RmRole extends CommandeUR {
     public String role;
     
-    public static AddRole parse(CallBackFunction lesSemantiques, URCTokenizer scan){
+    public static RmRole parse(CallBackFunction lesSemantiques, URCTokenizer scan){
         
         //System.out.println("AU");
-        if (scan.getTok() != URCTokenizer.Token.ADDROLE) {
-            System.out.println("Pas de debut addrole");
+        if (scan.getTok() != URCTokenizer.Token.RMROLE) {
+            System.out.println("Pas de debut rmrole");
             return null;
         }
-        //Current token est ADDUSER
-        scan.nToken(); //skip ADDUSER
-        AddRole au = new AddRole();
+        //Current token est RMROLE
+        scan.nToken(); //skip RMROLE
+        RmRole au = new RmRole();
         au.cf=lesSemantiques;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
-            System.out.println("Pas de role");
+            System.out.println("Pas de role à suprimmé!");
             return null;
         }
         au.role = new String(scan.sval);
@@ -35,12 +35,10 @@ public class AddRole extends CommandeUR {
     }
     @Override
     public void eval() {
-        System.out.println(cf.apply("addrole", this)); 
+        System.out.println(cf.apply("rmrole", this)); 
     }
-    
     @Override
     public String toString() {
-        return String.format("AddRole %s\n", role);
+        return String.format("RmRole %s\n", role);
     }
-    
 }

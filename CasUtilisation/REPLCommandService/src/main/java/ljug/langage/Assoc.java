@@ -5,9 +5,7 @@
  */
 package ljug.langage;
 
-import java.util.Scanner;
-import java.util.function.Consumer;
-import ljugCallback.CommandeCallbackAction;
+import ljugCallback.CallBackFunction;
 
 /**
  *
@@ -16,7 +14,7 @@ import ljugCallback.CommandeCallbackAction;
 public class Assoc extends CommandeUR {
     public String user;
     public String role;
-    public static Assoc parse(CommandeCallbackAction roleCallback, URCTokenizer scan){
+    public static Assoc parse(CallBackFunction lesSemantiques, URCTokenizer scan){
         //System.out.println("AU");
         if (scan.getTok() != URCTokenizer.Token.ASSOC) {
             System.out.println("Pas de debut assoc");
@@ -25,7 +23,7 @@ public class Assoc extends CommandeUR {
         
         scan.nToken(); 
         Assoc au = new Assoc();
-        au.actionCallbackChain = roleCallback;
+        au.cf=lesSemantiques;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de username");
             return null;
@@ -45,8 +43,10 @@ public class Assoc extends CommandeUR {
 
     @Override
     public void eval() {
-        //System.out.println("Eval ASSOC");
-        //callback.accept(produce.get());
-        actionCallbackChain.eval(this);
+        System.out.println(cf.apply("assoc", this)); 
+    }
+    @Override
+    public String toString() {
+        return String.format("Assoc %s %s\n",user, role);
     }
 }

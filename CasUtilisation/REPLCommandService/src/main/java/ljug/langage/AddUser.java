@@ -5,9 +5,9 @@
  */
 package ljug.langage;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
-import ljugCallback.CommandeCallbackAction;
+import ljugCallback.CallBackFunction;
+
 
 /**
  * le ? dans la règele est pour indiquer une option parser et semantique de
@@ -32,7 +32,7 @@ public class AddUser extends CommandeUR {
             
         
     }
-    public static AddUser parse(CommandeCallbackAction roleCallback, URCTokenizer scan) {
+    public static AddUser parse(CallBackFunction lesSemantiques, URCTokenizer scan) {
         
         if (scan.getTok() != URCTokenizer.Token.ADDUSER) {
             System.out.println("Pas de debut adduser");
@@ -41,8 +41,7 @@ public class AddUser extends CommandeUR {
         //Current token est ADDUSER
         scan.nToken(); //skip ADDUSER
         AddUser au = new AddUser();
-        //au.adduserCallback=adduserCallback;
-        au.actionCallbackChain=roleCallback;
+        au.cf=lesSemantiques;
         if (scan.getTok() != URCTokenizer.Token.SYMBOL) {
             System.out.println("Pas de username");
             return null;
@@ -54,13 +53,13 @@ public class AddUser extends CommandeUR {
             System.out.println("Pas de password");
             return null;
         }
-        au.password = new String(scan.sval);
+        au.password = scan.sval;
         scan.nToken();
 
         //C'est d;eja bon mais peut être un gmail en plus 
         
         if (scan.getTok() == URCTokenizer.Token.SYMBOL) {           
-            au.gmail = new String(scan.sval);
+            au.gmail = scan.sval;
             System.out.println("-gmail?"+au.gmail);
             scan.nToken();
         }
@@ -70,9 +69,12 @@ public class AddUser extends CommandeUR {
 
     @Override
     public void eval() {
-        //System.out.println("Eval AddUser"+callback+produce);
-        //callback.accept(this);
-        actionCallbackChain.eval(this);
+        System.out.println(cf.apply("adduser", this)); 
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("AddUser %s %s %s\n",username, password, gmail);
     }
     
 }

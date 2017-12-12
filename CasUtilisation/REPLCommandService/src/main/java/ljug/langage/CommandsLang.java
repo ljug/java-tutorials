@@ -5,7 +5,7 @@
  */
 package ljug.langage;
 
-import ljugCallback.CommandesCallback;
+import ljugCallback.CallBackFunction;
 
 /**
  *
@@ -13,7 +13,7 @@ import ljugCallback.CommandesCallback;
  */
 public class CommandsLang {
     //CommandCallback lesSemantiques;
-    public static void parse(CommandesCallback lesSemantiques, URCTokenizer scan) {
+    public static void parse(CallBackFunction lesSemantiques, URCTokenizer scan) {
         CommandeUR cur;
         System.out.flush();
         System.out.printf("\n$> ");
@@ -28,7 +28,7 @@ public class CommandsLang {
                 scan.nToken();
                 continue;
             }
-            cur.eval();
+            cur.eval(); //Eval Print
             System.out.printf("\n$> ");
         }
         /**/

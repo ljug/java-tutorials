@@ -64,19 +64,15 @@ public class URCTokenizer extends StreamTokenizer implements Serializable {
          * !
          */
         EVAL,
-        /**
-         * show
-         */
         SHOW,     
        
-        ASSOC,
-        
+        ASSOC,       
         LISTU,
         LISTR,
-
-        ADDUSER, //pour valider une expression selon la note éliminatoire entre 0 et 4
-        
-        ADDROLE, //pour valider une expression selon la note éliminatoire entre 0 et 5
+        ADDUSER, 
+        ADDROLE,
+        RMUSER,
+        RMROLE,
 
          /**
          * nop
@@ -122,7 +118,9 @@ public class URCTokenizer extends StreamTokenizer implements Serializable {
                 else if(sval.equals("listu")) return (tok=Token.LISTU);
                 else if(sval.equals("listr")) return (tok=Token.LISTR);
                 else if(sval.equals("adduser")) return (tok=Token.ADDUSER); 
-                else if(sval.equals("addrole")) return (tok=Token.ADDROLE); 
+                else if(sval.equals("addrole")) return (tok=Token.ADDROLE);
+                else if(sval.equals("rmuser")) return (tok=Token.RMUSER); 
+                else if(sval.equals("rmrole")) return (tok=Token.RMROLE); 
                 else return (tok=Token.SYMBOL);
                 case TT_NUMBER : return (tok=Token.CONST) ;
                 case TT_EOL: return (tok=Token.FININST);

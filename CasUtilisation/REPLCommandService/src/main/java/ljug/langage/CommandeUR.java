@@ -1,9 +1,8 @@
 package ljug.langage;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-import ljugCallback.CommandeCallbackAction;
-import ljugCallback.CommandesCallback;
+
+import ljugCallback.CallBackFunction;
+
 
 /**
  * CommandUR ::= AddUser | AddRole | Assoc | ListU | ListR
@@ -11,19 +10,20 @@ import ljugCallback.CommandesCallback;
  * @author Pascal Fares
  */
 public class CommandeUR {
-    Consumer callback = (c) -> System.out.println(c);
-    Supplier produce = () -> this;
-    CommandeCallbackAction actionCallbackChain;
+
+   CommandeUR commande;
     
-    public static CommandeUR parse(CommandesCallback lesSemantiques, URCTokenizer scan){  
+    CallBackFunction cf;
+    
+    public static CommandeUR parse(CallBackFunction lesSemantiques, URCTokenizer scan){  
         //System.out.println("UR");
         switch (scan.getTok()) {
             case ADDUSER:
-                return AddUser.parse(lesSemantiques.getAction("adduser"),scan);
+                return AddUser.parse(lesSemantiques,scan);
             case ADDROLE:
-                return AddRole.parse(lesSemantiques.getAction("addrole"),scan);
+                return AddRole.parse(lesSemantiques,scan);
             case ASSOC:
-                return Assoc.parse(lesSemantiques.getAction("assoc"),scan);
+                return Assoc.parse(lesSemantiques,scan);
             case FININST:
                 return null;
             case QUIT:
@@ -34,8 +34,7 @@ public class CommandeUR {
         }
     }
     public void eval() {
-        System.out.println("Eval CUR");
-        callback.accept(produce.get());
+        System.out.println(cf.apply("commandeUR", this));
     }
    
 }

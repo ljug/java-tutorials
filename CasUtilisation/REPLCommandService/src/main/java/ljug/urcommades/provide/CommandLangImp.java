@@ -5,12 +5,12 @@
  */
 package ljug.urcommades.provide;
 
-import ljug.langage.Assoc;
+import java.util.function.Function;
 import ljug.langage.CommandsLang;
-import ljug.langage.AddUser;
-import ljug.langage.AddRole;
+
+import ljug.langage.CommandeUR;
 import ljug.langage.URCTokenizer;
-import ljugCallback.CommandeCallbackAction;
+
 
 /**
  *
@@ -27,52 +27,46 @@ public class CommandLangImp implements CommandLangServices {
     }
 
     @Override
-    public <I> void setActionAddUsers(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("adduser", ca);
+    public void setActionAddUsers(Function<CommandeUR, CommandeUR> f) {
+        cc.registerFunction("adduser", f);
     }
 
     @Override
-    public <I> void setActionAddRoles(CommandeCallbackAction<I, AddRole> ca) {
-        cc.registerAction("addrole", ca);
-    }
+    public void setActionAddRoles(Function<CommandeUR, CommandeUR> f) {
+        cc.registerFunction("addrole", f); }
 
     @Override
-    public <I> void setActionAssoc(CommandeCallbackAction<I, Assoc> ca) {
-        cc.registerAction("assoc", ca);
-    }
+    public void setActionAssoc(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("assoc", f);}
 
     @Override
-    public <I> void setActionRmUsers(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("rmuser", ca);
-    }
+    public void setActionRmUsers(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("rmuser", f); }
 
     @Override
-    public <I> void setActionRmAddRoles(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("rmrole", ca);
-    }
+    public void setActionRmRoles(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("rmrole", f);}
 
     @Override
-    public <I> void setActionDeAssoc(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("deassoc", ca);
-    }
+    public void setActionDeAssoc(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("deassoc", f);}
 
     @Override
-    public <I> void setActionGetUsers(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("getusers", ca);
-    }
+    public void setActionGetUsers(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("listeu", f); }
 
     @Override
-    public <I> void setActionGetRoles(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("getroles", ca);}
+    public void setActionGetRoles(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("lister", f);}
 
     @Override
-    public <I> void setActionGetUser(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("getuser", ca);
-    }
+    public void setActionGetUser(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("getuser", f);}
 
     @Override
-    public <I> void setActionGetRole(CommandeCallbackAction<I, AddUser> ca) {
-        cc.registerAction("getrole", ca);
-    }
+    public void setActionGetRole(Function<CommandeUR, CommandeUR> f) {
+         cc.registerFunction("getrole", f);}
+
+    
 
 }
