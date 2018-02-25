@@ -52,7 +52,7 @@ Aleer dans votre "browser" favory et essayer http://localhost:8080/myapp/applica
 
 Ajouter ces 3 fichiers à votre projet (il définissent le serviceWeb l'entité et le dépôt d'entité (ici c'est une liste)
 
-[CustomerService.java](CustomerService.java.md), [Customer.java](Customer.java.md) et
-[CustomerList.java](CustomerList.java.md)
+[CustomerService.java](CustomerService.java), [Customer.java](Customer.java) et
+[CustomerList.java](CustomerList.java)
 
 
