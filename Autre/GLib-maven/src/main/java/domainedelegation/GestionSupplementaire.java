@@ -16,15 +16,24 @@ public class GestionSupplementaire {
     //}
 
     public static void main(String args[]) throws GeneralSecurityException, IOException {
+        //System.out.println(ajoutMembreAGroupe("test@isae.edu.lb", "sidemo17@isae.edu.lb", "OWNER"));
+        //System.out.println(listeGroupes());
+        //System.out.println(testerExistenceMembreGroupe("test@isae.edu.lb", "sidemo17@isae.edu.lb"));
+        //System.out.println(testerExistenceMembreGroupe("2017-SMB215-2@isae.edu.lb", "pascal.fares@isae.edu.lb"));
+        //System.out.println(testerExistenceMembreGroupe("test@isae.edu.lb", "pascal.fares@isae.edu.lb"));
+        //listeGroupesParPersonne("pascal.fares@isae.edu.lb");
+        //System.out.println(listeGroupesSansOwner());
         
-        
-        
+        //List<String> l=listeGroupesParPersonne("nehmat@isae.edu.lb");
+        //for (String l0:l) {
+            //System.out.println(l0);
+        //}
         
     }
 
     public static String ajoutMembreAGroupe(String groupEmail, String membreEmail, String membreRole) throws IOException {
         String mess;
-
+        System.out.println("Ajoute mebre"+groupEmail+membreEmail);
         try {
             Directory d = GestionDomaine.initDirectory();
 
@@ -35,15 +44,19 @@ public class GestionSupplementaire {
             d.members().insert(groupEmail, member).execute();
             mess = "L'ajout du membre au groupe a eu lieu avec succès.";
 
-        } catch (Exception exception) {
+        } catch (IOException | GeneralSecurityException exception) {
             String erreur = exception.getMessage();
-            if (erreur.substring(0, 3).equals("404")) {
-                mess = "ATTENTION: ECHEC - L'ajout du membre n'a pas eu lieu car ce groupe n'existe pas.";
-            } else if (erreur.substring(0, 3).equals("409")) {
-                mess = "ATTENTION: ECHEC - Ce membre existe déjà dans ce groupe.";
-            } else {
-                //Erreur 400: Directory non trouver ou il ya des parametres vides ou non valides ou autre raison d'echec
-                mess = "ATTENTION: ECHEC - L'ajout du membre n'a pas eu lieu.";
+            switch (erreur.substring(0, 3)) {
+                case "404":
+                    mess = "ATTENTION: ECHEC - L'ajout du membre n'a pas eu lieu car ce groupe n'existe pas.";
+                    break;
+                case "409":
+                    mess = "ATTENTION: ECHEC - Ce membre existe déjà dans ce groupe.";
+                    break;
+                default:
+                    //Erreur 400: Directory non trouver ou il ya des parametres vides ou non valides ou autre raison d'echec
+                    mess = "ATTENTION: ECHEC - L'ajout du membre n'a pas eu lieu.";
+                    break;
             }
         }
         return mess;
@@ -74,7 +87,7 @@ public class GestionSupplementaire {
                     }
                 }
             }
-        } catch (Exception exception) {
+        } catch (IOException | GeneralSecurityException exception) {
             mess = "ATTENTION: ECHEC - Impossible d'afficher la liste des groupes.";
         }
         return mess;
@@ -98,7 +111,7 @@ public class GestionSupplementaire {
                 }
             }
             
-        } catch (Exception exception) {
+        } catch (IOException | GeneralSecurityException exception) {
             mess = "ATTENTION: ECHEC - Impossible d'afficher la liste des groupes pour: "+EmailPersonne;
         }
         return l;
@@ -116,7 +129,7 @@ public class GestionSupplementaire {
             if (m.getRole().equals("MEMBER")) {
                 existe = 2;
             }
-        } catch (Exception exception) {
+        } catch (IOException | GeneralSecurityException exception) {
         }
         return existe;
     }
@@ -130,11 +143,8 @@ public class GestionSupplementaire {
             Directory d = GestionDomaine.initDirectory();
             Groups r = d.groups().list().setDomain("isae.edu.lb").execute();
             List<Group> groups = r.getGroups();
-
-            for (Group group : groups) {
-                mess += group.getEmail() + " - " + group.getName() + "\n";
-            }
-        } catch (Exception exception) {
+            mess = groups.stream().map((group) -> group.getEmail() + " - " + group.getName() + "\n").reduce(mess, String::concat);
+        } catch (IOException | GeneralSecurityException exception) {
             mess = "ATTENTION: ECHEC - Impossible d'afficher la liste des groupes.";
         }
         return mess;

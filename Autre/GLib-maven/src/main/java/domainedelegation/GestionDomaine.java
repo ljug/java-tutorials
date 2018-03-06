@@ -23,17 +23,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class GestionDomaine {
 
+    static final  boolean DEBUG=false;
     public GestionDomaine() {
     }
 
     public static Directory initDirectory() throws GeneralSecurityException, IOException {
 
+        
         //String cheminCatalina = System.getProperty("catalina.base");
         String cheminCatalina = "/opt/apache-tomcat-8.0.18";
         String chemin = "/resources/";
@@ -78,66 +80,43 @@ public class GestionDomaine {
     }
 
     public static void main(String args[]) throws GeneralSecurityException, IOException {
-        
+        //System.out.println(creerUtilisateur("sidemo-ente@isae.edu.lb", "si", "demo16", "demo1616", "/Etudiants"));
+        //System.out.println(changerMotDePasse("sidemo17@isae.edu.lb", "demo1717"));
+        //System.out.println(creerGroupe("test", "test@isae.edu.lb", "test"));
+        //System.out.println(supprimerGroupe("test@isae.edu.lb"));
+        //System.out.println(testerExistenceEmail("sidemo17@isae.edu.lb"));
     }
 
     public static String miseAJourGroupe(String groupEmail, List<String> l) throws IOException, GeneralSecurityException {
+        if (DEBUG) System.out.println("MAJ GROUPE");
+        List<String> laajoute = l.stream().collect(Collectors.toList());
         Directory d = initDirectory();
         String mess = "";
         //l représente la nouvelle liste des étudiants
         //mem représente la liste courante des étudiants chez Google
+        //l.stream().forEach(System.out::println);
+
+        if (DEBUG) System.out.println("Taille de la liste souhété" + l.size());
+
         Members mm = d.members().list(groupEmail).execute();
+        //mm.getNextPageToken();
         List<Member> mem = mm.getMembers();
-        //Recherche des nouveaux membres et leur affectation à la liste laj
-        int nbInsere = 0;
-        List<String> laj = new LinkedList<>();
-        boolean trouver;
-        if (l!=null) {
-        for (String l0 : l) {
-            trouver = false;
-            if (mem != null) {
-                for (Member mold : mem) {
-                    if (l0.equals(mold.getEmail())) {
-                        trouver = true;
-                        break;
-                    }
-                }
-            }
-            if (trouver == false) {
-                //ce bloc commenté est lent pour un très grand nombre à insérer
-                //--------------------------------------------------------------
-                //Member member=new Member();
-                //member.setEmail(l0);
-                //d.members().insert(groupEmail, member).execute();
-                laj.add(l0);
-                nbInsere = nbInsere + 1;
-            }
-        }
-        }
-        //Suppression des membres qui n'existent plus
-        int nbSupprime = 0;
-        if (mem != null) {
-            for (Member mold : mem) {
-                trouver = false;
-                if (!mold.getRole().equals("OWNER")) {
-                    if (l!=null) {
-                    for (String l0 : l) {
-                        if (l0.equals(mold.getEmail())) {
-                            trouver = true;
-                            break;
-                        }
-                    }
-                    }
-                    if (trouver == false) {
-                        d.members().delete(groupEmail, mold.getEmail()).execute();
-                        //lsupp.add(mold.getEmail());
-                        nbSupprime = nbSupprime + 1;
-                    }
-                }
-            }
+        if (DEBUG) System.out.println("Taille de la liste dans google" + mem.size() + ":" + mm.getNextPageToken());
+        while (mm.getNextPageToken() != null) {
+            mm = d.members().list(groupEmail).setPageToken(mm.getNextPageToken()).execute();
+            if (DEBUG) System.out.println("Taille de la liste dans google" + mem.size() + ":" + mm.getNextPageToken());
+            mem.addAll(mm.getMembers());
         }
 
-        if (!laj.isEmpty()) {
+        List<String> oldList = mem.stream().map(m -> m.getEmail()).collect(Collectors.toList());
+        //mem.stream().map(m -> m.getEmail()).forEach(System.out::println);
+        laajoute.removeAll(oldList);
+        if (DEBUG) System.out.println("Taille de la liste resultante (a ajouté)" + laajoute.size());
+
+        oldList.removeAll(l);
+        if (DEBUG) System.out.println("Taille de la liste resultante (a suprimé)" + oldList.size());
+
+        if (!(laajoute.isEmpty() && oldList.isEmpty())) {
             BatchRequest batch = d.batch(new HttpRequestInitializer() {
                 @Override
                 public void initialize(HttpRequest request) throws IOException {
@@ -157,32 +136,49 @@ public class GestionDomaine {
                 public void onSuccess(Member content, HttpHeaders responseHeaders) {
                     //Pour l'instant ceci va dans catalina.out
                     //TODO comtabilier les réussi
-                    //System.out.println(content.getEmail()+".... is successful!");
+                    if (DEBUG) System.out.println(content.getEmail() + ".... is successful!");
                 }
 
                 @Override
                 public void onFailure(GoogleJsonError e, HttpHeaders responseHeaders) {
                     //TODO comptabiliser les echec
-                    //System.out.println("Error Message: " + e.getMessage());
+                    if (DEBUG) System.out.println("Error Message: " + e.getMessage());
                 }
             };
-            for (String memberEmail : laj) {
 
-                Member member = new Member();
-                member.setEmail(memberEmail);
+            JsonBatchCallback<Void> callbackRm = new JsonBatchCallback<Void>() {
 
-                try {
-                    d.members().insert(groupEmail, member).queue(batch, callback);
-                } catch (IOException exception) {
-
+                @Override
+                public void onSuccess(Void content, HttpHeaders responseHeaders) {
+                    //Pour l'instant ceci va dans catalina.out
+                    //TODO comtabilier les réussi
+                    if (DEBUG) System.out.println(content + ".... is successful!");
                 }
+
+                @Override
+                public void onFailure(GoogleJsonError e, HttpHeaders responseHeaders) {
+                    //TODO comptabiliser les echec
+                    if (DEBUG) System.out.println("Error Message: " + e.getMessage());
+                }
+
+            };
+            if (DEBUG) System.out.print("1 ");
+            for (String nm : laajoute) {
+                Member member = new Member();
+                member.setEmail(nm);
+                d.members().insert(groupEmail, member).queue(batch, callback);
             }
+            if (DEBUG) System.out.print("2 ");
+            for (String md : oldList) {
+                d.members().delete(groupEmail, md).queue(batch, callbackRm);
+            }
+            if (DEBUG)  System.out.print("3 ");
             try {
                 //System.out.println(".........BEFORE BATCH EXECUTE ........."+batch.size());
-
+                if (DEBUG) System.out.println(".........BEFORE BATCH EXECUTE ........." + batch.size());
                 batch.execute();
                 mess = "L'opération de l'insertion a eu lieu avec succès. ";
-                //System.out.println(".........AFTER BATCH EXECUTE ........."+batch.size());
+                if (DEBUG) System.out.println(".........AFTER BATCH EXECUTE ........." + batch.size());
             } catch (IOException ex) {
                 //Logger.getLogger(GroupService.class.getName()).log(Level.SEVERE, null, ex);
                 //System.out.println(".........ERROR BATCH EXECUTE ........."+batch.size()+"\n"+ex);
@@ -192,7 +188,7 @@ public class GestionDomaine {
             }
         }
 
-        mess += "Nombre de membres inséré=" + nbInsere + ", Nombre de membres supprimé=" + nbSupprime;
+        mess += "Nombre de membres inséré=" + laajoute.size() +  "<br />Nombre de membres supprimé"+oldList.size();
 
         return mess;
     }
@@ -329,35 +325,32 @@ public class GestionDomaine {
         }
         return existe;
     }
-    
-    
-    
-    public static String supprimerMembre(String groupEmail,String memberEmail) {
-        String mess="";
+
+    public static String supprimerMembre(String groupEmail, String memberEmail) {
+        String mess = "";
         try {
-            Directory d=initDirectory();
+            Directory d = initDirectory();
             d.members().delete(groupEmail, memberEmail).execute();
-            mess="L'opération a eu lieu avec succès.";
-            
+            mess = "L'opération a eu lieu avec succès.";
+
         } catch (Exception exception) {
-            mess="ATTENTION: ECHEC - L'opération n'a pas eu lieu.";
+            mess = "ATTENTION: ECHEC - L'opération n'a pas eu lieu.";
         }
         return mess;
     }
-    
-        public static int testerEmailLogin(String email) throws GeneralSecurityException, IOException {
+
+    public static int testerEmailLogin(String email) throws GeneralSecurityException, IOException {
         int dejaLogin = 0;
 
         try {
             Directory d = initDirectory();
             d.users().get(email).execute();
-            if (d.users().get(email).execute().getAgreedToTerms()==true) {
-                dejaLogin=1;
+            if (d.users().get(email).execute().getAgreedToTerms() == true) {
+                dejaLogin = 1;
             }
         } catch (Exception exception) {
         }
         return dejaLogin;
     }
-    
-        
+
 }
