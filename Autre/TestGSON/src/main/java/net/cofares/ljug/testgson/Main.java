@@ -1,6 +1,7 @@
 /*
  * export CLASSPATH=~/.m2/repository/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar:~/.m2/repository/net/cofares/ljug/TestGSON/1.0/TestGSON-1.0.jar
  * java net.cofares.ljug.testgson.Main
+ * Ou mvn clean compile assembly:single rn ayant ajouter le necessaire dans <build> ... </build> du pom.xml
  */
 package net.cofares.ljug.testgson;
 
