@@ -26,7 +26,7 @@ public class MySource {
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         Source<String> source = new Source<>();
-        source.addGEventListener((GEvent ev) -> System.out.println(ev.getData()));
+        source.addGEventListener((GEvent ev) -> System.out.println("Je suis la callback" + ev.getData()));
        
         Thread t = new Thread(new MenuPrincipal(source));
         t.start();

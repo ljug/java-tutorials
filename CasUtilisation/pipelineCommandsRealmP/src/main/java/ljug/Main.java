@@ -5,13 +5,15 @@
  */
 package ljug;
 
-import net.cofares.ljug.event.CommandeCallbackAction;
-import net.cofares.ljug.event.CommandesCallback;
-import net.cofares.ljug.urcommades.AddRole;
-import net.cofares.ljug.urcommades.AddUser;
-import net.cofares.ljug.urcommades.Assoc;
-import net.cofares.ljug.urcommades.CommandsLang;
-import net.cofares.ljug.urcommades.URCTokenizer;
+import java.util.function.Function;
+import ljug.langage.AddRole;
+import ljug.langage.AddUser;
+import ljug.langage.Assoc;
+import ljug.langage.CommandeUR;
+import ljug.provide.ServiceFactory;
+import ljug.provide.Services;
+import ljug.urcommades.provide.CommandLangFactory;
+import ljug.urcommades.provide.CommandLangServices;
 
 /**
  * L ::= CommanUR L
@@ -20,33 +22,29 @@ import net.cofares.ljug.urcommades.URCTokenizer;
  */
 public class Main {
 
-    public static void initCommandCallbacks(CommandesCallback cc) {
-    
-        CommandeCallbackAction<String, AddUser> cau=new CommandeCallbackAction<>(
-                (String s) -> System.out.println(s),
-                (AddUser u) -> String.format("Adduser %s %s %s", u.username,u.password,u.gmail)
-        );
-        cc.registerAction("adduser", cau);
-        
-        CommandeCallbackAction<String, AddRole> cr=new CommandeCallbackAction<>(
-                (String s) -> System.out.println(s),
-                (AddRole r) -> String.format("AddRole %s", r.role)
-        );
-        cc.registerAction("addrole", cr);
-        
-        CommandeCallbackAction<String, Assoc> cass=new CommandeCallbackAction<>(
-                (String s) -> System.out.println(s),
-                (Assoc u) -> String.format("Assoc %s %s", u.user, u.role)
-        );
-        cc.registerAction("assoc", cass);
-    }
-    public static void main(String a[])  {
-        URCTokenizer scan = new URCTokenizer(System.in);
-        CommandesCallback cc=new CommandesCallback();
-        initCommandCallbacks(cc);
-        System.out.printf("START");
-        CommandsLang.parse(cc, scan);
-        System.out.println("END");
+    public static void main(String a[]) {
+        Services s = ServiceFactory.ServicesBuilder();
+        Function<CommandeUR, CommandeUR> addUser = (CommandeUR comm) -> {
+            AddUser au = (AddUser) comm;
+            s.addUser(au.username, au.password, au.gmail);
+            return comm;
+        };
+        Function<CommandeUR, CommandeUR> addRole = (CommandeUR comm) -> {
+            AddRole au = (AddRole) comm;
+            s.addRole(au.role);
+            return comm;
+        };
+        Function<CommandeUR, CommandeUR> assoc = (CommandeUR comm) -> {
+            Assoc au = (Assoc) comm;
+            s.associate(au.user, au.role);
+            return comm;
+        };
+        CommandLangServices cls = CommandLangFactory.create(
+                addRole, 
+                addUser, 
+                assoc);
+        cls.repl();
+
     }
 
 }

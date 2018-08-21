@@ -28,8 +28,8 @@ public class MenuPrincipal implements Runnable {
 
         int selection;
         //Ceci efface en principe un écran (console) Linux et Windows
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
         Scanner input = new Scanner(System.in);
 
         /**

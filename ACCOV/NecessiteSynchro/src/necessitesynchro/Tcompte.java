@@ -15,17 +15,18 @@ package necessitesynchro;
  * @author pascalfares
  */
 public class Tcompte implements Runnable {
+
     SimpleC compteur;
-    public Tcompte (SimpleC sc) {
-        compteur=sc;
+
+    public Tcompte(SimpleC sc) {
+        compteur = sc;
     }
+
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-                    compteur.compte();
-                }
+            compteur.compte();
+        }
     }
 
-    
-    
 }

@@ -36,6 +36,7 @@ public class AddRole extends CommandeUR {
     @Override
     public void eval() {
         System.out.println(cf.apply("addrole", this)); 
+        
     }
     
     @Override

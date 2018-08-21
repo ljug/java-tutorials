@@ -17,7 +17,8 @@ Vous trouverez ici:
 * [Code Camp](#code-camp)
 * [Lambda Java8](#lambda)
 * [J2EE](#j2ee)
-* [Concurence et Synchronisation](#accov)
+* [Concurence et Synchronisation (ext)](http://concurrence.cofares.net/)
+* [Design patterns en Java](http://design-patterns.cofares.net/)
 * [Transverse, Non classifié](Autre)
 
 ## [Code Camp](CampCode) 

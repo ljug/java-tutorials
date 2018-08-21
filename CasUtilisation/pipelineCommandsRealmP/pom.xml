@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>URCommandes</artifactId>
+            <artifactId>REPLCommandServcies</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -5,6 +5,7 @@
  */
 package ljug.urcommades.provide;
 
+import java.util.function.Function;
 import ljug.langage.Assoc;
 import ljug.langage.AddUser;
 import ljug.langage.AddRole;
@@ -30,4 +31,15 @@ public class CommandLangFactory {
         //TODO ajouter les autres
         return cl;
     }    
+    public static CommandLangServices create(
+            Function<CommandeUR, CommandeUR> addRole,
+            Function<CommandeUR, CommandeUR> addUser,
+            Function<CommandeUR, CommandeUR> assoc) {
+        CommandLangImp cl = new CommandLangImp();
+        cl.setActionAddUsers(addUser);
+        cl.setActionAddRoles(addRole);
+        cl.setActionAssoc(assoc);
+        //TODO ajouter les autres
+        return cl;
+    }
 }
