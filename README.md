@@ -11,6 +11,7 @@ Vous trouverez ici:
 - [x] Application complètes a la mode "microservice" (afin de donner une idée des concepts derrière ce pattern d'implémentation), utilisation JPA, RESTFull, Serveur ambarqué Grizzly, Lambda Java8, pattern conception: Fabrique, Callback, Interpreteur, Observer.
 - [x] Documentation du cours cycle C
 - [x] FAQ
+- [x] Les nouveautés Java à partir de la version 9, Visiter [Nouveautés Java >9](NouveautesJDK9+/)
 
 # Thèmes
 
