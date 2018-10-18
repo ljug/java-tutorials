@@ -16,4 +16,11 @@ public class Calculette {
     public int sub (int x, int y) {
         return x-y;
     }
+    public Integer mult (Integer x, Integer y) {
+        return x*y;
+    }
+    public Integer div (Integer x, Integer y) {
+        return x-y;
+    }
+    
 }
