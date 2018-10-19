@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.cofares.ljug.tdd;
 
 import org.junit.After;
@@ -12,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 /**
  *
@@ -51,7 +47,7 @@ public class CalculetteTest {
         int result = instance.add(x, y);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -67,7 +63,7 @@ public class CalculetteTest {
         int result = instance.sub(x, y);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -76,14 +72,14 @@ public class CalculetteTest {
     @Test
     public void testMult() {
         System.out.println("mult");
-        Integer x = null;
-        Integer y = null;
+        Integer x = 0;
+        Integer y = 10;
         Calculette instance = new Calculette();
-        Integer expResult = null;
+        Integer expResult = 0;
         Integer result = instance.mult(x, y);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -92,18 +88,21 @@ public class CalculetteTest {
     @Test
     public void testDiv() {
         System.out.println("div");
-        Integer x = null;
-        Integer y = null;
+        Integer x = 100;
+        Integer y = 10;
         Calculette instance = new Calculette();
-        Integer expResult = null;
+        Integer expResult = 10;
         Integer result = instance.div(x, y);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     public static void main(String[] args) {
-        JUnitCore.runClasses(CalculetteTest.class);
+        Result result = JUnitCore.runClasses(CalculetteTest.class);
+        result.getFailures().forEach((failure) -> {
+            System.out.println(failure.toString());
+        });
     }
 
 }

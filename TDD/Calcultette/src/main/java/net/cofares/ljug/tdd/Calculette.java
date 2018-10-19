@@ -20,7 +20,7 @@ public class Calculette {
         return x*y;
     }
     public Integer div (Integer x, Integer y) {
-        return x-y;
+        return x/y;
     }
     
 }
