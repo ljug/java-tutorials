@@ -30,7 +30,7 @@ public class CalculatorTest {
 	}
 
 	@Parameters
-	public static Collection testValues() {
+	public static Collection jeuDeValeurs() {
 		return Arrays.asList(new Object[][] { 
 			{ 2, 3, 5 }, 
 			{ 4, 9, 13 }, 
@@ -65,7 +65,7 @@ public class CalculatorTest {
 	@Test public void 
 	should_catch_exception_message_when_negative_number_is_given() throws Exception {
 		expectedException.expect(RuntimeException.class);
-		expectedException.expectMessage("He Ho pas permi! -1 4");
+		expectedException.expectMessage("Nombres négatifs non permi ");
 		calculator.add(-1, 4);
 	}
 
