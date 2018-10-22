@@ -6,6 +6,7 @@
 package ljug;
 
 import javax.persistence.EntityManagerFactory;
+import javax.annotation.Generated;
 import javax.persistence.Persistence;
 import ljug.provide.ServiceFactory;
 import ljug.provide.Services;
