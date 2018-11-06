@@ -24,8 +24,8 @@ public class JPAUtil {
     // Lire ceci dans un fichier de propriété
     public static final String URL = "jdbc:mysql://localhost/?useSSL=false";
     public static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String USERNAME = "tomcat";
-    public static final String PASSWORD = "pourtomcat";
+    public static final String USERNAME = "pascalfares";
+    public static final String PASSWORD = "pascal00";
     static Statement st;
     static Connection conn;
 
