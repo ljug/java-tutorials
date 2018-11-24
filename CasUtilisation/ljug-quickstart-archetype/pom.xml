@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.cofares.ljug</groupId>
+  <artifactId>ljug-quickstart-archetype</artifactId>
+  <version>1.0</version>
+  <packaging>maven-archetype</packaging>
+
+  <name>ljug-quickstart-archetype</name>
+  <description>The maven quickstart archetype adapted for the error with surfire</description>
+  <licenses>
+    <license>
+     <name>Apache License, Version 2.0</name>
+     <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+     <distribution>repo</distribution>
+    </license>
+  </licenses>
+<developers>
+    <developer>
+      <name>Pascal Fares</name>
+      <email>pascal.fares@cofares.net</email>
+      <organization>OSLM</organization>
+      <organizationUrl>http://oslm.cofares.net</organizationUrl>
+    </developer>
+  </developers>
+<scm>
+  <connection>scm:git:git://git@github.com:ljug/java-tutorials.git</connection>
+  <developerConnection>scm:git:ssh://github.com:ljug/java-tutorials.git</developerConnection>
+  <url>https://github.com/ljug/java-tutorials/tree/master/ACCOV</url>
+</scm>
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.archetype</groupId>
+        <artifactId>archetype-packaging</artifactId>
+        <version>3.0.1</version>
+      </extension>
+    </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-archetype-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+   
+  <plugin>
+  <groupId>org.sonatype.plugins</groupId>
+  <artifactId>nexus-staging-maven-plugin</artifactId>
+  <version>1.6.7</version>
+  <extensions>true</extensions>
+  <configuration>
+     <serverId>ossrh</serverId>
+     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+  </configuration>
+ </plugin>
+   </plugins>
+    </pluginManagement>
+  </build>
+<distributionManagement>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+  <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository>
+</distributionManagement>
+  <url>http://java.cofares.net/</url>
+</project>
