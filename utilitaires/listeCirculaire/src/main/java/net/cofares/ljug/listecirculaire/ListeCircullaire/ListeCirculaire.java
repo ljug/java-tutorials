@@ -1,5 +1,6 @@
 package net.cofares.ljug.listecirculaire.ListeCircullaire;
 
+import java.lang.reflect.Array;
 import net.cofares.ljug.exeptions.ListePleine;
 import net.cofares.ljug.exeptions.ListeVide;
 
@@ -20,10 +21,11 @@ public class ListeCirculaire<D> {
     private int debut,fin; 
     /**
      * Constructeur
+     * @param clazz le type génerique exem[ple String[].class
      * @param taille la taille de la liste circulaire 
      */
-    public ListeCirculaire(int taille) {
-        liste = (D[]) new Object[taille];
+    public ListeCirculaire(Class<D[]> clazz,int taille) {
+        liste = clazz.cast(Array.newInstance(clazz.getComponentType(), taille)); 
         this.taille=taille;
         nbElem=debut=fin=0; //la liste est vide
     }

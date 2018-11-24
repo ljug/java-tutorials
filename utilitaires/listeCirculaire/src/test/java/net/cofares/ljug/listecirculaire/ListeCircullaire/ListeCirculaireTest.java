@@ -39,12 +39,14 @@ public class ListeCirculaireTest {
 
     /**
      * Test of put method, of class ListeCirculaire.
+     * @throws net.cofares.ljug.exeptions.ListePleine
+     * @throws net.cofares.ljug.exeptions.ListeVide
      */
     @Test
     public void testPut() throws ListePleine, ListeVide {
         System.out.println("put");
         Integer d = 10;
-        ListeCirculaire<Integer> instance = new ListeCirculaire<>(10);
+        ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,10);
         instance.put(d);
         Integer result = instance.get();
         // TODO review the generated test code and remove the default call to fail.
@@ -56,7 +58,7 @@ public class ListeCirculaireTest {
     public void testMultiPutGet() {
         System.out.println("Multi put get");
         Integer d = 10;
-        ListeCirculaire<Integer> instance = new ListeCirculaire<>(10);
+        ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,10);
         
         for (int i=1; i<=10;i++) {
             try {
@@ -106,7 +108,7 @@ public class ListeCirculaireTest {
     public void testGet() throws ListePleine, ListeVide {
         System.out.println("get");
         Integer d = 1;
-        ListeCirculaire<Integer> instance = new ListeCirculaire<>(1);
+        ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,1);
         instance.put(d);
         Integer result = instance.get();
         // TODO review the generated test code and remove the default call to fail.
@@ -150,7 +152,7 @@ public class ListeCirculaireTest {
     public void testGetNbElem() {
         System.out.println("getNbElem");
         Integer d = 1;
-        ListeCirculaire<Integer> instance = new ListeCirculaire<>(1);
+        ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,1);
         try {
             instance.put(d);
             assertEquals(1, instance.getNbElem());

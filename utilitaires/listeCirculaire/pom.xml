@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.cofares.ljug</groupId>
     <artifactId>ListeCirculaire-proto</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
     <licenses>
         <license>
@@ -123,6 +123,6 @@
         </repository>
     </distributionManagement>
     <name>ListeCirculaire-proto</name>
-    <description>Liste cicruclaire de taille fixe pour producteur/comsomateur - un prototype</description>
+    <description>Liste cicruclaire de taille fixe pour producteur/comsomateur - un prototype version avec création de tableaux générique</description>
     <url>http://java.cofares.net/</url>
 </project>
