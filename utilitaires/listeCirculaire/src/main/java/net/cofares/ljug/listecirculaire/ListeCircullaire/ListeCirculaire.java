@@ -1,3 +1,7 @@
+/**
+ * 
+ * <a href="http://rosenlaw.com/pdf-files/OSL3.0-comparison.pdf">Open Software License (�OSL�) v. 3.0</a>
+*/
 package net.cofares.ljug.listecirculaire.ListeCircullaire;
 
 import java.lang.reflect.Array;
@@ -14,14 +18,14 @@ public class ListeCirculaire<D> {
     private int nbElem;
     /**
      * debut et fin de la liste
-     * debut ou on peut ecrire (la case est vide)
+     * debut ou on peut écrire (la case est vide)
      * fin ou on peut lire (FIFO) 
      * 
      */
     private int debut,fin; 
     /**
      * Constructeur
-     * @param clazz le type génerique exem[ple String[].class
+     * @param clazz le type génerique exemple String[].class
      * @param taille la taille de la liste circulaire 
      */
     public ListeCirculaire(Class<D[]> clazz,int taille) {
@@ -31,7 +35,7 @@ public class ListeCirculaire<D> {
     }
     /**
      * Déposer un élément
-     * @param d : un élément 
+     * @param d : élément à produire
      * @throws ListePleine Si liste pleine (pas possible de déposer)
      */
     public void put(D d) throws ListePleine{
@@ -44,8 +48,8 @@ public class ListeCirculaire<D> {
         nbElem++;
     }
     /**
-     * Retirer (consomer un élément
-     * @return l'élément suivant
+     * Retirer (consomer un élément)
+     * @return l'élément consomé (il n'est plus dans la liste)
      * @throws ListeVide Si liste vide (pas possible d'obtenir un élément)
      */
     public D get() throws ListeVide{

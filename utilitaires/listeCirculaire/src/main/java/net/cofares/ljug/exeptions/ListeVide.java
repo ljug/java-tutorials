@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * 
+ * <a href="http://rosenlaw.com/pdf-files/OSL3.0-comparison.pdf">Open Software License (OSL) v. 3.0</a>
+*/
 package net.cofares.ljug.exeptions;
 
 /**
  *
- * @author ppfar
+ * @author Pascal Fares at ISSAE CNam Liban and OSLM
  */
 public class ListeVide extends Exception {
 
