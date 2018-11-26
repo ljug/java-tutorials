@@ -47,6 +47,8 @@ Vous trouverez ici:
 
 ## [Transverse, Non classifié](Autre)
 
+* [Utilitaires et structures de données](/utilitaires/)
+
 ## ACCOV
 
 # Liens externes et utiles

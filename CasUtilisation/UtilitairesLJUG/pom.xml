@@ -2,15 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.cofares.ljug</groupId>
-    <artifactId>UtilitairesLJUG</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <artifactId>jdbcmysql-utility</artifactId>
+    <version>0.1-donotuse</version>
     <packaging>jar</packaging>
+    <name>Utilisatire JDBC par LJUG</name>
     <url>http://java.cofares.net</url>
     <organization>
         <name>Lebanese Java Users group</name>
         <url>http://ljug.cofares.net</url>
     </organization>
-    <description>Utilitaires (helper) pour les autres projets de LJUG</description>
+    <description>Utilitaire générique pour la gestion de requete et l'affichage de résulat avec JDBC.
+        Do not use this version is just for testing deployemtn to central maven (and for my studnets at Cnam Liban)
+        next versions will be best tested and completed
+    </description>
     <licenses>
         <license>
             <name>GNU GENERAL PUBLIC LICENSE v3</name>
@@ -48,7 +52,7 @@
             </roles>
             <timezone>UTC+2</timezone>
             <properties>
-                <otheremail>pascal.fares@isae.edu.lb</otheremail>
+                <otheremail>pascal.fares@cofares.net</otheremail>
             </properties>
         </developer>
     </developers>
@@ -70,7 +74,19 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <properties>
@@ -79,9 +95,90 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <distributionManagement>
-    <repository>
-      <id>ljug-mvn-repo</id>
-      <url>file:///home/pfares/mesgit/java-tutorials/mvn-repo</url>
-    </repository>
-  </distributionManagement>
+
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <!--
+                    <repository>
+                        <id>ljug-mvn-repo</id>
+                        <url>file:///home/pfares/mesgit/java-tutorials/mvn-repo</url>
+                    </repository>
+        -->
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+ 
+    </distributionManagement>
+    <scm>
+        <connection>scm:git:git://git@github.com:ljug/java-tutorials.git</connection>
+        <developerConnection>scm:git:ssh://github.com:ljug/java-tutorials.gitt</developerConnection>
+        <url>https://github.com/ljug/java-tutorials/tree/master/CasUtilisation</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

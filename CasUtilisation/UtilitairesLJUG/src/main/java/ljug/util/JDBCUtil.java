@@ -16,29 +16,30 @@ public interface JDBCUtil {
     /**
      * afficher les donnée d'une requête
      *
-     * @param sql la requete sql
+     * @param sql an sql query
      */
     void checkData(String sql);
 
     /**
-     * Creation d'une conection et d'un Opbjet Statement pour les requetes (debut)
-     * termiber l'ensemble des requete avec
-     * endStatement
+     * Creation d'une connecxion et d'un Objet Statement pour les requetes (debut)
      */
     void startStatement();
+    /**
+     * termiber l'ensemble des requete avec endStatement
+     */
     void endStatement();
    
     
     /**
-     * Service de driop table
-     * @param sql la requte 
+     * Service drop table
+     * @param sql an sql query
      */
     void droptable(String sql);
 
     /**
      * Executer une commande sql
      *
-     * @param sql
+     * @param sql sql auery
      * @throws Exception erreur dans la requete
      */
     void executeSQLCommand(String sql) throws Exception;
@@ -46,13 +47,13 @@ public interface JDBCUtil {
     /**
      * Affichage des resultat d'une requete générique (un prettyprint)
      *
-     * @param rs
+     * @param rs The resultSet
      * @throws Exception
      */
     void outputResultSet(ResultSet rs) throws Exception;
 
     /**
-     * Requete update
+     * Requete setup
      *
      * @param sql la requete sql
      */

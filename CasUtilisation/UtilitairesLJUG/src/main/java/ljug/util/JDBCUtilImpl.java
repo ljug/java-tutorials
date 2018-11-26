@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Tester en afichant le contenue des tables d'une base de donnée Mysql
+ * Tester en affichant le contenue des tables (ou résulat de requêtes) d'une base de donnée Mysql
  *
  * @author pfares
  */
@@ -68,6 +68,9 @@ class JDBCUtilImpl implements JDBCUtil {
         }
     }
 
+    /**
+     * End the connection and the statement
+     */
     @Override
     public void endStatement() {
         try {
@@ -77,7 +80,10 @@ class JDBCUtilImpl implements JDBCUtil {
         }
     }
 
-    // Drop table if exists
+    /**
+     * Drop the table if exist
+     * @param sql 
+     */
     @Override
     public void droptable(String sql) {
         try {
@@ -98,7 +104,7 @@ class JDBCUtilImpl implements JDBCUtil {
     }
 
     /**
-     * afficher les donnée d'une requête
+     * afficher les données d'une requête
      *
      * @param sql la requete sql
      */
@@ -115,7 +121,7 @@ class JDBCUtilImpl implements JDBCUtil {
     }
 
     /**
-     * Affichage des resultat d'une requete générique (un prettyprint)
+     * Affichage générique des resultats d'une requete générique (un prettyprint)
      *
      * @param rs
      * @throws Exception

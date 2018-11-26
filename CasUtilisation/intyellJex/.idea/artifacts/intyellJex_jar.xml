@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="intyellJex:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/intyellJex_jar</output-path>
+    <root id="archive" name="intyellJex.jar">
+      <element id="module-output" name="intyellJex" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.persistence.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

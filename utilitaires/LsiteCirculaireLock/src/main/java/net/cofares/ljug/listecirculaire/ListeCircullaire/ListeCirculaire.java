@@ -14,7 +14,7 @@ public class ListeCirculaire<D> {
     private int nbElem;
     /**
      * debut et fin de la liste
-     * debut ou on peut ecrire (la case est vide)
+     * debut ou on peut écrire (la case est vide)
      * fin ou on peut lire (FIFO) 
      * 
      */
