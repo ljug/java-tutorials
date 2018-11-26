@@ -72,7 +72,7 @@ Faire ceci `mvn install -DperformRelease=true -DcreateChecksum=true` puis copier
 * [ ] TODO A CLASSER ce qui suit ailleur!
 
 
-# génerer les jar avec les dependances
+# générer les jar avec les dépendances
 
 Inserrer ce code | Puis
 -----------------|-----
@@ -103,3 +103,11 @@ Inserrer ce code | Puis
 * [ ] Finaliser Rest Jersey Grizzly JPA
 * [ ] Securiser Griszly
 * [ ] Utiliser Asciidoctor http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+# Le depot maven central de ljug (Lebanese Java Users Group) groupId=net.cofares.ljug
+
+# La LJUG : [Lebanese Java Users Group](http://ljug.cofares.net)
+
+* Un blog http://ljug.cofares.net
+* et ce site http://java.cofares.net
+
