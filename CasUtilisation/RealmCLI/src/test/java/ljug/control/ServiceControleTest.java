@@ -1,9 +1,13 @@
 package ljug.control;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import ljug.provide.ServiceFactory;
 import ljug.provide.Services;
+import ljug.util.JDBCUtil;
+import ljug.util.JDBCUtilFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,7 +25,15 @@ public class ServiceControleTest {
     
     @BeforeClass
     public static void setUpClass() {
-        
+        JDBCUtil jdbcUtil= JDBCUtilFactory.create("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/?useSSL=false", "realm-ms", "realm-ms");
+        jdbcUtil.startStatement();
+        try {
+            //S'assurer que la BD existe (Les tables seront crée par JPA)
+            jdbcUtil.executeSQLCommand("create database if not exists realm");
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceControleTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jdbcUtil.endStatement();
     }
     
     @AfterClass

@@ -20,12 +20,17 @@ import ljug.util.JDBCUtil;
 public class Main {
     public static void main(String[] args) throws Exception {
 
+        //Connection BD standard par jdbc (utilisation de net.cofares.ljug:jdbcmysql-utility artifact maven par la LJUG)
+        JDBCUtil jdbcUtil= JDBCUtilFactory.create("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/realm?useSSL=false", "realm-ms", "realm-ms");
+        jdbcUtil.startStatement();
+        //S'assurer que la BD existe (Les tables seront crée par JPA)
+        jdbcUtil.executeSQLCommand("create database if not exist realm");
+        //JPA
         EntityManagerFactory emf
                 = Persistence.createEntityManagerFactory("REALMPU");
         
         Services service = ServiceFactory.ServicesBuilder(emf);
-        JDBCUtil jdbcUtil= JDBCUtilFactory.create();
-        jdbcUtil.startStatement();
+        //
         service.addUser("pascal", "pascal", null);
         service.addUser("pascal1", "pascal1", "pfares@cofares.net");
         service.addRole("admin");
@@ -33,9 +38,9 @@ public class Main {
         service.associate("pascal", "admin");
         service.associate("pascal", "prof");
         service.associate("pascal1", "prof");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.users");
+        jdbcUtil.checkData("select * from realm.roles");
+        jdbcUtil.checkData("select * from realm.users_roles");
         System.out.println("----------");
         service.getRoles("pascal").stream().map(r -> r.getRoleName() + " of pascal " ).forEach(System.out::print);
         System.out.println("-");
@@ -46,13 +51,13 @@ public class Main {
         service.getUsers("prof").stream().map(u -> u.getUserName() + " of admin " ).forEach(System.out::print);
         System.out.println("-----------");
         service.dessociate("pascal1", "prof");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.users");
+        jdbcUtil.checkData("select * from realm.roles");
+        jdbcUtil.checkData("select * from realm.users_roles");
         service.rmUser("pascal");
-        jdbcUtil.checkData("select * from NewRealm.users");
-        jdbcUtil.checkData("select * from NewRealm.roles");
-        jdbcUtil.checkData("select * from NewRealm.users_roles");
+        jdbcUtil.checkData("select * from realm.users");
+        jdbcUtil.checkData("select * from realm.roles");
+        jdbcUtil.checkData("select * from realm.users_roles");
         jdbcUtil.endStatement();
         /*
         EntityManager em = emf.createEntityManager();
