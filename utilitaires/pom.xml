@@ -2,10 +2,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.cofares.ljug</groupId>
     <artifactId>forDeployCentral</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>pom</packaging>
     <name>forDeployCentral</name>
-    <description>A parent pom for ljug projets that allow the deploty to maven central throw forDeployCentral sonatype ossrh</description> 
+    <description>A parent pom for ljug projets that allow deploy to maven central using parent pom forDeployCentral staging deploy to sonatype ossrh just use profile ossrh</description> 
     <url>http://java.cofares.net/</url>
     <licenses>
         <license>
@@ -19,66 +19,93 @@
             <email>pascal.fares@isae.edu,lb</email>
             <organization>Lebanese java users Group</organization>
             <organizationUrl>http://oslm.cofares.net</organizationUrl>
+            <roles>
+                <role>project</role>
+                <role>owner</role>
+            </roles>
         </developer>
     </developers>
     <scm>
         <connection>scm:git:git://github.com:ljug/java-tutorials.git</connection>
         <developerConnection>scm:git:ssh://github.com:ljug/java-tutorials.git</developerConnection>
-        <url>https://github.com/ljug/java-tutorials/tree/master/utilitaires/listeCirculaire</url>
+        <url>https://github.com/ljug/java-tutorials/tree/master/</url>
     </scm>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <build>
+                <plugins>          
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>
+                        https://oss.sonatype.org/content/repositories/snapshots
+                    </url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>
+                        https://oss.sonatype.org/service/local/staging/deploy/maven2/
+                    </url>
+                </repository>
+            </distributionManagement>
+        </profile>  
+    </profiles>
     <build>
-        <plugins>          
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+        <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
@@ -88,18 +115,4 @@
             </plugin>
         </plugins>
     </build>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>
-                https://oss.sonatype.org/content/repositories/snapshots
-            </url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>
-                https://oss.sonatype.org/service/local/staging/deploy/maven2/
-            </url>
-        </repository>
-    </distributionManagement>
 </project>

@@ -6,14 +6,16 @@
     <parent>
         <groupId>net.cofares.ljug</groupId>
         <artifactId>forDeployCentral</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
     <groupId>net.cofares.ljug</groupId>
     <artifactId>cnamliban-pojo</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
 
     <name>Cnam Liban POJO</name>
     <description>An archetype for ISSAE Cnam Liban students for POJO projects.
+    With profile ossrh allowing to deploy to maven central
+    surefire workarroud outside profile
     Pre-requisite 
         1- Must define gpg key for signing jar gpg --gen-key
         2- You could olso publish your key gpg- keyserver ___ --send-key ____
