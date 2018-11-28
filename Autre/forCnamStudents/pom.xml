@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.cofares.ljug</groupId>
     <artifactId>cnamliban-pojo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>Cnam Liban POJO</name>
     <description>An archetype for ISSAE Cnam Liban students for POJO projects.
