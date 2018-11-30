@@ -1,6 +1,20 @@
 # Etapes projet Maven Simple
 
-## but archetype:generate
+La [LJUG](http://ljug.cofares.net) a préparé un archetype pour vos squeltte de projet dans le cadre de votre formation au [Cnam Liban](http://www.cnam-liban.fr) ou utilisateur de ce projet git dans github 
+## but archetype:generate pour créer le projet
+
+### utiliser larchetype net.cofares.ljug:cnamliban-pojo-archetype:1.3 en mode interactif ) 
+
+
+```Bash
+mvn archetype:generate                               \
+  -DarchetypeGroupId=net.cofares.ljug                \
+  -DarchetypeArtifactId=cnamliban-pojo-archetype     \
+  -DarchetypeVersion=1.3
+```
+suivre les instructions
+
+### Un autre exemple
 
 ```Bash
 mvn archetype:generate
