@@ -14,6 +14,75 @@ mvn archetype:generate                               \
 ```
 suivre les instructions
 
+```Bash
+pfares@cnamBackup:~$ mvn archetype:generate                               \
+>   -DarchetypeGroupId=net.cofares.ljug                \
+>   -DarchetypeArtifactId=cnamliban-pojo-archetype     \
+>   -DarchetypeVersion=1.3
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> maven-archetype-plugin:3.0.1:generate (default-cli) > generate-sources @ standalone-pom >>>
+[INFO] 
+[INFO] <<< maven-archetype-plugin:3.0.1:generate (default-cli) < generate-sources @ standalone-pom <<<
+[INFO] 
+[INFO] 
+[INFO] --- maven-archetype-plugin:3.0.1:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] Archetype repository not defined. Using the one from [net.cofares.ljug:cnamliban-pojo-archetype:1.3] found in catalog local
+```
+#### Vous pourrez avoir parfois ce message
+
+```Bash
+[INFO] Generating project in Interactive mode
+[WARNING] Archetype not found in any catalog. Falling back to central repository.
+[WARNING] Add a repsoitory with id 'archetype' in your settings.xml if archetype's repository is elsewhere.
+Define value for property 'groupId':
+```
+
+#### Saisir votre groupId exemple lb.edu.isae
+
+puis les autres informations demandées
+
+```Bash
+Define value for property 'groupId': lb.edu.isae
+Define value for property 'artifactId': MonPremierProjetMaven
+Define value for property 'version' 1.0-SNAPSHOT: : 
+Define value for property 'package' lb.edu.isae: : 
+Confirm properties configuration:
+groupId: lb.edu.isae
+artifactId: MonPremierProjetMaven
+version: 1.0-SNAPSHOT
+package: lb.edu.isae
+ Y: : 
+```
+#### Après plusieurs download probable vous aurez cette conclusion
+```Bash
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: cnamliban-pojo-archetype:1.3
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: lb.edu.isae
+[INFO] Parameter: artifactId, Value: MonPremierProjetMaven
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: package, Value: lb.edu.isae
+[INFO] Parameter: packageInPathFormat, Value: lb/edu/isae
+[INFO] Parameter: package, Value: lb.edu.isae
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: groupId, Value: lb.edu.isae
+[INFO] Parameter: artifactId, Value: MonPremierProjetMaven
+[INFO] Project created from Archetype in dir: /home/cnamliban/MonPremierProjetMaven
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 04:46 min
+[INFO] Finished at: 2018-11-30T08:02:14+02:00
+[INFO] Final Memory: 17M/224M
+[INFO] ------------------------------------------------------------------------
+```
+
 ### Un autre exemple
 
 ```Bash
