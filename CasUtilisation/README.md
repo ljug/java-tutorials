@@ -17,15 +17,15 @@ L'objectif de l'application est de préparer un dépôts pour la sécurisation d
 ### Une décomposition statique: Les sous-modules (comme microservice)
 
 * [Interpreteur de commade REPL](URCommandes.md)
-* [Gestion réalm version JPA directe](RealmCLI/)
-* [Gestion réalm version JPA Restfull sans Serveur d'application](RealmAuto.md)
+* [Gestion realm version JPA directe](RealmCLI/)
+* [Gestion realm version JPA Restfull sans Serveur d'application](RealmAuto.md)
 
 pour en savoir plus concernant les [microservice](/MicroService)? et pourquoi un  [microservice](/MicroService) visiter cette présentation simple [ici](/MicroService)
 
 L'application que ous allons créer sera basé sur la composition de micrioservices, nous produiront notre application en 
 
 1. Découpant notre appli en microservices
-2. Developperons chaque microservice avec les design pattern qui vont bien et les technologies adaptés pour chacun d'eux
+2. Développerons chaque microservice avec les design pattern qui vont bien et les technologies adaptés pour chacun d'eux
 3. Nou recomposeront les microservices pour obtenir notre application finale 
 
 
