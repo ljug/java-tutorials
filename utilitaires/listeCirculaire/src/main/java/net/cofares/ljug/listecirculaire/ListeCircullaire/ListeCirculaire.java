@@ -29,7 +29,8 @@ public class ListeCirculaire<D> {
      * @param taille la taille de la liste circulaire 
      */
     public ListeCirculaire(Class<D[]> clazz,int taille) {
-        liste = clazz.cast(Array.newInstance(clazz.getComponentType(), taille)); 
+        liste = 
+                clazz.cast(Array.newInstance(clazz.getComponentType(), taille)); 
         this.taille=taille;
         nbElem=debut=fin=0; //la liste est vide
     }
