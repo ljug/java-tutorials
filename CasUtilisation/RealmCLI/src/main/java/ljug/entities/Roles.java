@@ -14,25 +14,27 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.Transient;
+
 
 /**
  *
  * @author pfares
  */
 @Entity
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
     , @NamedQuery(name = "Roles.findByRoleName", query = "SELECT r FROM Roles r WHERE r.roleName = :roleName")})
 public class Roles implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    
     @Id
     private String roleName;  
+    
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Users> usersSet;
+    
     public Roles() {
     }
     public Roles(String roleName) {
@@ -44,7 +46,6 @@ public class Roles implements Serializable {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-    @XmlTransient
     public Set<Users> getUsersSet() {
         return usersSet;
     }

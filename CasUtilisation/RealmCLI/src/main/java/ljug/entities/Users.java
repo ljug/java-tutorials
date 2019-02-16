@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.Transient;
+
+
+
 
 /**
  *
  * @author pfares
  */
 @Entity
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
     , @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName")
@@ -27,13 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByUserPass", query = "SELECT u FROM Users u WHERE u.userPass = :userPass")})
 public class Users implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+
     @Id
     private String userName;
     private String description;
     private String userGsuite;
     @Basic(optional = false)
     private String userPass;
+
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE}, mappedBy = "usersSet", fetch = FetchType.EAGER)
     private Set<Roles> rolesSet;
     public Users() {
@@ -76,7 +77,6 @@ public class Users implements Serializable {
         this.userPass = userPass;
     }
 
-    @XmlTransient
     public Set<Roles> getRolesSet() {
         return rolesSet;
     }
