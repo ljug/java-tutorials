@@ -41,9 +41,10 @@ public class ListeCirculaireTest {
      * Test of put method, of class ListeCirculaire.
      * @throws net.cofares.ljug.exeptions.ListePleine
      * @throws net.cofares.ljug.exeptions.ListeVide
+     * @throws java.lang.InterruptedException
      */
     @Test
-    public void testPut() throws ListePleine, ListeVide {
+    public void testPut() throws ListePleine, ListeVide, InterruptedException {
         System.out.println("put");
         Integer d = 10;
         ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,10);
@@ -55,7 +56,7 @@ public class ListeCirculaireTest {
     }
     
     @Test
-    public void testMultiPutGet() {
+    public void testMultiPutGet() throws InterruptedException {
         System.out.println("Multi put get");
         Integer d = 10;
         ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,10);
@@ -105,7 +106,7 @@ public class ListeCirculaireTest {
      */
     @Test
     @Ignore
-    public void testGet() throws ListePleine, ListeVide {
+    public void testGet() throws ListePleine, ListeVide, InterruptedException {
         System.out.println("get");
         Integer d = 1;
         ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,1);
@@ -149,7 +150,7 @@ public class ListeCirculaireTest {
      * Test of getNbElem method, of class ListeCirculaire.
      */
     @Test
-    public void testGetNbElem() {
+    public void testGetNbElem() throws InterruptedException {
         System.out.println("getNbElem");
         Integer d = 1;
         ListeCirculaire<Integer> instance = new ListeCirculaire<>(Integer[].class,1);
