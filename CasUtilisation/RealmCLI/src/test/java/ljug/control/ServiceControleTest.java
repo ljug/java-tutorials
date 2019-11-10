@@ -25,7 +25,7 @@ public class ServiceControleTest {
     
     @BeforeClass
     public static void setUpClass() {
-        JDBCUtil jdbcUtil= JDBCUtilFactory.create("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/?useSSL=false", "realm-ms", "realm-ms");
+        JDBCUtil jdbcUtil= JDBCUtilFactory.create("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/?useSSL=false", "jdbcutil", "jdbcutil");
         jdbcUtil.startStatement();
         try {
             //S'assurer que la BD existe (Les tables seront crée par JPA)
