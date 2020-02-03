@@ -159,25 +159,25 @@
       <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
-        <version>7.0.47</version>
+        <version>7.0.99</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-juli</artifactId>
-        <version>7.0.47</version>
+        <version>7.0.99</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-logging-juli</artifactId>
-        <version>7.0.47</version>
+        <version>7.0.99</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-servlet-api</artifactId>
-        <version>7.0.47</version>
+        <version>7.0.99</version>
         <scope>test</scope>
       </dependency>
       <dependency>
