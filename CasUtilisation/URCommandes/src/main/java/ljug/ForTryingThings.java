@@ -28,7 +28,7 @@ public class ForTryingThings<X,Commande> {
     }
 
     public static void tryIt() {
-        ForTryingThings<AddUser,AddUser> chain= new ForTryingThings<AddUser,AddUser>(
+        ForTryingThings<AddUser,AddUser> chain= new ForTryingThings<>(
         (AddUser u) -> System.out.println(u),
         () -> new AddUser(),
         (AddUser u) -> {

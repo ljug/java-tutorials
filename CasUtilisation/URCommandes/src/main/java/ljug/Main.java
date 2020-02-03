@@ -26,19 +26,19 @@ public class Main {
         cc.registerCommandAction("addrole", (AddRole r) -> System.out.printf("\nAddRole %s \n", r.role));
         cc.registerCommandAction("assoc", (Assoc r) -> System.out.printf("\nAssoc %s %s \n", r.user, r.role));
         
-        CommandeCallbackAction<String, AddUser> cau=new CommandeCallbackAction<String, AddUser>(
+        CommandeCallbackAction<String, AddUser> cau=new CommandeCallbackAction<>(
                 (String s) -> System.out.println(s),
                 (AddUser u) -> String.format("Adduser %s %s %s", u.username,u.password,u.gmail)
         );
         cc.registerAction("adduser", cau);
         
-        CommandeCallbackAction<String, AddRole> cr=new CommandeCallbackAction<String, AddRole>(
+        CommandeCallbackAction<String, AddRole> cr=new CommandeCallbackAction<>(
                 (String s) -> System.out.println(s),
                 (AddRole r) -> String.format("AddRole %s", r.role)
         );
         cc.registerAction("addrole", cr);
         
-        CommandeCallbackAction<String, Assoc> cass=new CommandeCallbackAction<String, Assoc>(
+        CommandeCallbackAction<String, Assoc> cass=new CommandeCallbackAction<>(
                 (String s) -> System.out.println(s),
                 (Assoc u) -> String.format("Assoc %s %s", u.user, u.role)
         );

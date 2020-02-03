@@ -15,8 +15,8 @@ public class JDBCUtilFactory {
     // TODO : Lire ceci dans un fichier de propriété
     public  static final String URL = "jdbc:mysql://localhost/?useSSL=false";
     public  static final String DBDRIVER = "com.mysql.cj.jdbc.Driver";
-    public  static final String USERNAME = "jdbcutil";
-    public  static final String PASSWORD = "jdbcutil";
+    public  static final String USERNAME = "pascalfares";
+    public  static final String PASSWORD = "pascal00";
     
     /**
      * Default static constructor with default values
@@ -29,6 +29,10 @@ public class JDBCUtilFactory {
     /**
      * Specific static constructor with default values
      * @param driver a JDBCutil instance
+     * @param url
+     * @param username
+     * @param password
+     * @return 
      */
     public static JDBCUtil create(String driver, String url, String username, String password) {
         JDBCUtil ju = new JDBCUtilImpl(driver, url, username, password);

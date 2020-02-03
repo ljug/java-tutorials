@@ -7,12 +7,13 @@ package net.cofares.ljug.event;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import net.cofares.ljug.urcommades.AddUser;
 
 /**
  *
  * @author pfares
+ * @param <X>
+ * @param <Commande>
  */
 public class CommandeCallbackAction<X,Commande> {
 
@@ -29,7 +30,7 @@ public class CommandeCallbackAction<X,Commande> {
         c.accept(m.apply(commande));
     }
     public static void tryIt() {
-        CommandeCallbackAction<AddUser,AddUser> chain= new CommandeCallbackAction<AddUser,AddUser>(
+        CommandeCallbackAction<AddUser,AddUser> chain= new CommandeCallbackAction<>(
         (AddUser u) -> System.out.println(u),
         (AddUser u) -> {
             u.gmail="toto"; 

@@ -25,7 +25,9 @@ public class JDBCUtilImplTest {
     
     @BeforeClass
     public static void setUpClass() throws Exception {
+        System.out.printf("Dans setUpClass\n");
         jdt = JDBCUtilFactory.create();
+        System.out.printf("Dans setUpClass après créate\n");
         jdt.startStatement();
         jdt.executeSQLCommand("create database IF NOT EXISTS newDatabase");        
     }

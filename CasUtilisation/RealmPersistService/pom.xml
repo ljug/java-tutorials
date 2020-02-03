@@ -18,14 +18,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>UtilitairesLJUG</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <groupId>net.cofares.ljug</groupId>
+            <artifactId>jdbcmysql-utility</artifactId>
+            <version>0.1-donotuse</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.18</version>
         </dependency>
     </dependencies>
     <properties>
