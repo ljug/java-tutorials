@@ -6,9 +6,9 @@
     <class>ljug.entities.Users</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/realm?useSSL=false"/>
-      <property name="javax.persistence.jdbc.user" value="realm-ms"/>
+      <property name="javax.persistence.jdbc.user" value="jdbcutil"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="realm-ms"/>
+      <property name="javax.persistence.jdbc.password" value="jdbcutil"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
