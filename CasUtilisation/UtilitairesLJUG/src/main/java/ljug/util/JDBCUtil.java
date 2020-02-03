@@ -14,24 +14,26 @@ import java.sql.ResultSet;
 public interface JDBCUtil {
 
     /**
-     * afficher les donnée d'une requête
+     * afficher les données d'une requête
      *
      * @param sql an sql query
      */
     void checkData(String sql);
 
     /**
-     * Creation d'une connecxion et d'un Objet Statement pour les requetes (debut)
+     * Creation d'une connecxion et d'un Objet Statement pour les requetes
+     * (debut)
      */
     void startStatement();
+
     /**
-     * termiber l'ensemble des requete avec endStatement
+     * terminer l'ensemble des requetes avec endStatement
      */
     void endStatement();
-   
-    
+
     /**
      * Service drop table
+     *
      * @param sql an sql query
      */
     void droptable(String sql);
@@ -45,7 +47,7 @@ public interface JDBCUtil {
     void executeSQLCommand(String sql) throws Exception;
 
     /**
-     * Affichage des resultat d'une requete générique (un prettyprint)
+     * Affichage des resultats d'une requete générique (un pretyprint)
      *
      * @param rs The resultSet
      * @throws Exception
@@ -53,10 +55,10 @@ public interface JDBCUtil {
     void outputResultSet(ResultSet rs) throws Exception;
 
     /**
-     * Requete setup
+     * Requête setup
      *
      * @param sql la requete sql
      */
     void setup(String sql);
-    
+
 }
