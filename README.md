@@ -2,7 +2,8 @@
 
 Vous trouverez ici:
 * Tutorials, howto and how it works 
-* Des traveaux pratiques
+* Des travaux pratiques
+* Des [FAQ](FAQ/) : Questions fréquentes issues de mes auditeurs
 * Le dépots des exercices ou traveaux d'auditeurs dans le cadre des UEs : ACCOV, Cycle C informatique et autre cours du [Cnam Liban](http://depinfo.isae.edu.lb)
 * Les publications de la [LJUG](http://ljug.cofares.net) ( [Lebanese Java Users group](http://ljug.cofares.net) )
 
