@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * L'interface (contrat) des dataFrame
@@ -28,8 +29,7 @@ public interface DataFrameIntf extends Serializable {
      * @param criteres : Les critère champs:fonction associé
      * @return la liste des ligne correspondante au critéres projeté
      */
-    List select(List<String> projection, 
-            HashMap<String, Function<?,Boolean>> criteres);
+    List select(HashMap<String, Predicate<String>> criteres, String ... chs);
     
     /**
      * Affichage d'une dataFrame

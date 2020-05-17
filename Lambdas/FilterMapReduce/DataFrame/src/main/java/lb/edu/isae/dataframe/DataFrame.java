@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,9 +42,15 @@ public final class DataFrame implements DataFrameIntf{
         return lignes.stream().
                 map((ls) -> _projection(ls, chs)).collect(Collectors.toList());
     }
+    private Boolean _critere(List<String> ligne, HashMap<String, Predicate<String>> conds){
+        return conds.keySet().stream().allMatch((k) -> conds.get(k).test(ligne.get(_champs.indexOf(k))));
+    }
+    private List<List<String>> where(HashMap<String, Predicate<String>> conds){
+        return _lignes.stream().filter((l) -> _critere(l, conds)).collect(Collectors.toList());
+    }
     @Override
-    public List select(List<String> projection, HashMap<String, Function<?, Boolean>> criteres) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List select(HashMap<String, Predicate<String>> criteres, String ... chs) {
+         return projection(where(criteres), chs);  
     }
 
     String _afficheLigne(List<String> ligne) {
@@ -53,8 +60,7 @@ public final class DataFrame implements DataFrameIntf{
     String _afficheLignes(List<List<String>> lignes) {
         return lignes.stream().map((ls) -> _afficheLigne(ls)).
                 reduce("",(acc,s)->String.format("%s\n%s",acc,s));
-        //.reduce("", 
-        //        (s, ls) -> String.format("%s\n%s",s,_afficheLigne(ls)));
+        
     }
     @Override
     public String toString(){
