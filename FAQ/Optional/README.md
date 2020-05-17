@@ -26,3 +26,72 @@ Une méthode `Optional<User> getUser(...)` est syntaxiquement et sémantiquement
 
 ## Alors Optional c'est quoi finalement?
 Tout simplement un conteneur de référence d'un d'objet pouvant être null ou pas. Avec une api de requête concernant la référence 
+
+## L'utilisation de Optional dans un cadre de programmation fonctionnel est encore plus évident
+
+Dans la séquence : flux données en entrée ->  filter -> map -> reduce 
+
+[ ] TODO Référencer paradigmes fonctionnel en JAVA 
+
+## Une illustration
+
+```java
+public class OptionalExemple {
+    public static int tailleDe(String str) {
+        return str.length();
+    }
+
+    public static void main(String... args) {
+        String str=null;
+        //Traitement qui devrait donner une valeur à str.....
+        System.out.println(tailleDe(str));
+    }
+}
+```
+
+Compilation ok... si le Traitement ne donne pas de valeur a str à l'execution on a ceci:
+
+```bash
+Exception in thread "main" java.lang.NullPointerException
+        at OptionalExemple.tailleDe(OptionalExemple.java:3)
+        at OptionalExemple.main(OptionalExemple.java:9)
+```
+
+### solution 1
+
+```java
+public class OptionalExempleS1 {
+    public static int tailleDe(String str) {
+        if (str !=null) {
+            return str.length();
+        } else {
+            //Quoi mettre ici? par exemple
+            return 0;
+        }
+    }
+
+    public static void main(String... args) {
+        String str=null;
+        //Traitement qui devrait donner une valeur à str.....
+        System.out.println(tailleDe(str));
+    }
+}
+```
+
+### solution 2 (avec Optional et paradigme fonctionnel)
+
+```java
+import java.util.Optional;
+
+public class OptionalExempleS2 {
+    public static int tailleDe(Optional<String> str) {
+        return str.map(String::length).orElse(0);
+    }
+
+    public static void main(String... args) {
+        String str=null;
+        //Traitement qui devrait donner une valeur à str.....
+        System.out.println(tailleDe(Optional.ofNullable(str)));
+    }
+}
+```
