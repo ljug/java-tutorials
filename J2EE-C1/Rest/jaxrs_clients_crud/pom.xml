@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <servlet-version>3.1.0</servlet-version>
         <jersey.version>2.28</jersey.version>
-        <junit-version>4.11</junit-version>
+        <junit-version>4.13.1</junit-version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
     
