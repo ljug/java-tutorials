@@ -8,83 +8,66 @@
  * fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, 
  * whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the Software. »
  */
+
 package philosophe;
 
-
-/**
- *
- * @author pascalfares
- */
 public class Philosophe extends Thread {
-
-    private final int rank;
-    private final Fourchette fourchetteGauche;
-    private final Fourchette fourchetteDroite;
-    private int loopCount;
-
-    public Philosophe(int rank,
-            Fourchette fourchetteGauche,
-            Fourchette fourchetteDroite,
-            int loopCount) {
-        this.rank = rank;
-        this.fourchetteGauche = fourchetteGauche;
-        this.fourchetteDroite = fourchetteDroite;
-        this.loopCount = loopCount;
-    }
-
-    public void run() {
-        while (true) {
-            penser();
-            prendre(fourchetteGauche);
-            prendre(fourchetteDroite);
-
-            manger();
-            poser(fourchetteGauche);
-            poser(fourchetteDroite);
-            
-
-        }
-    }
-
-    public void penser() {
-        System.out.println("Philosophe " + rank + " pense");
-    }
-
-    public void manger() {
-        System.out.println("Philosophe " + rank + " mange");
-    }
-
-    public void prendre(Fourchette fourchette) {
-        fourchette.prendre();
-    }
-
-    public void poser(Fourchette fourchette) {
-        fourchette.poser();
-    }
-
-    public static void main(String[] args) {
-        Fourchette[] fourchettes = new Fourchette[5];
-        for (int i = 0; i < 5; i++) {
-            fourchettes[i] = new Fourchette();
-        }
-
-        Philosophe[] philosophe = new Philosophe[5];
-        for (int i = 0; i < 5; i++) {
-            philosophe[i] = new Philosophe(i,
-                    fourchettes[i],
-                    fourchettes[(i + 1) % 5],
-                    50);
-        }
-
-        for (int i = 0; i < 5; i++) {
-            philosophe[i].start();
-        }
-
-        for (int i = 0; i < 5; i++) {
-            try {
-                philosophe[i].join();
-            } catch (InterruptedException e) {
-            }
-        };
-    }
+  /** no du philosophe */
+  int no;
+  /** nb de bouchees restantes dans l'assiette */
+  int nbBouchees;
+  /** stoppe le processus s'il a fini son assiette */
+  boolean fini;
+  /** date de debut du diner */
+  long debut;
+  /** liste de fourchettes */
+  Fourchettes lesFourchettes;
+  /**temps min d'une bouchee en milliseconde*/
+  static final int TEMPSMINBOUCHEE=100;
+  /**temps optionnel en plus pour une bouchee en milliseconde*/
+  static final int TEMPSBOUCHEE=2000;
+  /**temps min d'une pensee en milliseconde*/
+  static final int TEMPSMINPENSEE=100;
+  /**temps optionnel en plus pour une pensee en milliseconde*/
+  static final int TEMPSPENSEE=2000;
+ 
+/** initialise fini a true*/	
+Philosophe() { fini = true; }
+ 
+/** initialise le no et nb de bouchees */
+Philosophe(int _no, int _nbBouchees, Fourchettes _lesFourchettes)
+{
+  no = _no;
+  nbBouchees = _nbBouchees;
+  lesFourchettes = _lesFourchettes;
+  fini = false;
+}
+ 
+/** fonction principale du philosophe : cycle sur manger, penser.
+ * Pour manger, il prend la fourchette de droite et celle de gauche.
+ * Donc il prend la fourchette i et i+1.
+ * Le philosophe garde les fourchettes un certains temps et les depose ensuite
+ * la boucle se termine lorsque le philosophe a termine ses bouchees.
+ * */
+public void run()
+{
+long debutRepas = System.currentTimeMillis();
+  while(!fini)
+  {
+    System.out.println("philo"+no+" : je pense en attendant les fourchettes");
+    lesFourchettes.prendre(no);           
+    System.out.println("philo"+ no+ " : je mange, il me reste " + nbBouchees + " bouchees.");
+    nbBouchees--;
+    fini = (nbBouchees<=0); 
+    try {  Thread.sleep(Philosophe.TEMPSMINBOUCHEE +    (int)(Math.random()*Philosophe.TEMPSBOUCHEE ));}  
+    catch (InterruptedException e) {}
+    lesFourchettes.deposer(no);
+    System.out.println("philo"+no+" : j'ai depose mes fourchettes et je pense un peu");
+    try { Thread.sleep(Philosophe.TEMPSMINPENSEE +   (int)(Math.random()*Philosophe.TEMPSPENSEE ));}  
+    catch (InterruptedException e) {}
+  }
+  long finRepas = System.currentTimeMillis();
+  System.out.println("philo"+ no+ " : j'ai fini en " + 
+      (float)((float)(finRepas-debutRepas)/1000) + "s...");
+ }
 }
